@@ -5,12 +5,12 @@ using System;
 public class Attendee
 {
     public long Id { get; set; }
-    public long UserId { get; set; }
-    public long EventId { get; set; }
-    public string Status { get; set; } = "pending";
+    public long? EventId { get; set; }
+    public SocialEvent? SocialEvent { get; set; }
+    public AttendanceStatus Status { get; set; } = AttendanceStatus.Pending;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
     
-    // Optional: Enum for status, if preferred for type safety
+
     public enum AttendanceStatus
     {
         Confirmed,

@@ -12,4 +12,6 @@ public class SocialEvent
     public DateTime EndTime { get; set; }
     public long CreatedBy { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public List<Attendee> Attendees { get; } = new ();
 }
