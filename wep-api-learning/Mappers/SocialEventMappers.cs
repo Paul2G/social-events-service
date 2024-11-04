@@ -20,4 +20,20 @@ public static class SocialEventMappers
             AttendeesCount = socialEventModel.Attendees.Count,
         };
     }
+
+    public static SocialEvent ToSocialEventFromCreateDto(
+        this CreateSocialEventRequestDto createSocialEventRequestDto
+    )
+    {
+        return new SocialEvent
+        {
+            Name = createSocialEventRequestDto.Name,
+            Location = createSocialEventRequestDto.Location,
+            Description = createSocialEventRequestDto.Description,
+            StartTime = createSocialEventRequestDto.StartTime,
+            EndTime = createSocialEventRequestDto.EndTime,
+            CreatedAt = DateTime.Now,
+            CreatedBy = 1,
+        };
+    }
 }

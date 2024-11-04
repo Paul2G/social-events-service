@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using wep_api_learning.Data;
+using wep_api_learning.Dtos.SocialEvent;
 using wep_api_learning.Mappers;
 
 namespace wep_api_learning.Controllers;
@@ -32,5 +33,20 @@ public class SocialEventsController : ControllerBase
             return NotFound();
 
         return Ok(socialEvent);
+    }
+
+    [HttpPost]
+    public IActionResult Create([FromBody] CreateSocialEventRequestDto socialEventDto)
+    {
+        var socialEventModel = socialEventDto.ToSocialEventFromCreateDto();
+
+        _context.SocialEvents.Add(socialEventModel);
+        _context.SaveChanges();
+
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = socialEventModel.Id },
+            socialEventModel.ToSocialEventDto()
+        );
     }
 }
