@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using wep_api_learning.Data;
 using wep_api_learning.Dtos.SocialEvent;
 using wep_api_learning.Mappers;
@@ -75,5 +76,22 @@ public class SocialEventsController : ControllerBase
         _context.SaveChanges();
 
         return Ok(socialEventModel.ToSocialEventDto());
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public IActionResult Delete([FromRoute] int id)
+    {
+        var socialEventModel = _context.SocialEvents.FirstOrDefault(x => x.Id == id);
+
+        if (socialEventModel == null)
+        {
+            return NotFound();
+        }
+
+        _context.SocialEvents.Remove(socialEventModel);
+        _context.SaveChanges();
+
+        return NoContent();
     }
 }
