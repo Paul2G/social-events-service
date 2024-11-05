@@ -36,4 +36,18 @@ public static class SocialEventMappers
             CreatedBy = 1,
         };
     }
+
+    public static SocialEvent ToSocialEventToUpdateDto(
+        this UpdateSocialEventRequestDto updateSocialEventRequestDto
+    )
+    {
+        return new SocialEvent
+        {
+            Name = updateSocialEventRequestDto.Name,
+            Location = updateSocialEventRequestDto.Location,
+            Description = updateSocialEventRequestDto.Description,
+            StartTime = updateSocialEventRequestDto.StartTime,
+            EndTime = updateSocialEventRequestDto.EndTime,
+        };
+    }
 }

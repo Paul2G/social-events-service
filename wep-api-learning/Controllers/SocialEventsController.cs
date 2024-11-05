@@ -40,6 +40,8 @@ public class SocialEventsController : ControllerBase
     {
         var socialEventModel = socialEventDto.ToSocialEventFromCreateDto();
 
+        Console.Write(socialEventModel);
+
         _context.SocialEvents.Add(socialEventModel);
         _context.SaveChanges();
 
@@ -48,5 +50,30 @@ public class SocialEventsController : ControllerBase
             new { id = socialEventModel.Id },
             socialEventModel.ToSocialEventDto()
         );
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+    public IActionResult Update(
+        [FromRoute] int id,
+        [FromBody] UpdateSocialEventRequestDto socialEventDto
+    )
+    {
+        var socialEventModel = _context.SocialEvents.FirstOrDefault(x => x.Id == id);
+
+        if (socialEventModel == null)
+        {
+            return NotFound();
+        }
+
+        socialEventModel.Name = socialEventDto.Name;
+        socialEventModel.Description = socialEventDto.Description;
+        socialEventModel.Location = socialEventDto.Location;
+        socialEventModel.StartTime = socialEventDto.StartTime;
+        socialEventModel.EndTime = socialEventDto.EndTime;
+
+        _context.SaveChanges();
+
+        return Ok(socialEventModel.ToSocialEventDto());
     }
 }
