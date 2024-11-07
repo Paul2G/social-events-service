@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using wep_api_learning.Data;
 using wep_api_learning.Dtos.SocialEvent;
+using wep_api_learning.Interfaces;
 using wep_api_learning.Mappers;
 
 namespace wep_api_learning.Controllers;
@@ -10,25 +11,26 @@ namespace wep_api_learning.Controllers;
 [ApiController]
 public class SocialEventsController : ControllerBase
 {
-    private readonly ApplicationDBContext _context;
+    private readonly ISocialEventRepository _repository;
 
-    public SocialEventsController(ApplicationDBContext context)
+    public SocialEventsController(ISocialEventRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        var socialEvents = _context.SocialEvents.ToList().Select(s => s.ToSocialEventDto());
+        var socialEvents = await _repository.GetAllAsync();
+        var socialEventsDto = socialEvents.Select(s => s.ToSocialEventDto());
 
-        return Ok(socialEvents);
+        return Ok(socialEventsDto);
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById([FromRoute] long id)
+    public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var socialEvent = _context.SocialEvents.Find(id);
+        var socialEvent = await _repository.GetByIdAsync(id);
 
         if (socialEvent == null)
             return NotFound();
@@ -37,14 +39,10 @@ public class SocialEventsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create([FromBody] CreateSocialEventRequestDto socialEventDto)
+    public async Task<IActionResult> Create([FromBody] CreateSocialEventRequestDto socialEventDto)
     {
         var socialEventModel = socialEventDto.ToSocialEventFromCreateDto();
-
-        Console.Write(socialEventModel);
-
-        _context.SocialEvents.Add(socialEventModel);
-        _context.SaveChanges();
+        await _repository.CreateAsync(socialEventModel);
 
         return CreatedAtAction(
             nameof(GetById),
@@ -55,42 +53,27 @@ public class SocialEventsController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public IActionResult Update(
+    public async Task<IActionResult> Update(
         [FromRoute] int id,
         [FromBody] UpdateSocialEventRequestDto socialEventDto
     )
     {
-        var socialEventModel = _context.SocialEvents.FirstOrDefault(x => x.Id == id);
+        var socialEventModel = await _repository.UpdateAsync(id, socialEventDto);
 
         if (socialEventModel == null)
-        {
             return NotFound();
-        }
-
-        socialEventModel.Name = socialEventDto.Name;
-        socialEventModel.Description = socialEventDto.Description;
-        socialEventModel.Location = socialEventDto.Location;
-        socialEventModel.StartTime = socialEventDto.StartTime;
-        socialEventModel.EndTime = socialEventDto.EndTime;
-
-        _context.SaveChanges();
 
         return Ok(socialEventModel.ToSocialEventDto());
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public IActionResult Delete([FromRoute] int id)
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var socialEventModel = _context.SocialEvents.FirstOrDefault(x => x.Id == id);
+        var socialEventModel = await _repository.DeleteAsync(id);
 
         if (socialEventModel == null)
-        {
             return NotFound();
-        }
-
-        _context.SocialEvents.Remove(socialEventModel);
-        _context.SaveChanges();
 
         return NoContent();
     }

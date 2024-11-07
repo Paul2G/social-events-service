@@ -1,8 +1,10 @@
-using wep_api_learning.Models;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using wep_api_learning.Data;
+using wep_api_learning.Interfaces;
+using wep_api_learning.Models;
+using wep_api_learning.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<ISocialEventRepository, SocialEventRepository>();
 
 var app = builder.Build();
 
