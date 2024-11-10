@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using wep_api_learning.Models;
+using wep_api_learning.Modules.Attendee.Models;
+using wep_api_learning.Modules.SocialEvent.Models;
 
 namespace wep_api_learning.Data;
 
-public class ApplicationDBContext: DbContext
+public class ApplicationDbContext : DbContext
 {
-    public ApplicationDBContext(DbContextOptions dbContextOptions): base( dbContextOptions)
-    {
-    }
-    
+    public ApplicationDbContext(DbContextOptions dbContextOptions)
+        : base(dbContextOptions) { }
+
     public DbSet<SocialEvent> SocialEvents { get; set; }
     public DbSet<Attendee> Attendees { get; set; }
 }

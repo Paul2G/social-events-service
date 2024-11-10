@@ -1,11 +1,10 @@
-﻿using wep_api_learning.Dtos.SocialEvent;
-using wep_api_learning.Models;
+﻿using wep_api_learning.Modules.SocialEvent.DTOs;
 
-namespace wep_api_learning.Mappers;
+namespace wep_api_learning.Modules.SocialEvent.Mappers;
 
 public static class SocialEventMappers
 {
-    public static ReadSocialEventDto ToSocialEventDto(this SocialEvent socialEventModel)
+    public static ReadSocialEventDto ToSocialEventDto(this Models.SocialEvent socialEventModel)
     {
         return new ReadSocialEventDto
         {
@@ -16,16 +15,15 @@ public static class SocialEventMappers
             StartTime = socialEventModel.StartTime,
             EndTime = socialEventModel.EndTime,
             CreatedAt = socialEventModel.CreatedAt,
-            CreatedBy = socialEventModel.CreatedBy,
             AttendeesCount = socialEventModel.Attendees.Count,
         };
     }
 
-    public static SocialEvent ToSocialEventFromCreateDto(
+    public static Models.SocialEvent ToSocialEventFromCreateDto(
         this CreateSocialEventDto createSocialEventDto
     )
     {
-        return new SocialEvent
+        return new Models.SocialEvent
         {
             Name = createSocialEventDto.Name,
             Location = createSocialEventDto.Location,
@@ -33,15 +31,14 @@ public static class SocialEventMappers
             StartTime = createSocialEventDto.StartTime,
             EndTime = createSocialEventDto.EndTime,
             CreatedAt = DateTime.Now,
-            CreatedBy = 1,
         };
     }
 
-    public static SocialEvent ToSocialEventToUpdateDto(
+    public static Models.SocialEvent ToSocialEventToUpdateDto(
         this UpdateSocialEventDto updateSocialEventDto
     )
     {
-        return new SocialEvent
+        return new Models.SocialEvent
         {
             Name = updateSocialEventDto.Name,
             Location = updateSocialEventDto.Location,

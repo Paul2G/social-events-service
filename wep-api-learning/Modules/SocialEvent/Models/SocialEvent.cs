@@ -1,6 +1,4 @@
-﻿namespace wep_api_learning.Models;
-
-using System;
+﻿namespace wep_api_learning.Modules.SocialEvent.Models;
 
 public class SocialEvent
 {
@@ -10,8 +8,7 @@ public class SocialEvent
     public string Location { get; set; } = string.Empty;
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
-    public long CreatedBy { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public List<Attendee> Attendees { get; } = new ();
+    public List<Attendee.Models.Attendee> Attendees { get; } = new();
 }

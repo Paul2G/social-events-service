@@ -1,6 +1,6 @@
-﻿namespace wep_api_learning.Dtos.SocialEvent;
+﻿namespace wep_api_learning.Modules.SocialEvent.DTOs;
 
-public class CreateSocialEventDto
+public class UpdateSocialEventDto
 {
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }

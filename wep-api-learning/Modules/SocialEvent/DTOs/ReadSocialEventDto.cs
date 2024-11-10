@@ -1,4 +1,4 @@
-﻿namespace wep_api_learning.Dtos.SocialEvent;
+﻿namespace wep_api_learning.Modules.SocialEvent.DTOs;
 
 public class ReadSocialEventDto
 {

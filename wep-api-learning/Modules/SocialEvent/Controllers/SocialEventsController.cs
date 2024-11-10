@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using wep_api_learning.Data;
-using wep_api_learning.Dtos.SocialEvent;
-using wep_api_learning.Interfaces;
-using wep_api_learning.Mappers;
+﻿using Microsoft.AspNetCore.Mvc;
+using wep_api_learning.Modules.SocialEvent.DTOs;
+using wep_api_learning.Modules.SocialEvent.Interfaces;
+using wep_api_learning.Modules.SocialEvent.Mappers;
 
-namespace wep_api_learning.Controllers;
+namespace wep_api_learning.Modules.SocialEvent.Controllers;
 
 [Route("api/social-events")]
 [ApiController]
@@ -28,7 +26,7 @@ public class SocialEventsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById([FromRoute] int id)
+    public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var socialEvent = await _repository.GetByIdAsync(id);
 
@@ -54,7 +52,7 @@ public class SocialEventsController : ControllerBase
     [HttpPut]
     [Route("{id}")]
     public async Task<IActionResult> Update(
-        [FromRoute] int id,
+        [FromRoute] long id,
         [FromBody] UpdateSocialEventDto socialEventDto
     )
     {
@@ -68,7 +66,7 @@ public class SocialEventsController : ControllerBase
 
     [HttpDelete]
     [Route("{id}")]
-    public async Task<IActionResult> Delete([FromRoute] int id)
+    public async Task<IActionResult> Delete([FromRoute] long id)
     {
         var socialEventModel = await _repository.DeleteAsync(id);
 

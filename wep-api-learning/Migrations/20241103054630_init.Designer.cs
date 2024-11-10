@@ -11,7 +11,7 @@ using wep_api_learning.Data;
 
 namespace wep_api_learning.Migrations
 {
-    [DbContext(typeof(ApplicationDBContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20241103054630_init")]
     partial class init
     {

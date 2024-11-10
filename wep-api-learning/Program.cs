@@ -1,10 +1,7 @@
-using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using wep_api_learning.Data;
-using wep_api_learning.Interfaces;
-using wep_api_learning.Models;
-using wep_api_learning.Repository;
+using wep_api_learning.Modules.SocialEvent.Interfaces;
+using wep_api_learning.Modules.SocialEvent.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
-builder.Services.AddDbContext<ApplicationDBContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
