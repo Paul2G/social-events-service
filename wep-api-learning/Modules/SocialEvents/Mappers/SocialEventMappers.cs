@@ -1,10 +1,11 @@
-﻿using wep_api_learning.Modules.SocialEvent.DTOs;
+﻿using wep_api_learning.Modules.SocialEvents.DTOs;
+using wep_api_learning.Modules.SocialEvents.Models;
 
-namespace wep_api_learning.Modules.SocialEvent.Mappers;
+namespace wep_api_learning.Modules.SocialEvents.Mappers;
 
 public static class SocialEventMappers
 {
-    public static ReadSocialEventDto ToSocialEventDto(this Models.SocialEvent socialEventModel)
+    public static ReadSocialEventDto ToSocialEventDto(this SocialEvent socialEventModel)
     {
         return new ReadSocialEventDto
         {
@@ -19,11 +20,11 @@ public static class SocialEventMappers
         };
     }
 
-    public static Models.SocialEvent ToSocialEventFromCreateDto(
+    public static SocialEvent ToSocialEventFromCreateDto(
         this CreateSocialEventDto createSocialEventDto
     )
     {
-        return new Models.SocialEvent
+        return new SocialEvent
         {
             Name = createSocialEventDto.Name,
             Location = createSocialEventDto.Location,
@@ -34,11 +35,11 @@ public static class SocialEventMappers
         };
     }
 
-    public static Models.SocialEvent ToSocialEventToUpdateDto(
+    public static SocialEvent ToSocialEventToUpdateDto(
         this UpdateSocialEventDto updateSocialEventDto
     )
     {
-        return new Models.SocialEvent
+        return new SocialEvent
         {
             Name = updateSocialEventDto.Name,
             Location = updateSocialEventDto.Location,

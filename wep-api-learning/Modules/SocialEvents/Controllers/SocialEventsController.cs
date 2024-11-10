@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using wep_api_learning.Modules.SocialEvent.DTOs;
-using wep_api_learning.Modules.SocialEvent.Interfaces;
-using wep_api_learning.Modules.SocialEvent.Mappers;
+using wep_api_learning.Modules.SocialEvents.DTOs;
+using wep_api_learning.Modules.SocialEvents.Interfaces;
+using wep_api_learning.Modules.SocialEvents.Mappers;
 
-namespace wep_api_learning.Modules.SocialEvent.Controllers;
+namespace wep_api_learning.Modules.SocialEvents.Controllers;
 
 [Route("api/social-events")]
 [ApiController]

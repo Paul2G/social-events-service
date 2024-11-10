@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using wep_api_learning.Modules.Attendee.Models;
-using wep_api_learning.Modules.SocialEvent.Models;
+using wep_api_learning.Modules.Attendees.Models;
+using wep_api_learning.Modules.SocialEvents.Models;
 
 namespace wep_api_learning.Data;
 

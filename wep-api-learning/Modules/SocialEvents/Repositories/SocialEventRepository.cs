@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using wep_api_learning.Data;
-using wep_api_learning.Modules.SocialEvent.DTOs;
-using wep_api_learning.Modules.SocialEvent.Interfaces;
+using wep_api_learning.Modules.SocialEvents.DTOs;
+using wep_api_learning.Modules.SocialEvents.Interfaces;
+using wep_api_learning.Modules.SocialEvents.Models;
 
-namespace wep_api_learning.Modules.SocialEvent.Repositories;
+namespace wep_api_learning.Modules.SocialEvents.Repositories;
 
 public class SocialEventRepository : ISocialEventRepository
 {
@@ -14,17 +15,17 @@ public class SocialEventRepository : ISocialEventRepository
         _context = context;
     }
 
-    public Task<List<Models.SocialEvent>> GetAllAsync()
+    public Task<List<SocialEvent>> GetAllAsync()
     {
         return _context.SocialEvents.ToListAsync();
     }
 
-    public async Task<Models.SocialEvent?> GetByIdAsync(long id)
+    public async Task<SocialEvent?> GetByIdAsync(long id)
     {
         return await _context.SocialEvents.FindAsync(id);
     }
 
-    public async Task<Models.SocialEvent> CreateAsync(Models.SocialEvent socialEventModel)
+    public async Task<SocialEvent> CreateAsync(SocialEvent socialEventModel)
     {
         await _context.SocialEvents.AddAsync(socialEventModel);
         await _context.SaveChangesAsync();
@@ -32,7 +33,7 @@ public class SocialEventRepository : ISocialEventRepository
         return socialEventModel;
     }
 
-    public async Task<Models.SocialEvent?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto)
+    public async Task<SocialEvent?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto)
     {
         var socialEventModel = await _context.SocialEvents.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -50,7 +51,7 @@ public class SocialEventRepository : ISocialEventRepository
         return socialEventModel;
     }
 
-    public async Task<Models.SocialEvent?> DeleteAsync(long id)
+    public async Task<SocialEvent?> DeleteAsync(long id)
     {
         var socialEventModel = await _context.SocialEvents.FirstOrDefaultAsync(x => x.Id == id);
 

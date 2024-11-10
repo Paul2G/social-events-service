@@ -1,4 +1,6 @@
-﻿namespace wep_api_learning.Modules.Attendee.Models;
+﻿using wep_api_learning.Modules.SocialEvents.Models;
+
+namespace wep_api_learning.Modules.Attendees.Models;
 
 public class Attendee
 {
@@ -11,7 +13,7 @@ public class Attendee
 
     public long Id { get; set; }
     public long? EventId { get; set; }
-    public SocialEvent.Models.SocialEvent? SocialEvent { get; set; }
+    public SocialEvent? SocialEvent { get; set; }
     public AttendanceStatus Status { get; set; } = AttendanceStatus.Pending;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 }

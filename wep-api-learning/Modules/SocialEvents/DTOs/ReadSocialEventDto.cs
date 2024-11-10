@@ -1,6 +1,6 @@
-﻿namespace wep_api_learning.Modules.SocialEvent.Models;
+﻿namespace wep_api_learning.Modules.SocialEvents.DTOs;
 
-public class SocialEvent
+public class ReadSocialEventDto
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -8,7 +8,7 @@ public class SocialEvent
     public string Location { get; set; } = string.Empty;
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
+    public long CreatedBy { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public List<Attendee.Models.Attendee> Attendees { get; } = new();
+    public int AttendeesCount { get; set; }
 }

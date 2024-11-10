@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using wep_api_learning.Data;
-using wep_api_learning.Modules.SocialEvent.Interfaces;
-using wep_api_learning.Modules.SocialEvent.Repositories;
+using wep_api_learning.Modules.SocialEvents.Interfaces;
+using wep_api_learning.Modules.SocialEvents.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
