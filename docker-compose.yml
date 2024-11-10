@@ -1,0 +1,6 @@
+﻿services:
+  web-api-learning:
+    image: web-api-learning
+    build:
+      context: .
+      dockerfile: web-api-learning/Dockerfile
