@@ -5,9 +5,9 @@ namespace wep_api_learning.Mappers;
 
 public static class SocialEventMappers
 {
-    public static SocialEventDto ToSocialEventDto(this SocialEvent socialEventModel)
+    public static ReadSocialEventDto ToSocialEventDto(this SocialEvent socialEventModel)
     {
-        return new SocialEventDto
+        return new ReadSocialEventDto
         {
             Id = socialEventModel.Id,
             Name = socialEventModel.Name,
@@ -22,32 +22,32 @@ public static class SocialEventMappers
     }
 
     public static SocialEvent ToSocialEventFromCreateDto(
-        this CreateSocialEventRequestDto createSocialEventRequestDto
+        this CreateSocialEventDto createSocialEventDto
     )
     {
         return new SocialEvent
         {
-            Name = createSocialEventRequestDto.Name,
-            Location = createSocialEventRequestDto.Location,
-            Description = createSocialEventRequestDto.Description,
-            StartTime = createSocialEventRequestDto.StartTime,
-            EndTime = createSocialEventRequestDto.EndTime,
+            Name = createSocialEventDto.Name,
+            Location = createSocialEventDto.Location,
+            Description = createSocialEventDto.Description,
+            StartTime = createSocialEventDto.StartTime,
+            EndTime = createSocialEventDto.EndTime,
             CreatedAt = DateTime.Now,
             CreatedBy = 1,
         };
     }
 
     public static SocialEvent ToSocialEventToUpdateDto(
-        this UpdateSocialEventRequestDto updateSocialEventRequestDto
+        this UpdateSocialEventDto updateSocialEventDto
     )
     {
         return new SocialEvent
         {
-            Name = updateSocialEventRequestDto.Name,
-            Location = updateSocialEventRequestDto.Location,
-            Description = updateSocialEventRequestDto.Description,
-            StartTime = updateSocialEventRequestDto.StartTime,
-            EndTime = updateSocialEventRequestDto.EndTime,
+            Name = updateSocialEventDto.Name,
+            Location = updateSocialEventDto.Location,
+            Description = updateSocialEventDto.Description,
+            StartTime = updateSocialEventDto.StartTime,
+            EndTime = updateSocialEventDto.EndTime,
         };
     }
 }

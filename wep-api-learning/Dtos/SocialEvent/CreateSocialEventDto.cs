@@ -1,6 +1,6 @@
 ﻿namespace wep_api_learning.Dtos.SocialEvent;
 
-public class UpdateSocialEventRequestDto
+public class CreateSocialEventDto
 {
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }

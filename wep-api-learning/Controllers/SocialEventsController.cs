@@ -39,7 +39,7 @@ public class SocialEventsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateSocialEventRequestDto socialEventDto)
+    public async Task<IActionResult> Create([FromBody] CreateSocialEventDto socialEventDto)
     {
         var socialEventModel = socialEventDto.ToSocialEventFromCreateDto();
         await _repository.CreateAsync(socialEventModel);
@@ -55,7 +55,7 @@ public class SocialEventsController : ControllerBase
     [Route("{id}")]
     public async Task<IActionResult> Update(
         [FromRoute] int id,
-        [FromBody] UpdateSocialEventRequestDto socialEventDto
+        [FromBody] UpdateSocialEventDto socialEventDto
     )
     {
         var socialEventModel = await _repository.UpdateAsync(id, socialEventDto);

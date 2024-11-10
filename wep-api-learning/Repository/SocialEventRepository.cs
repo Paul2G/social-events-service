@@ -33,7 +33,7 @@ public class SocialEventRepository : ISocialEventRepository
         return socialEventModel;
     }
 
-    public async Task<SocialEvent?> UpdateAsync(int id, UpdateSocialEventRequestDto socialEventDto)
+    public async Task<SocialEvent?> UpdateAsync(int id, UpdateSocialEventDto socialEventDto)
     {
         var socialEventModel = await _context.SocialEvents.FirstOrDefaultAsync(x => x.Id == id);
 
