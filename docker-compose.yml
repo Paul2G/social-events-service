@@ -1,6 +1,6 @@
 ﻿services:
   web-api-learning:
     image: web-api-learning
-    build:
-      context: .
-      dockerfile: web-api-learning/Dockerfile
+    build: ./web-api-learning
+    ports:
+      - "8080:8080"
