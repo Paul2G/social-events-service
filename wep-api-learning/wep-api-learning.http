@@ -1,6 +1,0 @@
-@wep_api_learning_HostAddress = http://localhost:5231
-
-GET {{wep_api_learning_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
