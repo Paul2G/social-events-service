@@ -1,6 +1,32 @@
 ﻿services:
   web-api-learning:
+    container_name: service-api
     image: web-api-learning
     build: ./web-api-learning
     ports:
-      - "8080:8080"
+      - 8080:8080
+      - 8081:8081
+    networks:
+      - main-network
+    depends_on:
+      - sqlserver
+    restart: on-failure
+  
+  sqlserver:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1443:1433
+    volumes: 
+      - sqlvolume:/var/opt/mssql
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: worD1209$$
+    networks:
+      - main-network
+      
+networks:
+  main-network:
+
+volumes:
+  sqlvolume:

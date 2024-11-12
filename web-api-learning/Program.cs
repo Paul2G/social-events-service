@@ -5,23 +5,26 @@ using web_api_learning.Modules.SocialEvents.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ??
+                       builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(connectionString); });
 
 builder.Services.AddScoped<ISocialEventRepository, SocialEventRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// using (var scope = app.Services.CreateScope())
+// {
+//     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+//     context.Database.Migrate();
+// }
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -29,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/");
 
 app.MapControllers();
 
