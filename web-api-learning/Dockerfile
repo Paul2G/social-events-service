@@ -3,7 +3,6 @@ USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
-ENV DB_CONNECTION_STRING="Server=sql-server;Database=learning;User Id=sa;Password=worD1209$$;TrustServerCertificate=True;"
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
