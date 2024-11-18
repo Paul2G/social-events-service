@@ -7,11 +7,11 @@ namespace web_api_learning.Modules.SocialEvents.Controllers;
 
 [Route("api/social-events")]
 [ApiController]
-public class SocialEventsController : ControllerBase
+public class SocialEventController : ControllerBase
 {
     private readonly ISocialEventRepository _repository;
 
-    public SocialEventsController(ISocialEventRepository repository)
+    public SocialEventController(ISocialEventRepository repository)
     {
         _repository = repository;
     }
