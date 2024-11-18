@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using web_api_learning.Data;
+using web_api_learning.Modules.Attendees.Interfaces;
+using web_api_learning.Modules.Attendees.Repositories;
 using web_api_learning.Modules.SocialEvents.Interfaces;
 using web_api_learning.Modules.SocialEvents.Repositories;
 
@@ -16,6 +18,7 @@ builder.Services.AddHealthChecks();
 builder.Services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(connectionString); });
 
 builder.Services.AddScoped<ISocialEventRepository, SocialEventRepository>();
+builder.Services.AddScoped<IAttendeeRepository, AttendeeRepository>();
 
 var app = builder.Build();
 
