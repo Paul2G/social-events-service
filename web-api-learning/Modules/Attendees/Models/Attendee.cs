@@ -11,7 +11,8 @@ public class Attendee
         Declined
     }
 
-    public string Name = string.Empty;
+    public string Name { get; set; } = string.Empty;
+
     public long Id { get; set; }
     public AttendanceStatus Status { get; set; } = AttendanceStatus.Pending;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;

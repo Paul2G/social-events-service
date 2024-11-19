@@ -16,4 +16,13 @@ public static class AttendeeMapper
             SocialEventId = attendee.SocialEventId
         };
     }
+
+    public static Attendee ToAttendeeFromCreateDto(this CreateAttendeeDto attendeeDto)
+    {
+        return new Attendee
+        {
+            Name = attendeeDto.Name,
+            SocialEventId = attendeeDto.SocialEventId
+        };
+    }
 }

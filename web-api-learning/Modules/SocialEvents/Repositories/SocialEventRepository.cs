@@ -63,4 +63,9 @@ public class SocialEventRepository : ISocialEventRepository
 
         return socialEventModel;
     }
+
+    public async Task<bool> ExitsAsync(long id)
+    {
+        return await _context.SocialEvents.AnyAsync(s => s.Id == id);
+    }
 }

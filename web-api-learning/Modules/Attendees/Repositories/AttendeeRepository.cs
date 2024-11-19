@@ -24,9 +24,11 @@ public class AttendeeRepository : IAttendeeRepository
         return await _context.Attendees.FirstOrDefaultAsync(s => s.Id == id);
     }
 
-    public Task<Attendee> CreateAsync() 
+    public async Task<Attendee> CreateAsync(Attendee attendeeModel)
     {
-        throw new NotImplementedException();
+        await _context.Attendees.AddAsync(attendeeModel);
+        await _context.SaveChangesAsync();
+        return attendeeModel;
     }
 
     public Task<Attendee?> UpdateAsync()

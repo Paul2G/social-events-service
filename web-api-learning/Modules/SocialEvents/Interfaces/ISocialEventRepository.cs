@@ -13,4 +13,5 @@ public interface ISocialEventRepository
     Task<SocialEvent?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto);
 
     Task<SocialEvent?> DeleteAsync(long id);
+    Task<bool> ExitsAsync(long id);
 }
