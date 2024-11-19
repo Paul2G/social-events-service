@@ -7,19 +7,12 @@ namespace web_api_learning.Modules.SocialEvents.Controllers;
 
 [Route("api/social-events")]
 [ApiController]
-public class SocialEventController : ControllerBase
+public class SocialEventController(ISocialEventRepository socialEventRepository) : ControllerBase
 {
-    private readonly ISocialEventRepository _repository;
-
-    public SocialEventController(ISocialEventRepository repository)
-    {
-        _repository = repository;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var socialEvents = await _repository.GetAllAsync();
+        var socialEvents = await socialEventRepository.GetAllAsync();
         var socialEventsDto = socialEvents.Select(s => s.ToSocialEventDto());
 
         return Ok(socialEventsDto);
@@ -29,7 +22,7 @@ public class SocialEventController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
-        var socialEvent = await _repository.GetByIdAsync(id);
+        var socialEvent = await socialEventRepository.GetByIdAsync(id);
 
         if (socialEvent == null)
             return NotFound();
@@ -43,7 +36,7 @@ public class SocialEventController : ControllerBase
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var socialEventModel = socialEventDto.ToSocialEventFromCreateDto();
-        await _repository.CreateAsync(socialEventModel);
+        await socialEventRepository.CreateAsync(socialEventModel);
 
         return CreatedAtAction(
             nameof(GetById),
@@ -61,7 +54,7 @@ public class SocialEventController : ControllerBase
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var socialEventModel = await _repository.UpdateAsync(id, socialEventDto);
+        var socialEventModel = await socialEventRepository.UpdateAsync(id, socialEventDto);
 
         if (socialEventModel == null)
             return NotFound();
@@ -73,7 +66,7 @@ public class SocialEventController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var socialEventModel = await _repository.DeleteAsync(id);
+        var socialEventModel = await socialEventRepository.DeleteAsync(id);
 
         if (socialEventModel == null)
             return NotFound();

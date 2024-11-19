@@ -7,22 +7,15 @@ using web_api_learning.Modules.SocialEvents.Interfaces;
 namespace web_api_learning.Modules.Attendees.Controllers;
 
 [Route("api/attendees")]
-public class AttendeeController : ControllerBase
+public class AttendeeController(
+    IAttendeeRepository attendeeRepository,
+    ISocialEventRepository socialEventRepository)
+    : ControllerBase
 {
-    private readonly IAttendeeRepository _attendeeRepository;
-    private readonly ISocialEventRepository _socialEventRepository;
-
-    public AttendeeController(IAttendeeRepository attendeeAttendeeRepository,
-        ISocialEventRepository socialEventRepository)
-    {
-        _attendeeRepository = attendeeAttendeeRepository;
-        _socialEventRepository = socialEventRepository;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var attendees = await _attendeeRepository.GetAllAsync();
+        var attendees = await attendeeRepository.GetAllAsync();
         var attendeesDto = attendees.Select(s => s.ToAttendeeDto());
         return Ok(attendeesDto);
     }
@@ -31,7 +24,7 @@ public class AttendeeController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
-        var attendee = await _attendeeRepository.GetByIdAsync(id);
+        var attendee = await attendeeRepository.GetByIdAsync(id);
 
         if (attendee == null)
             return NotFound();
@@ -44,12 +37,12 @@ public class AttendeeController : ControllerBase
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        if (!await _socialEventRepository.ExitsAsync(attendeeDto.SocialEventId))
+        if (!await socialEventRepository.ExitsAsync(attendeeDto.SocialEventId))
             return BadRequest("Social event doesn't exists");
 
         var attendeeModel = attendeeDto.ToAttendeeFromCreateDto();
 
-        await _attendeeRepository.CreateAsync(attendeeModel);
+        await attendeeRepository.CreateAsync(attendeeModel);
 
         return CreatedAtAction(nameof(GetById), new { id = attendeeModel.Id }, attendeeModel.ToAttendeeDto());
     }
@@ -60,7 +53,7 @@ public class AttendeeController : ControllerBase
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var attendeeModel = await _attendeeRepository.UpdateAsync(id, attendeeDto);
+        var attendeeModel = await attendeeRepository.UpdateAsync(id, attendeeDto);
 
         if (attendeeModel == null) return NotFound("Attendee not found");
 
@@ -71,7 +64,7 @@ public class AttendeeController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var attendeeModel = await _attendeeRepository.DeleteAsync(id);
+        var attendeeModel = await attendeeRepository.DeleteAsync(id);
 
         if (attendeeModel == null) return NotFound("Attendee not found");
 
