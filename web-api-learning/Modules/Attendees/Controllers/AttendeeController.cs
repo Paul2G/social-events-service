@@ -49,6 +49,17 @@ public class AttendeeController : ControllerBase
 
         await _attendeeRepository.CreateAsync(attendeeModel);
 
-        return CreatedAtAction(nameof(GetById), new { id = attendeeModel }, attendeeModel.ToAttendeeDto());
+        return CreatedAtAction(nameof(GetById), new { id = attendeeModel.Id }, attendeeModel.ToAttendeeDto());
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UpdateAttendeeDto attendeeDto)
+    {
+        var attendeeModel = await _attendeeRepository.UpdateAsync(id, attendeeDto);
+
+        if (attendeeModel == null) return NotFound("Attendee not found");
+
+        return Ok(attendeeModel.ToAttendeeDto());
     }
 }

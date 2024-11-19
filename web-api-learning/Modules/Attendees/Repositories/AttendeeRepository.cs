@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using web_api_learning.Data;
+using web_api_learning.Modules.Attendees.DTOs;
 using web_api_learning.Modules.Attendees.Interfaces;
 using web_api_learning.Modules.Attendees.Models;
 
@@ -31,13 +32,34 @@ public class AttendeeRepository : IAttendeeRepository
         return attendeeModel;
     }
 
-    public Task<Attendee?> UpdateAsync()
+    public async Task<Attendee?> UpdateAsync(long id, UpdateAttendeeDto attendeeDto)
     {
-        throw new NotImplementedException();
+        var attendeeModel = await _context.Attendees.FirstOrDefaultAsync(a => a.Id == id);
+
+        if (attendeeModel == null) return null;
+
+        attendeeModel.Name = attendeeDto.Name;
+        attendeeModel.Status = attendeeDto.Status;
+
+        await _context.SaveChangesAsync();
+
+        return attendeeModel;
     }
 
-    public Task<Attendee?> DeleteAsync()
+    public async Task<Attendee?> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var attendeeModel = await _context.Attendees.FirstOrDefaultAsync(a => a.Id == id);
+
+        if (attendeeModel == null) return null;
+
+        _context.Attendees.Remove(attendeeModel);
+        await _context.SaveChangesAsync();
+
+        return attendeeModel;
+    }
+
+    public async Task<bool> ExistsAsync(long id)
+    {
+        return await _context.Attendees.AnyAsync(a => id == a.Id);
     }
 }
