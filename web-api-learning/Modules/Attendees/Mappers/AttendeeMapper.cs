@@ -12,7 +12,8 @@ public static class AttendeeMapper
             Id = attendee.Id,
             Name = attendee.Name,
             RegisteredAt = attendee.RegisteredAt,
-            Status = attendee.Status
+            Status = attendee.Status,
+            SocialEventId = attendee.SocialEventId
         };
     }
 }

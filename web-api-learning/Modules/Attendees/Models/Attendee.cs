@@ -16,6 +16,6 @@ public class Attendee
     public AttendanceStatus Status { get; set; } = AttendanceStatus.Pending;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
-    public long? EventId { get; set; }
+    public long? SocialEventId { get; set; }
     public SocialEvent? SocialEvent { get; set; }
 }

@@ -19,12 +19,12 @@ public class AttendeeRepository : IAttendeeRepository
         return await _context.Attendees.ToListAsync();
     }
 
-    public Task<Attendee?> GetByIdAsync()
+    public async Task<Attendee?> GetByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        return await _context.Attendees.FirstOrDefaultAsync(s => s.Id == id);
     }
 
-    public Task<Attendee> CreateAsync()
+    public Task<Attendee> CreateAsync() 
     {
         throw new NotImplementedException();
     }

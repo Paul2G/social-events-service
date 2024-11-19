@@ -9,5 +9,5 @@ public class ReadAttendeeDto
     public Attendee.AttendanceStatus Status { get; set; } = Attendee.AttendanceStatus.Pending;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
-    public long? EventId { get; set; }
+    public long? SocialEventId { get; set; }
 }

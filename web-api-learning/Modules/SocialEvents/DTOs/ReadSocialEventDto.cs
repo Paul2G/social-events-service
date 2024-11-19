@@ -1,4 +1,6 @@
-﻿namespace web_api_learning.Modules.SocialEvents.DTOs;
+﻿using web_api_learning.Modules.Attendees.DTOs;
+
+namespace web_api_learning.Modules.SocialEvents.DTOs;
 
 public class ReadSocialEventDto
 {
@@ -11,4 +13,6 @@ public class ReadSocialEventDto
     public long CreatedBy { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public int AttendeesCount { get; set; }
+
+    public List<ReadAttendeeDto> Attendees { get; set; } = new();
 }

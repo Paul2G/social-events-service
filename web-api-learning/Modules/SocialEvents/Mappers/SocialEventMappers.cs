@@ -1,4 +1,5 @@
-﻿using web_api_learning.Modules.SocialEvents.DTOs;
+﻿using web_api_learning.Modules.Attendees.Mappers;
+using web_api_learning.Modules.SocialEvents.DTOs;
 using web_api_learning.Modules.SocialEvents.Models;
 
 namespace web_api_learning.Modules.SocialEvents.Mappers;
@@ -17,6 +18,7 @@ public static class SocialEventMappers
             EndTime = socialEventModel.EndTime,
             CreatedAt = socialEventModel.CreatedAt,
             AttendeesCount = socialEventModel.Attendees.Count,
+            Attendees = socialEventModel.Attendees.Select(c => c.ToAttendeeDto()).ToList()
         };
     }
 
@@ -31,7 +33,7 @@ public static class SocialEventMappers
             Description = createSocialEventDto.Description,
             StartTime = createSocialEventDto.StartTime,
             EndTime = createSocialEventDto.EndTime,
-            CreatedAt = DateTime.Now,
+            CreatedAt = DateTime.Now
         };
     }
 
@@ -45,7 +47,7 @@ public static class SocialEventMappers
             Location = updateSocialEventDto.Location,
             Description = updateSocialEventDto.Description,
             StartTime = updateSocialEventDto.StartTime,
-            EndTime = updateSocialEventDto.EndTime,
+            EndTime = updateSocialEventDto.EndTime
         };
     }
 }

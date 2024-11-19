@@ -15,14 +15,14 @@ public class SocialEventRepository : ISocialEventRepository
         _context = context;
     }
 
-    public Task<List<SocialEvent>> GetAllAsync()
+    public async Task<List<SocialEvent>> GetAllAsync()
     {
-        return _context.SocialEvents.ToListAsync();
+        return await _context.SocialEvents.Include(c => c.Attendees).ToListAsync();
     }
 
     public async Task<SocialEvent?> GetByIdAsync(long id)
     {
-        return await _context.SocialEvents.FindAsync(id);
+        return await _context.SocialEvents.Include(c => c.Attendees).FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<SocialEvent> CreateAsync(SocialEvent socialEventModel)
