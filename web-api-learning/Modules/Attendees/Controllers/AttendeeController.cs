@@ -62,4 +62,15 @@ public class AttendeeController : ControllerBase
 
         return Ok(attendeeModel.ToAttendeeDto());
     }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] long id)
+    {
+        var attendeeModel = await _attendeeRepository.DeleteAsync(id);
+
+        if (attendeeModel == null) return NotFound("Attendee not found");
+
+        return NoContent();
+    }
 }
