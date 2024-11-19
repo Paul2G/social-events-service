@@ -28,7 +28,7 @@ public class AttendeeController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id}")]
+    [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var attendee = await _attendeeRepository.GetByIdAsync(id);
@@ -42,6 +42,8 @@ public class AttendeeController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateAttendeeDto attendeeDto)
     {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
         if (!await _socialEventRepository.ExitsAsync(attendeeDto.SocialEventId))
             return BadRequest("Social event doesn't exists");
 
@@ -53,9 +55,11 @@ public class AttendeeController : ControllerBase
     }
 
     [HttpPut]
-    [Route("{id}")]
+    [Route("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UpdateAttendeeDto attendeeDto)
     {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
         var attendeeModel = await _attendeeRepository.UpdateAsync(id, attendeeDto);
 
         if (attendeeModel == null) return NotFound("Attendee not found");
@@ -64,7 +68,7 @@ public class AttendeeController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("{id}")]
+    [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
         var attendeeModel = await _attendeeRepository.DeleteAsync(id);
