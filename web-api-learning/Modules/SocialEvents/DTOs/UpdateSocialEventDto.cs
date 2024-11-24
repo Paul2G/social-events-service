@@ -12,7 +12,7 @@ public class UpdateSocialEventDto
     [MaxLength(255, ErrorMessage = "Description cannot be over 255 characters")]
     public string? Description { get; set; }
 
-    public string Location { get; set; } = string.Empty;
+    public long? LocationId { get; set; }
 
     [Required]
     [DataType(DataType.DateTime)]

@@ -10,12 +10,14 @@ public class AttendeeRepository(ApplicationDbContext context) : IAttendeeReposit
 {
     public async Task<List<Attendee>> GetAllAsync()
     {
-        return await context.Attendees.ToListAsync();
+        return await context.Attendees.Include(a => a.SocialEvent).ToListAsync();
     }
 
     public async Task<Attendee?> GetByIdAsync(long id)
     {
-        return await context.Attendees.FirstOrDefaultAsync(s => s.Id == id);
+        return await context
+            .Attendees.Include(a => a.SocialEvent)
+            .FirstOrDefaultAsync(s => s.Id == id);
     }
 
     public async Task<Attendee> CreateAsync(Attendee attendeeModel)
@@ -29,7 +31,8 @@ public class AttendeeRepository(ApplicationDbContext context) : IAttendeeReposit
     {
         var attendeeModel = await context.Attendees.FirstOrDefaultAsync(a => a.Id == id);
 
-        if (attendeeModel == null) return null;
+        if (attendeeModel == null)
+            return null;
 
         attendeeModel.Name = attendeeDto.Name;
         attendeeModel.Status = attendeeDto.Status;
@@ -43,7 +46,8 @@ public class AttendeeRepository(ApplicationDbContext context) : IAttendeeReposit
     {
         var attendeeModel = await context.Attendees.FirstOrDefaultAsync(a => a.Id == id);
 
-        if (attendeeModel == null) return null;
+        if (attendeeModel == null)
+            return null;
 
         context.Attendees.Remove(attendeeModel);
         await context.SaveChangesAsync();

@@ -1,4 +1,5 @@
 using web_api_learning.Modules.Attendees.Models;
+using web_api_learning.Modules.SocialEvents.Models;
 
 namespace web_api_learning.Modules.Attendees.DTOs;
 
@@ -9,5 +10,5 @@ public class ReadAttendeeDto
     public Attendee.AttendanceStatus Status { get; set; } = Attendee.AttendanceStatus.Pending;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
-    public long? SocialEventId { get; set; }
+    public SocialEvent SocialEvent { get; set; }
 }

@@ -29,7 +29,7 @@ public static class SocialEventMappers
         return new SocialEvent
         {
             Name = createSocialEventDto.Name,
-            Location = createSocialEventDto.Location,
+            LocationId = createSocialEventDto.LocationId,
             Description = createSocialEventDto.Description,
             StartTime = createSocialEventDto.StartTime,
             EndTime = createSocialEventDto.EndTime,

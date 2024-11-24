@@ -10,12 +10,18 @@ public class SocialEventRepository(ApplicationDbContext context) : ISocialEventR
 {
     public async Task<List<SocialEvent>> GetAllAsync()
     {
-        return await context.SocialEvents.Include(c => c.Attendees).ToListAsync();
+        return await context
+            .SocialEvents.Include(c => c.Attendees)
+            .Include(c => c.Location)
+            .ToListAsync();
     }
 
     public async Task<SocialEvent?> GetByIdAsync(long id)
     {
-        return await context.SocialEvents.Include(c => c.Attendees).FirstOrDefaultAsync(c => c.Id == id);
+        return await context
+            .SocialEvents.Include(c => c.Attendees)
+            .Include(c => c.Location)
+            .FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<SocialEvent> CreateAsync(SocialEvent socialEventModel)
@@ -35,7 +41,7 @@ public class SocialEventRepository(ApplicationDbContext context) : ISocialEventR
 
         socialEventModel.Name = socialEventDto.Name;
         socialEventModel.Description = socialEventDto.Description;
-        socialEventModel.Location = socialEventDto.Location;
+        socialEventModel.LocationId = socialEventDto.LocationId;
         socialEventModel.StartTime = socialEventDto.StartTime;
         socialEventModel.EndTime = socialEventDto.EndTime;
 

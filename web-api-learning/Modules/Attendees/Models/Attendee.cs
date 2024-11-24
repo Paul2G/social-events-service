@@ -18,5 +18,5 @@ public class Attendee
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
     public long? SocialEventId { get; set; }
-    public SocialEvent? SocialEvent { get; set; }
+    public SocialEvent SocialEvent { get; set; }
 }
