@@ -7,7 +7,9 @@ using Newtonsoft.Json;
 using web_api_learning.Data;
 using web_api_learning.Modules.Attendees.Interfaces;
 using web_api_learning.Modules.Attendees.Repositories;
+using web_api_learning.Modules.Auth.Interfaces;
 using web_api_learning.Modules.Auth.Models;
+using web_api_learning.Modules.Auth.Services;
 using web_api_learning.Modules.Locations.Interfaces;
 using web_api_learning.Modules.Locations.Repositories;
 using web_api_learning.Modules.SocialEvents.Interfaces;
@@ -61,6 +63,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<ISocialEventRepository, SocialEventRepository>();
 builder.Services.AddScoped<IAttendeeRepository, AttendeeRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
