@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using web_api_learning.Data;
 
@@ -11,9 +12,11 @@ using web_api_learning.Data;
 namespace web_api_learning.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241125055417_roleseed")]
+    partial class roleseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,7 +197,7 @@ namespace web_api_learning.Migrations
 
                     b.HasIndex("SocialEventId");
 
-                    b.ToTable("Attendees", (string)null);
+                    b.ToTable("Attendees");
                 });
 
             modelBuilder.Entity("web_api_learning.Modules.Auth.Models.AppUser", b =>
@@ -291,7 +294,7 @@ namespace web_api_learning.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations", (string)null);
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("web_api_learning.Modules.SocialEvents.Models.SocialEvent", b =>
@@ -325,7 +328,7 @@ namespace web_api_learning.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("SocialEvents", (string)null);
+                    b.ToTable("SocialEvents");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
