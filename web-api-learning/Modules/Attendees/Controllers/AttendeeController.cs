@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using web_api_learning.Modules.Attendees.DTOs;
 using web_api_learning.Modules.Attendees.Interfaces;
@@ -13,6 +14,7 @@ public class AttendeeController(
     : ControllerBase
 {
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAll()
     {
         var attendees = await attendeeRepository.GetAllAsync();

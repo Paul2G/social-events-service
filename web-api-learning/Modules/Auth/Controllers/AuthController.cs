@@ -1,16 +1,45 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using web_api_learning.Modules.Auth.DTOs;
 using web_api_learning.Modules.Auth.Interfaces;
 using web_api_learning.Modules.Auth.Models;
-using web_api_learning.Modules.DTOs;
 
 namespace web_api_learning.Modules.Auth.Controllers;
 
 [Route("api/auth")]
 [ApiController]
-public class AuthController(UserManager<AppUser> userManager, ITokenService tokenService) : ControllerBase
+public class AuthController(
+    UserManager<AppUser> userManager,
+    ITokenService tokenService,
+    SignInManager<AppUser> signInManager)
+    : ControllerBase
 {
-    [HttpPost("register")]
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login(LoginDto loginDto)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        var user = await userManager.Users.FirstOrDefaultAsync(u =>
+            u.NormalizedUserName == loginDto.Username.ToUpper());
+
+        if (user == null) return Unauthorized("Invalid credentials");
+
+        var result = await signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+
+        if (!result.Succeeded) return Unauthorized("Invalid credentials");
+
+        return Ok(new NewUserDto
+        {
+            Username = user.UserName,
+            Email = user.Email,
+            Token = tokenService.CreateToken(user)
+        });
+    }
+
+    [HttpPost]
+    [Route("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
         try
@@ -32,7 +61,7 @@ public class AuthController(UserManager<AppUser> userManager, ITokenService toke
                 return roleResult.Succeeded
                     ? Ok(new NewUserDto
                     {
-                        UserName = appUser.UserName,
+                        Username = appUser.UserName,
                         Email = appUser.Email,
                         Token = tokenService.CreateToken(appUser)
                     })

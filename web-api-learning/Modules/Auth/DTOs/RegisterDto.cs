@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace web_api_learning.Modules.DTOs;
+namespace web_api_learning.Modules.Auth.DTOs;
 
 public class RegisterDto
 {

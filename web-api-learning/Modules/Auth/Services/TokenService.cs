@@ -27,6 +27,7 @@ public class TokenService : ITokenService
         };
 
         var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
