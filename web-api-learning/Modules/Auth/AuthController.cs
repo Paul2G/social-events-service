@@ -17,19 +17,19 @@ public class AuthController(
 {
     [HttpPost]
     [Route("login")]
-    public async Task<IActionResult> Login(LoginDto loginDto)
+    public async Task<IActionResult> Login(LoginUserDto loginUserDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
         var user = await userManager.Users.FirstOrDefaultAsync(u =>
-            u.NormalizedUserName == loginDto.Username.ToUpper()
+            u.NormalizedUserName == loginUserDto.Username.ToUpper()
         );
 
         if (user == null)
             return Unauthorized("Invalid credentials");
 
-        var result = await signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+        var result = await signInManager.CheckPasswordSignInAsync(user, loginUserDto.Password, false);
 
         if (!result.Succeeded)
             return Unauthorized("Invalid credentials");
@@ -39,16 +39,16 @@ public class AuthController(
 
     [HttpPost]
     [Route("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+    public async Task<IActionResult> Register([FromBody] RegisterUserDto registerUserDto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var appUser = registerDto.ToAppUser();
+            var appUser = registerUserDto.ToAppUser();
 
-            var createdUser = await userManager.CreateAsync(appUser, registerDto.Password);
+            var createdUser = await userManager.CreateAsync(appUser, registerUserDto.Password);
 
             if (createdUser.Succeeded)
             {

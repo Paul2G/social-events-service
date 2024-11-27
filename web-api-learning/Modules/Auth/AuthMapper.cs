@@ -15,12 +15,12 @@ public static class AuthMapper
         };
     }
 
-    public static AppUser ToAppUser(this RegisterDto registerDto)
+    public static AppUser ToAppUser(this RegisterUserDto registerUserDto)
     {
         return new AppUser
         {
-            UserName = registerDto.Username,
-            Email = registerDto.Email
+            UserName = registerUserDto.Username,
+            Email = registerUserDto.Email
         };
     }
 }

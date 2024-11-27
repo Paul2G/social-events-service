@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace web_api_learning.Modules.Auth.DTOs;
 
-public class LoginDto
+public class LoginUserDto
 {
     [Required] public string Username { get; set; }
 
