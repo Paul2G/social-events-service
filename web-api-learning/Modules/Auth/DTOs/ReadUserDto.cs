@@ -1,6 +1,6 @@
 namespace web_api_learning.Modules.Auth.DTOs;
 
-public class NewUserDto
+public class ReadUserDto
 {
     public string Username { get; set; }
     public string Email { get; set; }

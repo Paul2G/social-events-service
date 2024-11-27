@@ -5,37 +5,36 @@ using web_api_learning.Modules.Auth.DTOs;
 using web_api_learning.Modules.Auth.Interfaces;
 using web_api_learning.Modules.Auth.Models;
 
-namespace web_api_learning.Modules.Auth.Controllers;
+namespace web_api_learning.Modules.Auth;
 
 [Route("api/auth")]
 [ApiController]
 public class AuthController(
     UserManager<AppUser> userManager,
     ITokenService tokenService,
-    SignInManager<AppUser> signInManager)
-    : ControllerBase
+    SignInManager<AppUser> signInManager
+) : ControllerBase
 {
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
         var user = await userManager.Users.FirstOrDefaultAsync(u =>
-            u.NormalizedUserName == loginDto.Username.ToUpper());
+            u.NormalizedUserName == loginDto.Username.ToUpper()
+        );
 
-        if (user == null) return Unauthorized("Invalid credentials");
+        if (user == null)
+            return Unauthorized("Invalid credentials");
 
         var result = await signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-        if (!result.Succeeded) return Unauthorized("Invalid credentials");
+        if (!result.Succeeded)
+            return Unauthorized("Invalid credentials");
 
-        return Ok(new NewUserDto
-        {
-            Username = user.UserName,
-            Email = user.Email,
-            Token = tokenService.CreateToken(user)
-        });
+        return Ok(user.ToReadUserDto(tokenService.CreateToken(user)));
     }
 
     [HttpPost]
@@ -44,13 +43,10 @@ public class AuthController(
     {
         try
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            var appUser = new AppUser
-            {
-                UserName = registerDto.Username,
-                Email = registerDto.Email
-            };
+            var appUser = registerDto.ToAppUser();
 
             var createdUser = await userManager.CreateAsync(appUser, registerDto.Password);
 
@@ -59,12 +55,7 @@ public class AuthController(
                 var roleResult = await userManager.AddToRoleAsync(appUser, "User");
 
                 return roleResult.Succeeded
-                    ? Ok(new NewUserDto
-                    {
-                        Username = appUser.UserName,
-                        Email = appUser.Email,
-                        Token = tokenService.CreateToken(appUser)
-                    })
+                    ? Ok(appUser.ToReadUserDto(tokenService.CreateToken(appUser)))
                     : StatusCode(500, roleResult.Errors);
             }
 
