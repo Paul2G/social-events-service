@@ -1,7 +1,7 @@
 using web_api_learning.Modules.Attendees.DTOs;
 using web_api_learning.Modules.Attendees.Models;
 
-namespace web_api_learning.Modules.Attendees.Mappers;
+namespace web_api_learning.Modules.Attendees;
 
 public static class AttendeeMapper
 {

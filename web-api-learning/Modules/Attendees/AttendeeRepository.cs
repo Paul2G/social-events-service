@@ -4,7 +4,7 @@ using web_api_learning.Modules.Attendees.DTOs;
 using web_api_learning.Modules.Attendees.Interfaces;
 using web_api_learning.Modules.Attendees.Models;
 
-namespace web_api_learning.Modules.Attendees.Repositories;
+namespace web_api_learning.Modules.Attendees;
 
 public class AttendeeRepository(ApplicationDbContext context) : IAttendeeRepository
 {

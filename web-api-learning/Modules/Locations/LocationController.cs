@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using web_api_learning.Modules.Locations.Interfaces;
 
-namespace web_api_learning.Modules.Locations.Controllers;
+namespace web_api_learning.Modules.Locations;
 
 [Route("api/locations")]
 public class LocationController(ILocationRepository locationRepository) : ControllerBase

@@ -2,10 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using web_api_learning.Modules.Attendees.DTOs;
 using web_api_learning.Modules.Attendees.Interfaces;
-using web_api_learning.Modules.Attendees.Mappers;
 using web_api_learning.Modules.SocialEvents.Interfaces;
 
-namespace web_api_learning.Modules.Attendees.Controllers;
+namespace web_api_learning.Modules.Attendees;
 
 [Route("api/attendees")]
 public class AttendeeController(

@@ -3,7 +3,7 @@ using web_api_learning.Data;
 using web_api_learning.Modules.Locations.Interfaces;
 using web_api_learning.Modules.Locations.Models;
 
-namespace web_api_learning.Modules.Locations.Repositories;
+namespace web_api_learning.Modules.Locations;
 
 public class LocationRepository(ApplicationDbContext context) : ILocationRepository
 {

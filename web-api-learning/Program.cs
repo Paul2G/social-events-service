@@ -6,15 +6,15 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using web_api_learning.Data;
+using web_api_learning.Modules.Attendees;
 using web_api_learning.Modules.Attendees.Interfaces;
-using web_api_learning.Modules.Attendees.Repositories;
 using web_api_learning.Modules.Auth.Interfaces;
 using web_api_learning.Modules.Auth.Models;
 using web_api_learning.Modules.Auth.Services;
+using web_api_learning.Modules.Locations;
 using web_api_learning.Modules.Locations.Interfaces;
-using web_api_learning.Modules.Locations.Repositories;
+using web_api_learning.Modules.SocialEvents;
 using web_api_learning.Modules.SocialEvents.Interfaces;
-using web_api_learning.Modules.SocialEvents.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

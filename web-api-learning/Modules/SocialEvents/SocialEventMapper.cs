@@ -1,10 +1,10 @@
-﻿using web_api_learning.Modules.Attendees.Mappers;
+﻿using web_api_learning.Modules.Attendees;
 using web_api_learning.Modules.SocialEvents.DTOs;
 using web_api_learning.Modules.SocialEvents.Models;
 
-namespace web_api_learning.Modules.SocialEvents.Mappers;
+namespace web_api_learning.Modules.SocialEvents;
 
-public static class SocialEventMappers
+public static class SocialEventMapper
 {
     public static ReadSocialEventDto ToSocialEventDto(this SocialEvent socialEventModel)
     {

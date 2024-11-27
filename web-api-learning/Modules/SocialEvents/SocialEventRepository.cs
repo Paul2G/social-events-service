@@ -4,7 +4,7 @@ using web_api_learning.Modules.SocialEvents.DTOs;
 using web_api_learning.Modules.SocialEvents.Interfaces;
 using web_api_learning.Modules.SocialEvents.Models;
 
-namespace web_api_learning.Modules.SocialEvents.Repositories;
+namespace web_api_learning.Modules.SocialEvents;
 
 public class SocialEventRepository(ApplicationDbContext context) : ISocialEventRepository
 {
