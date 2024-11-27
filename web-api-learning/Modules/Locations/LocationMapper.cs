@@ -38,17 +38,4 @@ public static class LocationMapper
         location.PostalCode = updateLocationDto.PostalCode;
         location.Address = updateLocationDto.Address;
     }
-
-
-    public static Location ToLocation(this UpdateLocationDto updateLocationDto)
-    {
-        return new Location
-        {
-            Name = updateLocationDto.Name,
-            Phone = updateLocationDto.Phone,
-            Country = updateLocationDto.Country,
-            PostalCode = updateLocationDto.PostalCode,
-            Address = updateLocationDto.Address
-        };
-    }
 }

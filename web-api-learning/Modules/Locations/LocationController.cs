@@ -48,7 +48,6 @@ public class LocationController(ILocationRepository locationRepository) : Contro
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var locationModel = await locationRepository.UpdateAsync(id, locationDto);
-
         if (locationModel == null) return NotFound("Location was not found");
 
         return Ok(locationModel.ToLocationDto());

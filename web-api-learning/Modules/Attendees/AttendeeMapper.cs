@@ -17,12 +17,18 @@ public static class AttendeeMapper
         };
     }
 
-    public static Attendee ToAttendeeFromCreateDto(this CreateAttendeeDto attendeeDto)
+    public static Attendee ToAttendee(this CreateAttendeeDto attendeeDto)
     {
         return new Attendee
         {
             Name = attendeeDto.Name,
             SocialEventId = attendeeDto.SocialEventId
         };
+    }
+
+    public static void ParseFromUpdateAttendeeDto(this Attendee attendee, UpdateAttendeeDto updateAttendeeDto)
+    {
+        attendee.Name = updateAttendeeDto.Name;
+        attendee.Status = updateAttendeeDto.Status;
     }
 }

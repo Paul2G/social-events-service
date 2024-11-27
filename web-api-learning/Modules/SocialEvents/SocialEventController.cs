@@ -34,8 +34,7 @@ public class SocialEventController(ISocialEventRepository socialEventRepository)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var socialEventModel = socialEventDto.ToSocialEventFromCreateDto();
-        await socialEventRepository.CreateAsync(socialEventModel);
+        var socialEventModel = await socialEventRepository.CreateAsync(socialEventDto);
 
         return CreatedAtAction(
             nameof(GetById),
@@ -54,9 +53,7 @@ public class SocialEventController(ISocialEventRepository socialEventRepository)
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var socialEventModel = await socialEventRepository.UpdateAsync(id, socialEventDto);
-
-        if (socialEventModel == null)
-            return NotFound();
+        if (socialEventModel == null) return NotFound();
 
         return Ok(socialEventModel.ToSocialEventDto());
     }
@@ -66,9 +63,7 @@ public class SocialEventController(ISocialEventRepository socialEventRepository)
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
         var socialEventModel = await socialEventRepository.DeleteAsync(id);
-
-        if (socialEventModel == null)
-            return NotFound();
+        if (socialEventModel == null) return NotFound();
 
         return NoContent();
     }

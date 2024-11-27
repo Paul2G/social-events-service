@@ -34,9 +34,7 @@ public class AttendeeRepository(ApplicationDbContext context) : IAttendeeReposit
         if (attendeeModel == null)
             return null;
 
-        attendeeModel.Name = attendeeDto.Name;
-        attendeeModel.Status = attendeeDto.Status;
-
+        attendeeModel.ParseFromUpdateAttendeeDto(attendeeDto);
         await context.SaveChangesAsync();
 
         return attendeeModel;

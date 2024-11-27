@@ -22,7 +22,7 @@ public static class SocialEventMapper
         };
     }
 
-    public static SocialEvent ToSocialEventFromCreateDto(
+    public static SocialEvent ToSocialEvent(
         this CreateSocialEventDto createSocialEventDto
     )
     {
@@ -35,5 +35,15 @@ public static class SocialEventMapper
             EndTime = createSocialEventDto.EndTime,
             CreatedAt = DateTime.Now
         };
+    }
+
+    public static void ParseFromUpdateSocialEventDto(this SocialEvent socialEvent,
+        UpdateSocialEventDto updateSocialEventDto)
+    {
+        socialEvent.Name = updateSocialEventDto.Name;
+        socialEvent.Description = updateSocialEventDto.Description;
+        socialEvent.LocationId = updateSocialEventDto.LocationId;
+        socialEvent.StartTime = updateSocialEventDto.StartTime;
+        socialEvent.EndTime = updateSocialEventDto.EndTime;
     }
 }

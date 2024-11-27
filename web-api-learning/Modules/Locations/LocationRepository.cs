@@ -34,7 +34,6 @@ public class LocationRepository(ApplicationDbContext context) : ILocationReposit
         if (locationModel == null) return null;
 
         locationModel.ParseFromUpdateLocationDto(locationDto);
-
         await context.SaveChangesAsync();
 
         return locationModel;

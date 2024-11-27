@@ -24,14 +24,6 @@ public class SocialEventRepository(ApplicationDbContext context) : ISocialEventR
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<SocialEvent> CreateAsync(SocialEvent socialEventModel)
-    {
-        await context.SocialEvents.AddAsync(socialEventModel);
-        await context.SaveChangesAsync();
-
-        return socialEventModel;
-    }
-
     public async Task<SocialEvent?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto)
     {
         var socialEventModel = await context.SocialEvents.FirstOrDefaultAsync(x => x.Id == id);
@@ -39,12 +31,7 @@ public class SocialEventRepository(ApplicationDbContext context) : ISocialEventR
         if (socialEventModel == null)
             return null;
 
-        socialEventModel.Name = socialEventDto.Name;
-        socialEventModel.Description = socialEventDto.Description;
-        socialEventModel.LocationId = socialEventDto.LocationId;
-        socialEventModel.StartTime = socialEventDto.StartTime;
-        socialEventModel.EndTime = socialEventDto.EndTime;
-
+        socialEventModel.ParseFromUpdateSocialEventDto(socialEventDto);
         await context.SaveChangesAsync();
 
         return socialEventModel;
@@ -66,5 +53,15 @@ public class SocialEventRepository(ApplicationDbContext context) : ISocialEventR
     public async Task<bool> ExitsAsync(long id)
     {
         return await context.SocialEvents.AnyAsync(s => s.Id == id);
+    }
+
+    public async Task<SocialEvent> CreateAsync(CreateSocialEventDto socialEventDto)
+    {
+        var socialEventModel = socialEventDto.ToSocialEvent();
+
+        await context.SocialEvents.AddAsync(socialEventModel);
+        await context.SaveChangesAsync();
+
+        return socialEventModel;
     }
 }

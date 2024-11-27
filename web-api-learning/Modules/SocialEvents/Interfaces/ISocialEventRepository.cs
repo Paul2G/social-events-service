@@ -8,7 +8,7 @@ public interface ISocialEventRepository
     Task<List<SocialEvent>> GetAllAsync();
     Task<SocialEvent?> GetByIdAsync(long id);
 
-    Task<SocialEvent> CreateAsync(SocialEvent socialEventModel);
+    Task<SocialEvent> CreateAsync(CreateSocialEventDto socialEventDto);
 
     Task<SocialEvent?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto);
 
