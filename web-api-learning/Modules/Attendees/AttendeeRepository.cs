@@ -10,13 +10,13 @@ public class AttendeeRepository(ApplicationDbContext context) : IAttendeeReposit
 {
     public async Task<List<Attendee>> GetAllAsync()
     {
-        return await context.Attendees.Include(a => a.SocialEvent).ToListAsync();
+        return await context.Attendees.ToListAsync();
     }
 
     public async Task<Attendee?> GetByIdAsync(long id)
     {
         return await context
-            .Attendees.Include(a => a.SocialEvent)
+            .Attendees
             .FirstOrDefaultAsync(s => s.Id == id);
     }
 

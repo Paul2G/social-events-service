@@ -17,6 +17,13 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions) : IdentityD
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        // Config many-to-many relationship
+        builder.Entity<SocialEvent>()
+            .HasMany(e => e.Attendees)
+            .WithMany(e => e.SocialEvents);
+
+        // Seeding roles
         var roles = new List<IdentityRole>
         {
             new()

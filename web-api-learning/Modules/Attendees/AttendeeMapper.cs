@@ -12,8 +12,7 @@ public static class AttendeeMapper
             Id = attendee.Id,
             Name = attendee.Name,
             RegisteredAt = attendee.RegisteredAt,
-            Status = attendee.Status,
-            SocialEvent = attendee.SocialEvent
+            Status = attendee.Status
         };
     }
 
@@ -21,8 +20,7 @@ public static class AttendeeMapper
     {
         return new Attendee
         {
-            Name = attendeeDto.Name,
-            SocialEventId = attendeeDto.SocialEventId
+            Name = attendeeDto.Name
         };
     }
 
