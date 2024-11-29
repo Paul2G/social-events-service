@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using web_api_learning.Data;
 
@@ -11,16 +12,33 @@ using web_api_learning.Data;
 namespace web_api_learning.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241129055556_UserContent")]
+    partial class UserContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0-rc.2.24474.1")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AttendeeSocialEvent", b =>
+                {
+                    b.Property<long>("AttendeesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("SocialEventsId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("AttendeesId", "SocialEventsId");
+
+                    b.HasIndex("SocialEventsId");
+
+                    b.ToTable("AttendeeSocialEvent");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -51,13 +69,13 @@ namespace web_api_learning.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4e0e4b37-d2e7-4a64-abc6-7dca951da9df",
+                            Id = "ef782bc2-cb9a-4396-ba81-6c904c6ce1eb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c282b1a5-5935-4d3c-8b29-50c7e3e56e49",
+                            Id = "c117954b-aaea-4115-9b89-c1ccd76b3e1f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -177,24 +195,23 @@ namespace web_api_learning.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegisteredAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("SocialEventId")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SocialEventId");
+                    b.HasIndex("AppUserId");
 
-                    b.ToTable("Attendees", (string)null);
+                    b.ToTable("Attendees");
                 });
 
             modelBuilder.Entity("web_api_learning.Modules.Auth.Models.AppUser", b =>
@@ -274,6 +291,9 @@ namespace web_api_learning.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -291,7 +311,9 @@ namespace web_api_learning.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations", (string)null);
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("web_api_learning.Modules.SocialEvents.Models.SocialEvent", b =>
@@ -301,6 +323,9 @@ namespace web_api_learning.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -323,9 +348,26 @@ namespace web_api_learning.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
                     b.HasIndex("LocationId");
 
-                    b.ToTable("SocialEvents", (string)null);
+                    b.ToTable("SocialEvents");
+                });
+
+            modelBuilder.Entity("AttendeeSocialEvent", b =>
+                {
+                    b.HasOne("web_api_learning.Modules.Attendees.Models.Attendee", null)
+                        .WithMany()
+                        .HasForeignKey("AttendeesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("web_api_learning.Modules.SocialEvents.Models.SocialEvent", null)
+                        .WithMany()
+                        .HasForeignKey("SocialEventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -381,15 +423,24 @@ namespace web_api_learning.Migrations
 
             modelBuilder.Entity("web_api_learning.Modules.Attendees.Models.Attendee", b =>
                 {
-                    b.HasOne("web_api_learning.Modules.SocialEvents.Models.SocialEvent", "SocialEvent")
+                    b.HasOne("web_api_learning.Modules.Auth.Models.AppUser", null)
                         .WithMany("Attendees")
-                        .HasForeignKey("SocialEventId");
+                        .HasForeignKey("AppUserId");
+                });
 
-                    b.Navigation("SocialEvent");
+            modelBuilder.Entity("web_api_learning.Modules.Locations.Models.Location", b =>
+                {
+                    b.HasOne("web_api_learning.Modules.Auth.Models.AppUser", null)
+                        .WithMany("Locations")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("web_api_learning.Modules.SocialEvents.Models.SocialEvent", b =>
                 {
+                    b.HasOne("web_api_learning.Modules.Auth.Models.AppUser", null)
+                        .WithMany("SocialEvents")
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("web_api_learning.Modules.Locations.Models.Location", "Location")
                         .WithMany("SocialEvents")
                         .HasForeignKey("LocationId");
@@ -397,14 +448,18 @@ namespace web_api_learning.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("web_api_learning.Modules.Locations.Models.Location", b =>
+            modelBuilder.Entity("web_api_learning.Modules.Auth.Models.AppUser", b =>
                 {
+                    b.Navigation("Attendees");
+
+                    b.Navigation("Locations");
+
                     b.Navigation("SocialEvents");
                 });
 
-            modelBuilder.Entity("web_api_learning.Modules.SocialEvents.Models.SocialEvent", b =>
+            modelBuilder.Entity("web_api_learning.Modules.Locations.Models.Location", b =>
                 {
-                    b.Navigation("Attendees");
+                    b.Navigation("SocialEvents");
                 });
 #pragma warning restore 612, 618
         }
