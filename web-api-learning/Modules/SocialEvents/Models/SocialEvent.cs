@@ -15,6 +15,7 @@ public class SocialEvent
     public DateTime EndTime { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public long? LocationId { get; set; }
+    public string AppUserId { get; set; } = string.Empty;
 
     // Navigation
     public Location? Location { get; set; }

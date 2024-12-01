@@ -12,7 +12,7 @@ public class CreateSocialEventDto
     [MaxLength(255, ErrorMessage = "Description cannot be over 255 characters")]
     public string Description { get; set; }
 
-    public long LocationId { get; set; }
+    public long? LocationId { get; set; }
 
     [Required]
     [DataType(DataType.DateTime)]

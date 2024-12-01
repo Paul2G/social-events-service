@@ -12,6 +12,7 @@ public class Location
     public string Country { get; set; } = string.Empty;
     public int PostalCode { get; set; }
     public string Address { get; set; } = string.Empty;
+    public string AppUserId { get; set; } = string.Empty;
 
     // Navigation
 
