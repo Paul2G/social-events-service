@@ -2,18 +2,18 @@
   sql-volume:
 
 services:
-  sqlserver:
+  sql-server-db:
     container_name: sql-server
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
       - 1443:1443
     volumes: 
-      - sql-volume:/var/opt/mssql/data
+      - sql-volume:/var/opt/mssql/data    
     environment:
-      ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD: woRrrrrrD1209!!
-      MSSQL_PID: Express
-      MSSQL_TCP_PORT: 1443
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - MSSQL_TCP_PORT=${MSSQL_TCP_PORT}
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       
   web-api-learning:
     container_name: service-api
@@ -23,5 +23,10 @@ services:
       - 8080:8080
       - 8081:8081
     depends_on:
-      - sqlserver
+      - sql-server-db
     restart: on-failure
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_PASSWORD=${DB_PASSWORD}

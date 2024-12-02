@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>web_api_learning</RootNamespace>
+        <UserSecretsId>d55f3bdc-7f76-437f-a0f8-0ff9d10694f6</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
