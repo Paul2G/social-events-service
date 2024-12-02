@@ -67,8 +67,8 @@ public class SocialEventRepository(ApplicationDbContext context) : ISocialEventR
         return socialEventModel;
     }
 
-    public async Task<bool> ExitsAsync(long id)
+    public async Task<bool> ExitsAsync(AppUser appUser, long id)
     {
-        return await context.SocialEvents.AnyAsync(s => s.Id == id);
+        return await context.SocialEvents.Where(s => s.AppUserId == appUser.Id).AnyAsync(s => s.Id == id);
     }
 }

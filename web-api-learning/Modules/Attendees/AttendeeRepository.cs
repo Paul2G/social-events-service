@@ -3,33 +3,38 @@ using web_api_learning.Data;
 using web_api_learning.Modules.Attendees.DTOs;
 using web_api_learning.Modules.Attendees.Interfaces;
 using web_api_learning.Modules.Attendees.Models;
+using web_api_learning.Modules.Auth.Models;
 
 namespace web_api_learning.Modules.Attendees;
 
 public class AttendeeRepository(ApplicationDbContext context) : IAttendeeRepository
 {
-    public async Task<List<Attendee>> GetAllAsync()
+    public async Task<List<Attendee>> GetAllAsync(AppUser appUser)
     {
-        return await context.Attendees.ToListAsync();
+        return await context.Attendees.Where(s => s.AppUserId == appUser.Id).ToListAsync();
     }
 
-    public async Task<Attendee?> GetByIdAsync(long id)
+    public async Task<Attendee?> GetByIdAsync(AppUser appUser, long id)
     {
-        return await context
-            .Attendees
+        return await context.Attendees
+            .Where(a => a.AppUserId == appUser.Id)
             .FirstOrDefaultAsync(s => s.Id == id);
     }
 
-    public async Task<Attendee> CreateAsync(Attendee attendeeModel)
+    public async Task<Attendee> CreateAsync(AppUser appUser, CreateAttendeeDto attendeeDto)
     {
+        var attendeeModel = attendeeDto.ToAttendee(appUser.Id);
+
         await context.Attendees.AddAsync(attendeeModel);
         await context.SaveChangesAsync();
         return attendeeModel;
     }
 
-    public async Task<Attendee?> UpdateAsync(long id, UpdateAttendeeDto attendeeDto)
+    public async Task<Attendee?> UpdateAsync(AppUser appUser, long id, UpdateAttendeeDto attendeeDto)
     {
-        var attendeeModel = await context.Attendees.FirstOrDefaultAsync(a => a.Id == id);
+        var attendeeModel = await context.Attendees
+            .Where(a => a.AppUserId == appUser.Id)
+            .FirstOrDefaultAsync(a => a.Id == id);
 
         if (attendeeModel == null)
             return null;
@@ -40,9 +45,11 @@ public class AttendeeRepository(ApplicationDbContext context) : IAttendeeReposit
         return attendeeModel;
     }
 
-    public async Task<Attendee?> DeleteAsync(long id)
+    public async Task<Attendee?> DeleteAsync(AppUser appUser, long id)
     {
-        var attendeeModel = await context.Attendees.FirstOrDefaultAsync(a => a.Id == id);
+        var attendeeModel = await context.Attendees
+            .Where(a => a.AppUserId == appUser.Id)
+            .FirstOrDefaultAsync(a => a.Id == id);
 
         if (attendeeModel == null)
             return null;
@@ -53,8 +60,8 @@ public class AttendeeRepository(ApplicationDbContext context) : IAttendeeReposit
         return attendeeModel;
     }
 
-    public async Task<bool> ExistsAsync(long id)
+    public async Task<bool> ExistsAsync(AppUser appUser, long id)
     {
-        return await context.Attendees.AnyAsync(a => id == a.Id);
+        return await context.Attendees.Where(a => a.AppUserId == appUser.Id).AnyAsync(a => id == a.Id);
     }
 }

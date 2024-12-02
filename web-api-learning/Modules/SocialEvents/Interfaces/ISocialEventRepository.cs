@@ -14,5 +14,5 @@ public interface ISocialEventRepository
     Task<SocialEvent?> UpdateAsync(AppUser appUser, long id, UpdateSocialEventDto socialEventDto);
 
     Task<SocialEvent?> DeleteAsync(AppUser appUser, long id);
-    Task<bool> ExitsAsync(long id);
+    Task<bool> ExitsAsync(AppUser appUser, long id);
 }

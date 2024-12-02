@@ -16,11 +16,12 @@ public static class AttendeeMapper
         };
     }
 
-    public static Attendee ToAttendee(this CreateAttendeeDto attendeeDto)
+    public static Attendee ToAttendee(this CreateAttendeeDto attendeeDto, string appUserId)
     {
         return new Attendee
         {
-            Name = attendeeDto.Name
+            Name = attendeeDto.Name,
+            AppUserId = appUserId
         };
     }
 

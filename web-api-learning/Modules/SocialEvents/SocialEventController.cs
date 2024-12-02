@@ -8,13 +8,13 @@ using web_api_learning.Modules.SocialEvents.Interfaces;
 
 namespace web_api_learning.Modules.SocialEvents;
 
-[Route("api/social-events")]
 [ApiController]
+[Route("api/social-events")]
+[Authorize]
 public class SocialEventController(ISocialEventRepository socialEventRepository, UserManager<AppUser> userManager)
     : ControllerBase
 {
     [HttpGet]
-    [Authorize]
     public async Task<IActionResult> GetAll()
     {
         var username = User.GetUsername();
@@ -27,7 +27,6 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
     }
 
     [HttpGet]
-    [Authorize]
     [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
@@ -43,7 +42,6 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
     }
 
     [HttpPost]
-    [Authorize]
     public async Task<IActionResult> Create([FromBody] CreateSocialEventDto socialEventDto)
     {
         var username = User.GetUsername();
@@ -61,7 +59,6 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
     }
 
     [HttpPut]
-    [Authorize]
     [Route("{id:int}")]
     public async Task<IActionResult> Update(
         [FromRoute] long id,
@@ -80,7 +77,6 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
     }
 
     [HttpDelete]
-    [Authorize]
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
