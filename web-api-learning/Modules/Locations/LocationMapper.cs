@@ -18,7 +18,7 @@ public static class LocationMapper
         };
     }
 
-    public static Location ToLocation(this CreateLocationDto createLocationDto)
+    public static Location ToLocation(this CreateLocationDto createLocationDto, string appUserId)
     {
         return new Location
         {
@@ -26,7 +26,8 @@ public static class LocationMapper
             Phone = createLocationDto.Phone,
             Country = createLocationDto.Country,
             PostalCode = createLocationDto.PostalCode,
-            Address = createLocationDto.Address
+            Address = createLocationDto.Address,
+            AppUserId = appUserId
         };
     }
 
