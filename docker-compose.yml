@@ -1,7 +1,4 @@
-﻿volumes:
-  sql-volume:
-
-services:
+﻿services:
   sql-server-db:
     container_name: sql-server
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -31,3 +28,6 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
       - DB_PASSWORD=${DB_PASSWORD}
+        
+volumes:
+  sql-volume:
