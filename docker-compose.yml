@@ -1,6 +1,7 @@
 ﻿services:
   sql-server-db:
     container_name: sql-server
+    user: root
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
       - 1443:1443
