@@ -32,7 +32,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Web api learning", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Social Event Manager", Version = "v1" });
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -113,8 +113,12 @@ using (var scope = app.Services.CreateScope())
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(option => { option.RouteTemplate = "docs/{documentName}/swagger.json"; });
+    app.UseSwaggerUI(option =>
+    {
+        option.SwaggerEndpoint("/docs/v1/swagger.json", "Social Event Manager API v1");
+        option.RoutePrefix = "docs";
+    });
 }
 
 app.UseHttpsRedirection();
