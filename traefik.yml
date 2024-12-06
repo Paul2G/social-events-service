@@ -1,0 +1,57 @@
+log:
+  level: INFO
+  filePath: /traefik.log
+  format: json
+
+api:
+  insecure: true
+  dashboard: true
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          sheme: https
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: "letsencrypt"
+
+certificatesresolvers:
+  letsencrypt:
+    acme:
+      email: "paulgarcia92@hotmail.com"
+      storage: "/acme.json"
+      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+      httpChallenge:
+        entryPoint: web
+
+http:
+  middlewares:
+    https-redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+    traefik-auth:
+      basicAuth:
+        userFile: /users
+
+tls:
+  stores:
+    default:
+      defaultGeneratedCert:
+        resolver: "letsencrypt"
+        domain:
+          main: "paul2g.dev"
+          sans:
+            - "sem.paul2g.dev"
+
+providers:
+  swarm:
+    endpoint: "unix://var/run/docker.sock"
+    exposedByDefault: false

@@ -1,0 +1,311 @@
+{"level":"info","version":"3.2.1","time":"2024-12-06T18:29:08Z","message":"Traefik version 3.2.1 built on 2024-11-20T17:39:47Z"}
+{"level":"info","time":"2024-12-06T18:29:08Z","message":"\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"}
+{"level":"info","time":"2024-12-06T18:29:08Z","message":"Starting provider aggregator *aggregator.ProviderAggregator"}
+{"level":"info","time":"2024-12-06T18:29:08Z","message":"Starting provider *traefik.Provider"}
+{"level":"info","time":"2024-12-06T18:29:08Z","message":"Starting provider *acme.ChallengeTLSALPN"}
+{"level":"info","time":"2024-12-06T18:29:08Z","message":"Starting provider *docker.SwarmProvider"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:29:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:29:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:29:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:29:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:30:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:30:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:30:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:30:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:31:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:31:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:31:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:31:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:32:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:32:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:32:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:32:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:33:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:33:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:33:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:33:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:34:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:34:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:34:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:34:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:35:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:35:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:35:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:35:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:36:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:36:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:36:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:36:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:37:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:37:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:37:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:37:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:38:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:38:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:38:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:38:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:39:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:39:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:39:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:39:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:40:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:40:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:40:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:40:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:41:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:41:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:41:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:41:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:42:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:42:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:42:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:42:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:43:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:43:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:43:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:43:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:44:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:44:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:44:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:44:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:45:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:45:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:45:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:45:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:46:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:46:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:46:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:46:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:47:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:47:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:47:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:47:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:48:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:48:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:48:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:48:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:49:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:49:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:49:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:49:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:50:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:50:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:50:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:50:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:51:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:51:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:51:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:51:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:52:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:52:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:52:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:52:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:53:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:53:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:53:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:53:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:54:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:54:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:54:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:54:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:55:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:55:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:55:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:55:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:56:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:56:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:56:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:56:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:57:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:57:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:57:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:57:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:58:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:58:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:58:38Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T18:58:38Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T18:58:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:58:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:59:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:59:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:59:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T18:59:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:00:08Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:00:09Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:00:09Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:00:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:00:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:00:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:01:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:01:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:01:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:01:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:02:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:02:23Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:02:23Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:02:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:02:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:02:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:03:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:03:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:03:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:03:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:04:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:04:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:04:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:04:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:05:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:05:23Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:05:23Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:05:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:05:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:05:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:06:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:06:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:06:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:06:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:07:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:07:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:07:38Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:07:38Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:07:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:07:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:08:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:08:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:08:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:08:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:09:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:09:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:09:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:09:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:10:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:10:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:10:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:10:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:11:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:11:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:11:38Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:11:38Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:11:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:11:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:12:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:12:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:12:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:12:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:13:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:13:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:13:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:13:53Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:13:53Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:13:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:14:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:14:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:14:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:14:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:15:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:15:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:15:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:15:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:16:08Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:16:08Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:16:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:16:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:16:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:16:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:17:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:17:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:17:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:17:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:18:08Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:18:23Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:18:38Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:18:53Z"}
+{"level":"error","providerName":"swarm","container":"traefik-traefik-zmmdfq44ccw5lc3b7iia8a4qq","error":"field not found, node: middleware","time":"2024-12-06T19:19:08Z"}
+{"level":"info","time":"2024-12-06T19:19:25Z","message":"I have to go..."}
+{"level":"info","time":"2024-12-06T19:19:25Z","message":"Stopping server gracefully"}
+{"level":"error","entryPointName":"web","error":"accept tcp [::]:80: use of closed network connection","time":"2024-12-06T19:19:25Z"}
+{"level":"error","entryPointName":"web","error":"close tcp [::]:80: use of closed network connection","time":"2024-12-06T19:19:25Z"}
+{"level":"error","entryPointName":"websecure","error":"accept tcp [::]:443: use of closed network connection","time":"2024-12-06T19:19:25Z"}
+{"level":"error","entryPointName":"traefik","error":"accept tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:19:25Z"}
+{"level":"error","entryPointName":"websecure","error":"close tcp [::]:443: use of closed network connection","time":"2024-12-06T19:19:25Z"}
+{"level":"error","entryPointName":"traefik","error":"close tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:19:25Z"}
+{"level":"info","time":"2024-12-06T19:19:25Z","message":"Server stopped"}
+{"level":"info","time":"2024-12-06T19:19:25Z","message":"Shutting down"}
+{"level":"info","version":"3.2.1","time":"2024-12-06T19:30:40Z","message":"Traefik version 3.2.1 built on 2024-11-20T17:39:47Z"}
+{"level":"info","time":"2024-12-06T19:30:40Z","message":"\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"}
+{"level":"info","time":"2024-12-06T19:30:40Z","message":"Starting provider aggregator *aggregator.ProviderAggregator"}
+{"level":"info","time":"2024-12-06T19:30:40Z","message":"Starting provider *traefik.Provider"}
+{"level":"info","time":"2024-12-06T19:30:40Z","message":"Starting provider *acme.ChallengeTLSALPN"}
+{"level":"info","time":"2024-12-06T19:30:40Z","message":"Starting provider *docker.SwarmProvider"}
+{"level":"error","entryPointName":"web","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:30:40Z"}
+{"level":"error","entryPointName":"websecure","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:30:40Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:31:56Z"}
+{"level":"error","entryPointName":"web","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:31:56Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:31:56Z"}
+{"level":"error","entryPointName":"websecure","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:31:56Z"}
+{"level":"error","entryPointName":"web","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:32:10Z"}
+{"level":"error","entryPointName":"websecure","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:32:10Z"}
+{"level":"info","time":"2024-12-06T19:33:11Z","message":"I have to go..."}
+{"level":"info","time":"2024-12-06T19:33:11Z","message":"Stopping server gracefully"}
+{"level":"error","entryPointName":"traefik","error":"accept tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:33:11Z"}
+{"level":"error","entryPointName":"traefik","error":"close tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:33:11Z"}
+{"level":"error","entryPointName":"web","error":"accept tcp [::]:80: use of closed network connection","time":"2024-12-06T19:33:11Z"}
+{"level":"error","entryPointName":"web","error":"close tcp [::]:80: use of closed network connection","time":"2024-12-06T19:33:11Z"}
+{"level":"error","entryPointName":"websecure","error":"accept tcp [::]:443: use of closed network connection","time":"2024-12-06T19:33:11Z"}
+{"level":"error","entryPointName":"websecure","error":"close tcp [::]:443: use of closed network connection","time":"2024-12-06T19:33:11Z"}
+{"level":"info","time":"2024-12-06T19:33:11Z","message":"Server stopped"}
+{"level":"info","time":"2024-12-06T19:33:11Z","message":"Shutting down"}
+{"level":"info","version":"3.2.1","time":"2024-12-06T19:33:18Z","message":"Traefik version 3.2.1 built on 2024-11-20T17:39:47Z"}
+{"level":"info","time":"2024-12-06T19:33:18Z","message":"\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"}
+{"level":"info","time":"2024-12-06T19:33:18Z","message":"Starting provider aggregator *aggregator.ProviderAggregator"}
+{"level":"info","time":"2024-12-06T19:33:18Z","message":"Starting provider *traefik.Provider"}
+{"level":"info","time":"2024-12-06T19:33:18Z","message":"Starting provider *docker.SwarmProvider"}
+{"level":"info","time":"2024-12-06T19:33:18Z","message":"Starting provider *acme.ChallengeTLSALPN"}
+{"level":"error","entryPointName":"web","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:33:19Z"}
+{"level":"error","entryPointName":"websecure","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:33:19Z"}
+{"level":"info","time":"2024-12-06T19:34:18Z","message":"I have to go..."}
+{"level":"info","time":"2024-12-06T19:34:18Z","message":"Stopping server gracefully"}
+{"level":"error","entryPointName":"web","error":"accept tcp [::]:80: use of closed network connection","time":"2024-12-06T19:34:18Z"}
+{"level":"error","entryPointName":"traefik","error":"accept tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:34:18Z"}
+{"level":"error","entryPointName":"traefik","error":"close tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:34:18Z"}
+{"level":"error","entryPointName":"websecure","error":"accept tcp [::]:443: use of closed network connection","time":"2024-12-06T19:34:18Z"}
+{"level":"error","entryPointName":"web","error":"close tcp [::]:80: use of closed network connection","time":"2024-12-06T19:34:18Z"}
+{"level":"error","entryPointName":"websecure","error":"close tcp [::]:443: use of closed network connection","time":"2024-12-06T19:34:18Z"}
+{"level":"info","time":"2024-12-06T19:34:18Z","message":"Server stopped"}
+{"level":"info","time":"2024-12-06T19:34:18Z","message":"Shutting down"}
+{"level":"info","version":"3.2.1","time":"2024-12-06T19:34:25Z","message":"Traefik version 3.2.1 built on 2024-11-20T17:39:47Z"}
+{"level":"info","time":"2024-12-06T19:34:25Z","message":"\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"}
+{"level":"info","time":"2024-12-06T19:34:25Z","message":"Starting provider aggregator *aggregator.ProviderAggregator"}
+{"level":"info","time":"2024-12-06T19:34:25Z","message":"Starting provider *traefik.Provider"}
+{"level":"info","time":"2024-12-06T19:34:25Z","message":"Starting provider *acme.ChallengeTLSALPN"}
+{"level":"info","time":"2024-12-06T19:34:25Z","message":"Starting provider *docker.SwarmProvider"}
+{"level":"error","entryPointName":"web","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:34:26Z"}
+{"level":"error","entryPointName":"websecure","routerName":"traefik@swarm","error":"error while parsing rule Host(traefik.my-net.here): *ast.BinaryExpr is not supported","time":"2024-12-06T19:34:26Z"}
+{"level":"info","time":"2024-12-06T19:35:20Z","message":"I have to go..."}
+{"level":"info","time":"2024-12-06T19:35:20Z","message":"Stopping server gracefully"}
+{"level":"error","entryPointName":"traefik","error":"accept tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:35:20Z"}
+{"level":"error","entryPointName":"traefik","error":"close tcp [::]:8080: use of closed network connection","time":"2024-12-06T19:35:20Z"}
+{"level":"error","entryPointName":"websecure","error":"accept tcp [::]:443: use of closed network connection","time":"2024-12-06T19:35:20Z"}
+{"level":"error","entryPointName":"websecure","error":"close tcp [::]:443: use of closed network connection","time":"2024-12-06T19:35:20Z"}
+{"level":"error","entryPointName":"web","error":"accept tcp [::]:80: use of closed network connection","time":"2024-12-06T19:35:20Z"}
+{"level":"error","entryPointName":"web","error":"close tcp [::]:80: use of closed network connection","time":"2024-12-06T19:35:20Z"}
+{"level":"info","time":"2024-12-06T19:35:20Z","message":"Server stopped"}
+{"level":"info","time":"2024-12-06T19:35:20Z","message":"Shutting down"}
+{"level":"info","version":"3.2.1","time":"2024-12-06T19:35:28Z","message":"Traefik version 3.2.1 built on 2024-11-20T17:39:47Z"}
+{"level":"info","time":"2024-12-06T19:35:28Z","message":"\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"}
+{"level":"info","time":"2024-12-06T19:35:28Z","message":"Starting provider aggregator *aggregator.ProviderAggregator"}
+{"level":"info","time":"2024-12-06T19:35:28Z","message":"Starting provider *traefik.Provider"}
+{"level":"info","time":"2024-12-06T19:35:28Z","message":"Starting provider *acme.ChallengeTLSALPN"}
+{"level":"info","time":"2024-12-06T19:35:28Z","message":"Starting provider *docker.SwarmProvider"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:36:14Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:36:14Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:36:59Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:36:59Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:41:44Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:41:44Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:44:29Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:44:29Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:46:44Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:46:44Z"}
+{"level":"error","entryPointName":"web","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:48:59Z"}
+{"level":"error","entryPointName":"websecure","routerName":"api@swarm","error":"error while parsing rule Host(api.localhost.com): api.localhost.com is not defined","time":"2024-12-06T19:48:59Z"}

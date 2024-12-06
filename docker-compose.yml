@@ -5,21 +5,20 @@
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
       - 1443:1443
-    volumes: 
-      - sql-volume:/var/opt/mssql/data    
+    volumes:
+      - sql-volume:/var/opt/mssql/data
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Express
       - MSSQL_TCP_PORT=${MSSQL_TCP_PORT}
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
-      
-  web-api-learning:
+
+  service-api:
     container_name: service-api
-    image: web-api-learning
-    build: ./web-api-learning
+    image: test:latest
     ports:
-      - 8080:8080
-      - 8081:8081
+      - 9090:8080
+      - 9091:8081
     depends_on:
       - sql-server-db
     restart: on-failure
@@ -29,6 +28,10 @@
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
       - DB_PASSWORD=${DB_PASSWORD}
-        
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.api.rule=Host(api.my-net.here)
+      - traefik.http.services.api.loadbalancer.server.port=9090
+
 volumes:
   sql-volume:

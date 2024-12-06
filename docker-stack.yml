@@ -1,0 +1,65 @@
+networks:
+  traefik:
+    external: true
+    driver: overlay
+
+services:
+  traefik:
+    image: traefik:v3.2
+    ports:
+      # Host mode is essential to work with IPv6
+      # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
+      - target: 80
+        published: 80
+        mode: host
+        protocol: tcp
+      # Listen on port 443, default for HTTPS
+      - target: 443
+        published: 443
+        mode: host
+        protocol: tcp
+      - target: 8080
+        published: 8080
+        mode: host
+        protocol: tcp
+    networks:
+      - traefik
+    volumes:
+      # --->> Host volumes
+      - ./traefik.log:/traefik.log # traefik status logs
+      - ./traefik.development.yml:/traefik.yml # traefik static configuration
+      # - ./users:/users              # file for user and password
+      # --->>
+      - /var/run/docker.sock:/var/run/docker.sock:ro # mount docker socket
+    command: --configFile=/traefik.yml # run config
+    deploy:
+      restart_policy:
+        max_attempts: 1
+        condition: on-failure
+      replicas: 1
+
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        # [required]
+        # visible for traefik
+        - traefik.enable=true
+
+        # redirection for traefik to service:port
+        - traefik.http.services.traefik.loadbalancer.server.port=8080
+
+        - traefik.http.routers.traefik.rule=Host(`traefik.my-net.here`)
+        - traefik.http.routers.traefik.service=api@internal
+        # network use for traefik
+        - traefik.docker.network=traefik
+
+        # define the middleware functions
+        # - traefik.http.middlewares.traefik-basicauth.basicauth.usersfile=/users
+        # - traefik.http.middlewares.traefik-basicauth.basicauth.realm="Nginx auth"
+        # applay middlewares
+        # - traefik.http.routers.traefik.middleware=traefik-basicauth
+
+        # - traefik.http.routers.http-catchall.rule=HostRegexp({host:.+})
+        # - traefik.http.routers.http-catchall.entrypoints=web
+        # - traefik.http.routers.http-catchall.middlewares=redirect-to-https
