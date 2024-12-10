@@ -18,8 +18,8 @@
     image: web-api-learning
     build: ./web-api-learning
     ports:
-      - 8080:8080
-      - 8081:8081
+      - 9090:8080
+      - 9091:8081
     depends_on:
       - sql-server-db
     restart: on-failure
@@ -29,6 +29,36 @@
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
       - DB_PASSWORD=${DB_PASSWORD}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web-api-learning.rule=Host(`${MAIN_HOST}`)"
+      - "traefik.http.routers.web-api-learning.entrypoints=websecure"
+      - "traefik.http.routers.web-api-learning.tls.certresolver=resolver"
         
+  traefik:
+    image: "traefik:v3.2"
+    container_name: "traefik"
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.resolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.resolver.acme.httpchallenge.entrypoint=web"
+      #- "--certificatesresolvers.resolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.resolver.acme.email=postmaster@example.com"
+      - "--certificatesresolvers.resolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
 volumes:
   sql-volume:
