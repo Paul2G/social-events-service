@@ -50,7 +50,7 @@
       - "--certificatesresolvers.resolver.acme.httpchallenge=true"
       - "--certificatesresolvers.resolver.acme.httpchallenge.entrypoint=web"
       #- "--certificatesresolvers.resolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.resolver.acme.email=postmaster@example.com"
+      - "--certificatesresolvers.resolver.acme.email=pggaleana@gmail.com"
       - "--certificatesresolvers.resolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
