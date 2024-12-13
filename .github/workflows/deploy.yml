@@ -1,0 +1,48 @@
+name: Deploy to Virtual Machine
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  pull-and-deploy:
+    name: Pull changes and deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Configure SSH
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+    - name: Pull last changes
+      run: |
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+          cd ${{ secrets.WORK_DIR }} &&
+          git checkout ${{ secrets.MAIN_BRANCH }} &&
+          git reset --hard origin/${{ secrets.MAIN_BRANCH }} &&
+          git pull &&
+          echo 'Successfully pulled repository.'
+        "
+    - name: Build project
+      run: |
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+          cd ${{ secrets.WORK_DIR }} &&
+          sudo docker-compose build
+        "
+    - name: Deploy service
+      run: |
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+          cd ${{ secrets.WORK_DIR }} &&
+          sudo docker-compose up -d
+        "
+    - name: Check running containers
+      run: |
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+          sudo docker ps -a
+        "
+    - name: Cleanup
+      run: |
+        rm -rf ~/.ssh
