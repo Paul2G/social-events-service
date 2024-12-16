@@ -13,10 +13,10 @@
       - MSSQL_TCP_PORT=${MSSQL_TCP_PORT}
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       
-  web-api-learning:
+  social-events-manager:
     container_name: service-api
-    image: web-api-learning
-    build: ./web-api-learning
+    image: social-events-manager
+    build: ./social-events-manager
     ports:
       - 8080:8080
       - 8081:8081
