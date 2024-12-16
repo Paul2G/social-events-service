@@ -30,13 +30,13 @@ jobs:
       run: |
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
           cd ${{ secrets.WORK_DIR }} &&
-          sudo docker-compose build
+          sudo docker compose build
         "
     - name: Deploy service
       run: |
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
           cd ${{ secrets.WORK_DIR }} &&
-          sudo docker-compose up -d
+          sudo docker compose up -d
         "
     - name: Check running containers
       run: |
