@@ -31,7 +31,7 @@
       - DB_PASSWORD=${DB_PASSWORD}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web-api-learning.rule=Host(`${MAIN_HOST}`)"
+      - "traefik.http.routers.web-api-learning.rule=Host(`${APP_HOST}`)"
       - "traefik.http.routers.web-api-learning.entrypoints=websecure"
       - "traefik.http.routers.web-api-learning.tls.certresolver=resolver"
         
