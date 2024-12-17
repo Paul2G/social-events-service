@@ -5,6 +5,7 @@ using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
 using social_events_manager.Modules.Auth.Extensions;
 using social_events_manager.Modules.Auth.Models;
+using social_events_manager.Modules.Shared.DTOs;
 using social_events_manager.Modules.SocialEvents.Interfaces;
 
 namespace social_events_manager.Modules.Attendees;
@@ -19,7 +20,7 @@ public class AttendeeController(
     : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] SearchParamsDto searchParamsDto)
     {
         var username = User.GetUsername();
         var appUser = await userManager.FindByNameAsync(username);
