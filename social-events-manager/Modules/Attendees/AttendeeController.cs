@@ -20,12 +20,12 @@ public class AttendeeController(
     : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] SearchParamsDto searchParamsDto)
+    public async Task<IActionResult> GetAll([FromQuery] PaginationDto paginationDto)
     {
         var username = User.GetUsername();
         var appUser = await userManager.FindByNameAsync(username);
 
-        var attendees = await attendeeRepository.GetAllAsync(appUser);
+        var attendees = await attendeeRepository.GetAllAsync(appUser, paginationDto);
         var attendeesDto = attendees.Select(s => s.ToAttendeeDto());
         return Ok(attendeesDto);
     }

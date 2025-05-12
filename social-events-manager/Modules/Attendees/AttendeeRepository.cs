@@ -4,14 +4,21 @@ using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
 using social_events_manager.Modules.Attendees.Models;
 using social_events_manager.Modules.Auth.Models;
+using social_events_manager.Modules.Shared.DTOs;
 
 namespace social_events_manager.Modules.Attendees;
 
 public class AttendeeRepository(ApplicationDbContext context) : IAttendeeRepository
 {
-    public async Task<List<Attendee>> GetAllAsync(AppUser appUser)
+    public async Task<List<Attendee>> GetAllAsync(AppUser appUser, PaginationDto paginationDto)
     {
-        return await context.Attendees.Where(s => s.AppUserId == appUser.Id).ToListAsync();
+        var offset = paginationDto.Limit * (paginationDto.Page - 1);
+
+        return await context.Attendees
+            .Where(a => a.AppUserId == appUser.Id)
+            .Skip(offset)
+            .Take(paginationDto.Limit)
+            .ToListAsync();
     }
 
     public async Task<Attendee?> GetByIdAsync(AppUser appUser, long id)
