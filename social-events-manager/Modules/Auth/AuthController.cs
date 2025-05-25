@@ -7,7 +7,7 @@ using social_events_manager.Modules.Auth.Models;
 
 namespace social_events_manager.Modules.Auth;
 
-[Route("api/auth")]
+[Route("auth")]
 [ApiController]
 public class AuthController(
     UserManager<AppUser> userManager,
