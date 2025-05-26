@@ -1,17 +1,18 @@
-﻿using social_events_manager.Modules.SocialEvents.DTOs;
 using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.SocialEvents.Interfaces;
 
 public interface ISocialEventRepository
 {
-    Task<List<SocialEvent>> GetAllAsync();
-    Task<SocialEvent?> GetByIdAsync(long id);
 
-    Task<SocialEvent> CreateAsync(CreateSocialEventDto socialEventDto);
+        Task<List<SocialEvent>> FindUserSocialEvents(string userId);
+        Task<SocialEvent?> FindUserSocialEventById(string userId, long id);
 
-    Task<SocialEvent?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto);
+        Task<SocialEvent> SaveUserSocialEvent(string userId, SocialEvent socialEvent);
 
-    Task<SocialEvent?> DeleteAsync(long id);
-    Task<bool> ExitsAsync(long id);
+        Task<SocialEvent?> UpdateUserSocialEvent(string userId, SocialEvent socialEvent);
+
+        Task<SocialEvent?> DeleteUserSocialEvent(string userId, long id);
+        Task<bool> ExitsUserSocialEvent(string userId, long id);
+    
 }

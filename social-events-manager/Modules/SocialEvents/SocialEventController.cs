@@ -12,30 +12,22 @@ namespace social_events_manager.Modules.SocialEvents;
 [Route("api/social-events")]
 [Authorize]
 public class SocialEventController(
-    ISocialEventRepository socialEventRepository,
+    ISocialEventService socialEventService,
     UserManager<AppUser> userManager
 ) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
-
-        var socialEvents = await socialEventRepository.GetAllAsync();
-        var socialEventsDto = socialEvents.Select(s => s.ToSocialEventDto());
-
-        return Ok(socialEventsDto);
+        var socialEvents = await socialEventService.GetAllAsync();
+        return Ok(socialEvents);
     }
 
     [HttpGet]
     [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
-
-        var socialEvent = await socialEventRepository.GetByIdAsync(id);
+        var socialEvent = await socialEventService.GetByIdAsync(id);
 
         if (socialEvent == null)
             return NotFound();
@@ -46,18 +38,14 @@ public class SocialEventController(
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateSocialEventDto socialEventDto)
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
-
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var socialEventModel = await socialEventRepository.CreateAsync(socialEventDto);
+        var socialEvent = await socialEventService.CreateAsync(socialEventDto);
 
         return CreatedAtAction(
             nameof(GetById),
-            new { id = socialEventModel.Id },
-            socialEventModel.ToSocialEventDto()
+            new { id = socialEvent.Id }
         );
     }
 
@@ -68,27 +56,21 @@ public class SocialEventController(
         [FromBody] UpdateSocialEventDto socialEventDto
     )
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
-
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var socialEventModel = await socialEventRepository.UpdateAsync(id, socialEventDto);
-        if (socialEventModel == null)
+        var socialEvent = await socialEventService.UpdateAsync(id, socialEventDto);
+        if (socialEvent == null)
             return NotFound();
 
-        return Ok(socialEventModel.ToSocialEventDto());
+        return Ok(socialEvent);
     }
 
     [HttpDelete]
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
-
-        var socialEventModel = await socialEventRepository.DeleteAsync(id);
+        var socialEventModel = await socialEventService.DeleteAsync(id);
         if (socialEventModel == null)
             return NotFound();
 

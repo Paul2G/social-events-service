@@ -15,7 +15,7 @@ namespace social_events_manager.Modules.Attendees;
 [Authorize]
 public class AttendeeController(
     IAttendeeRepository attendeeRepository,
-    ISocialEventRepository socialEventRepository,
+    ISocialEventService socialEventService,
     UserManager<AppUser> userManager)
     : ControllerBase
 {
@@ -52,7 +52,7 @@ public class AttendeeController(
 
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        if (!await socialEventRepository.ExitsAsync(attendeeDto.SocialEventId))
+        if (!await socialEventService.ExitsAsync(attendeeDto.SocialEventId))
             return BadRequest("Social event doesn't exists");
 
         var attendeeModel = await attendeeRepository.CreateAsync(appUser, attendeeDto);

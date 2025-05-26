@@ -1,87 +1,81 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using social_events_manager.Data;
-using social_events_manager.Modules.Auth.Interfaces;
-using social_events_manager.Modules.SocialEvents.DTOs;
 using social_events_manager.Modules.SocialEvents.Interfaces;
 using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.SocialEvents;
 
-public class SocialEventRepository : ISocialEventRepository
+public class SocialEventRepository: ISocialEventRepository
 {
     private readonly ApplicationDbContext _applicationDbContext;
-    private readonly IUserService _userService;
 
-    public SocialEventRepository(
-        ApplicationDbContext applicationDbContext,
-        IUserService userService)
+    public SocialEventRepository(ApplicationDbContext applicationDbContext)
     {
         _applicationDbContext = applicationDbContext;
-        _userService = userService;
     }
-
-    public async Task<List<SocialEvent>> GetAllAsync()
+    
+    public async Task<List<SocialEvent>> FindUserSocialEvents(string userId)
     {
         return await _applicationDbContext
-            .SocialEvents.Where(s =>
-                s.AppUserId == _userService.GetUserId())
+            .SocialEvents.Where(s => s.AppUserId == userId)
             .Include(c => c.Attendees)
             .Include(c => c.Location)
             .ToListAsync();
     }
 
-    public async Task<SocialEvent?> GetByIdAsync(long id)
+    public  async Task<SocialEvent?> FindUserSocialEventById(string userId, long id)
     {
-        return await _applicationDbContext
-            .SocialEvents.Where(s => s.AppUserId == _userService.GetUserId())
+        return await _applicationDbContext.SocialEvents
             .Include(c => c.Attendees)
             .Include(c => c.Location)
-            .FirstOrDefaultAsync(c => c.Id == id);
+            .FirstOrDefaultAsync(c => c.Id == id && c.AppUserId == userId);
     }
 
-    public async Task<SocialEvent> CreateAsync(CreateSocialEventDto socialEventDto)
+    public async Task<SocialEvent> SaveUserSocialEvent(string userId, SocialEvent socialEvent)
     {
-        var socialEventModel = socialEventDto.ToSocialEvent(_userService.GetUserId());
-
-        await _applicationDbContext.SocialEvents.AddAsync(socialEventModel);
+        socialEvent.AppUserId = userId;
+        
+        await _applicationDbContext.SocialEvents.AddAsync(socialEvent);
         await _applicationDbContext.SaveChangesAsync();
 
-        return socialEventModel;
+        return socialEvent;
     }
 
-    public async Task<SocialEvent?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto)
+    public async Task<SocialEvent?> UpdateUserSocialEvent(string userId, SocialEvent socialEvent)
     {
-        var socialEventModel = await _applicationDbContext.SocialEvents
-            .Where(s => s.AppUserId == _userService.GetUserId())
-            .FirstOrDefaultAsync(x => x.Id == id);
+        var existingSocialEvent = await _applicationDbContext.SocialEvents
+            .FirstOrDefaultAsync(s => s.Id == socialEvent.Id && s.AppUserId == userId);
 
-        if (socialEventModel == null)
+        // TODO: Make this more robust, maybe throw an exception or return a specific error
+        if (existingSocialEvent == null)
             return null;
 
-        socialEventModel.ParseFromUpdateSocialEventDto(socialEventDto);
+        _applicationDbContext.Entry(existingSocialEvent).CurrentValues.SetValues(socialEvent);
+        existingSocialEvent.AppUserId = userId;
+        
         await _applicationDbContext.SaveChangesAsync();
 
-        return socialEventModel;
+        return existingSocialEvent;
     }
 
-    public async Task<SocialEvent?> DeleteAsync(long id)
+    public async Task<SocialEvent?> DeleteUserSocialEvent(string userId, long id)
     {
-        var socialEventModel = await _applicationDbContext.SocialEvents
-            .Where(s => s.AppUserId == _userService.GetUserId())
-            .FirstOrDefaultAsync(x => x.Id == id);
+        var existingSocialEvent = await _applicationDbContext.SocialEvents
+            .FirstOrDefaultAsync(x => x.Id == id && x.AppUserId == userId);
 
-        if (socialEventModel == null)
+        // TODO: Make this more robust, maybe throw an exception or return a specific error
+        if (existingSocialEvent == null)
             return null;
 
-        _applicationDbContext.SocialEvents.Remove(socialEventModel);
+        _applicationDbContext.SocialEvents.Remove(existingSocialEvent);
         await _applicationDbContext.SaveChangesAsync();
 
-        return socialEventModel;
+        return existingSocialEvent;
     }
 
-    public async Task<bool> ExitsAsync(long id)
+    public async Task<bool> ExitsUserSocialEvent(string userId, long id)
     {
-        return await _applicationDbContext.SocialEvents.Where(s => s.AppUserId == _userService.GetUserId())
-            .AnyAsync(s => s.Id == id);
+        return await _applicationDbContext.SocialEvents
+            .AnyAsync(s => s.Id == id && s.AppUserId == userId);
     }
 }

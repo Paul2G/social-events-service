@@ -23,8 +23,7 @@ public static class SocialEventMapper
     }
 
     public static SocialEvent ToSocialEvent(
-        this CreateSocialEventDto createSocialEventDto,
-        string appUserId
+        this CreateSocialEventDto createSocialEventDto
     )
     {
         return new SocialEvent
@@ -35,7 +34,20 @@ public static class SocialEventMapper
             StartTime = createSocialEventDto.StartTime,
             EndTime = createSocialEventDto.EndTime,
             CreatedAt = DateTime.Now,
-            AppUserId = appUserId
+        };
+    }
+    
+    public static SocialEvent ToSocialEvent(
+        this UpdateSocialEventDto updateSocialEventDto
+    )
+    {
+        return new SocialEvent
+        {
+            Name = updateSocialEventDto.Name,
+            LocationId = updateSocialEventDto.LocationId,
+            Description = updateSocialEventDto.Description,
+            StartTime = updateSocialEventDto.StartTime,
+            EndTime = updateSocialEventDto.EndTime,
         };
     }
 
