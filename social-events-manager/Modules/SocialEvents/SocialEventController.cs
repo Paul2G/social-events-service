@@ -11,8 +11,10 @@ namespace social_events_manager.Modules.SocialEvents;
 [ApiController]
 [Route("api/social-events")]
 [Authorize]
-public class SocialEventController(ISocialEventRepository socialEventRepository, UserManager<AppUser> userManager)
-    : ControllerBase
+public class SocialEventController(
+    ISocialEventRepository socialEventRepository,
+    UserManager<AppUser> userManager
+) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -20,7 +22,7 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
         var username = User.GetUsername();
         var appUser = await userManager.FindByNameAsync(username);
 
-        var socialEvents = await socialEventRepository.GetAllAsync(appUser);
+        var socialEvents = await socialEventRepository.GetAllAsync();
         var socialEventsDto = socialEvents.Select(s => s.ToSocialEventDto());
 
         return Ok(socialEventsDto);
@@ -33,7 +35,7 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
         var username = User.GetUsername();
         var appUser = await userManager.FindByNameAsync(username);
 
-        var socialEvent = await socialEventRepository.GetByIdAsync(appUser, id);
+        var socialEvent = await socialEventRepository.GetByIdAsync(id);
 
         if (socialEvent == null)
             return NotFound();
@@ -47,9 +49,10 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
         var username = User.GetUsername();
         var appUser = await userManager.FindByNameAsync(username);
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-        var socialEventModel = await socialEventRepository.CreateAsync(appUser, socialEventDto);
+        var socialEventModel = await socialEventRepository.CreateAsync(socialEventDto);
 
         return CreatedAtAction(
             nameof(GetById),
@@ -68,10 +71,12 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
         var username = User.GetUsername();
         var appUser = await userManager.FindByNameAsync(username);
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-        var socialEventModel = await socialEventRepository.UpdateAsync(appUser, id, socialEventDto);
-        if (socialEventModel == null) return NotFound();
+        var socialEventModel = await socialEventRepository.UpdateAsync(id, socialEventDto);
+        if (socialEventModel == null)
+            return NotFound();
 
         return Ok(socialEventModel.ToSocialEventDto());
     }
@@ -83,8 +88,9 @@ public class SocialEventController(ISocialEventRepository socialEventRepository,
         var username = User.GetUsername();
         var appUser = await userManager.FindByNameAsync(username);
 
-        var socialEventModel = await socialEventRepository.DeleteAsync(appUser, id);
-        if (socialEventModel == null) return NotFound();
+        var socialEventModel = await socialEventRepository.DeleteAsync(id);
+        if (socialEventModel == null)
+            return NotFound();
 
         return NoContent();
     }

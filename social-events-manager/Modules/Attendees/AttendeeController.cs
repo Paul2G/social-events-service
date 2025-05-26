@@ -52,7 +52,7 @@ public class AttendeeController(
 
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        if (!await socialEventRepository.ExitsAsync(appUser, attendeeDto.SocialEventId))
+        if (!await socialEventRepository.ExitsAsync(attendeeDto.SocialEventId))
             return BadRequest("Social event doesn't exists");
 
         var attendeeModel = await attendeeRepository.CreateAsync(appUser, attendeeDto);
