@@ -20,32 +20,32 @@ public class SocialEventService : ISocialEventService
 
     public async Task<List<ReadSocialEventDto>> GetAllAsync()
     {
-        var existingSocialEvents = await _socialEventRepository.FindUserSocialEvents(
+        var socialEvents = await _socialEventRepository.FindUserSocialEvents(
             _userService.GetUserId()
         );
 
-        return (List<ReadSocialEventDto>)existingSocialEvents.Select(s => s.ToSocialEventDto());
+        return (List<ReadSocialEventDto>)socialEvents.Select(s => s.ToSocialEventDto());
     }
 
     public async Task<ReadSocialEventDto?> GetByIdAsync(long id)
     {
-        var existingSocialEvent = await _socialEventRepository.FindUserSocialEventById(
+        var socialEvent = await _socialEventRepository.FindUserSocialEventById(
             _userService.GetUserId(),
             id
         );
-        return existingSocialEvent.ToSocialEventDto();
+        return socialEvent.ToSocialEventDto();
     }
 
     public async Task<ReadSocialEventDto> CreateAsync(CreateSocialEventDto socialEventDto)
     {
         var incomingSocialEvent = socialEventDto.ToSocialEvent();
 
-        var socialEventModel = await _socialEventRepository.SaveUserSocialEvent(
+        var socialEvent = await _socialEventRepository.SaveUserSocialEvent(
             _userService.GetUserId(),
             incomingSocialEvent
         );
 
-        return socialEventModel.ToSocialEventDto();
+        return socialEvent.ToSocialEventDto();
     }
 
     public async Task<ReadSocialEventDto?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto)
@@ -53,26 +53,21 @@ public class SocialEventService : ISocialEventService
         var incomingSocialEvent = socialEventDto.ToSocialEvent();
         incomingSocialEvent.Id = id;
 
-        var socialEventModel = await _socialEventRepository.UpdateUserSocialEvent(
+        var socialEvent = await _socialEventRepository.UpdateUserSocialEvent(
             _userService.GetUserId(),
             incomingSocialEvent
         );
 
-        return socialEventModel.ToSocialEventDto();
+        return socialEvent.ToSocialEventDto();
     }
 
     public async Task<ReadSocialEventDto?> DeleteAsync(long id)
     {
-        var existingSocialEvent = await _socialEventRepository.FindUserSocialEventById(
+        var socialEvent = await _socialEventRepository.FindUserSocialEventById(
             _userService.GetUserId(),
             id
         );
 
-        return existingSocialEvent.ToSocialEventDto();
-    }
-
-    public async Task<bool> ExitsAsync(long id)
-    {
-        return await _socialEventRepository.ExitsUserSocialEvent(_userService.GetUserId(), id);
+        return socialEvent.ToSocialEventDto();
     }
 }

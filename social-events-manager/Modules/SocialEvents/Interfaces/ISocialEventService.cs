@@ -12,5 +12,4 @@ public interface ISocialEventService
     Task<ReadSocialEventDto?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto);
 
     Task<ReadSocialEventDto?> DeleteAsync(long id);
-    Task<bool> ExitsAsync(long id);
 }
