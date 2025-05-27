@@ -11,7 +11,7 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
     {
         var attendees = await attendeeRepository.FindUserAttendees(userService.GetUserId());
 
-        return (List<ReadAttendeeDto>)attendees.Select(a => a.ToAttendeeDto());
+        return attendees.Select(a => a.ToAttendeeDto()).ToList();
     }
 
     public async Task<ReadAttendeeDto?> GetByIdAsync(long id)

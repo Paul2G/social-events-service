@@ -15,7 +15,7 @@ public class SocialEventService(
             userService.GetUserId()
         );
 
-        return (List<ReadSocialEventDto>)socialEvents.Select(s => s.ToSocialEventDto());
+        return socialEvents.Select(s => s.ToSocialEventDto()).ToList();
     }
 
     public async Task<ReadSocialEventDto?> GetByIdAsync(long id)

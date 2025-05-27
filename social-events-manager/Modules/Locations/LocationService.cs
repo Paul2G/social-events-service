@@ -11,7 +11,7 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
     {
         var locations = await locationRepository.FindUserLocations(userService.GetUserId());
 
-        return (List<ReadLocationDto>)locations.Select(l => l.ToLocationDto());
+        return locations.Select(l => l.ToLocationDto()).ToList();
     }
 
     public async Task<ReadLocationDto?> GetByIdAsync(long id)
