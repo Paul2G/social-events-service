@@ -10,5 +10,4 @@ public interface ILocationService
     Task<ReadLocationDto> CreateAsync(CreateLocationDto locationDto);
     Task<ReadLocationDto?> UpdateAsync(long id, UpdateLocationDto locationDto);
     Task<ReadLocationDto?> DeleteAsync(long id);
-    Task<bool> ExistsAsync(long id);
 }

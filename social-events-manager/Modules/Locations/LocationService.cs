@@ -11,33 +11,28 @@ public class LocationService : ILocationService
 
     public async Task<List<ReadLocationDto>> GetAllAsync()
     {
-        var existingLocation = await _locationRepository.FindUserLocations(
-            _userService.GetUserId()
-        );
+        var locations = await _locationRepository.FindUserLocations(_userService.GetUserId());
 
-        return (List<ReadLocationDto>)existingLocation.Select(l => l.ToLocationDto());
+        return (List<ReadLocationDto>)locations.Select(l => l.ToLocationDto());
     }
 
     public async Task<ReadLocationDto?> GetByIdAsync(long id)
     {
-        var existingLocation = await _locationRepository.FindUserLocationById(
-            _userService.GetUserId(),
-            id
-        );
+        var location = await _locationRepository.FindUserLocationById(_userService.GetUserId(), id);
 
-        return existingLocation.ToLocationDto();
+        return location.ToLocationDto();
     }
 
     public async Task<ReadLocationDto> CreateAsync(CreateLocationDto locationDto)
     {
         var incomingLocation = locationDto.ToLocation();
 
-        var locationModel = await _locationRepository.SaveUserLocation(
+        var location = await _locationRepository.SaveUserLocation(
             _userService.GetUserId(),
             incomingLocation
         );
 
-        return locationModel.ToLocationDto();
+        return location.ToLocationDto();
     }
 
     public async Task<ReadLocationDto?> UpdateAsync(long id, UpdateLocationDto locationDto)
@@ -45,26 +40,18 @@ public class LocationService : ILocationService
         var incomingLocation = locationDto.ToLocation();
         incomingLocation.Id = id;
 
-        var existingLocation = await _locationRepository.UpdateUserLocation(
+        var location = await _locationRepository.UpdateUserLocation(
             _userService.GetUserId(),
             incomingLocation
         );
 
-        return existingLocation.ToLocationDto();
+        return location.ToLocationDto();
     }
 
     public async Task<ReadLocationDto?> DeleteAsync(long id)
     {
-        var existingLocation = await _locationRepository.DeleteUserLocation(
-            _userService.GetUserId(),
-            id
-        );
+        var location = await _locationRepository.DeleteUserLocation(_userService.GetUserId(), id);
 
-        return existingLocation.ToLocationDto();
-    }
-
-    public Task<bool> ExistsAsync(long id)
-    {
-        return _locationRepository.ExistsUserLocation(_userService.GetUserId(), id);
+        return location.ToLocationDto();
     }
 }
