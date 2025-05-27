@@ -1,5 +1,4 @@
 ﻿using social_events_manager.Modules.SocialEvents.DTOs;
-using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.SocialEvents.Interfaces;
 

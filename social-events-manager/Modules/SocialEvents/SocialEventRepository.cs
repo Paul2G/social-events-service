@@ -5,7 +5,7 @@ using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.SocialEvents;
 
-public class SocialEventRepository: ISocialEventRepository
+public class SocialEventRepository : ISocialEventRepository
 {
     private readonly ApplicationDbContext _applicationDbContext;
 
@@ -13,7 +13,7 @@ public class SocialEventRepository: ISocialEventRepository
     {
         _applicationDbContext = applicationDbContext;
     }
-    
+
     public async Task<List<SocialEvent>> FindUserSocialEvents(string userId)
     {
         return await _applicationDbContext
@@ -23,10 +23,10 @@ public class SocialEventRepository: ISocialEventRepository
             .ToListAsync();
     }
 
-    public  async Task<SocialEvent?> FindUserSocialEventById(string userId, long id)
+    public async Task<SocialEvent?> FindUserSocialEventById(string userId, long id)
     {
-        return await _applicationDbContext.SocialEvents
-            .Include(c => c.Attendees)
+        return await _applicationDbContext
+            .SocialEvents.Include(c => c.Attendees)
             .Include(c => c.Location)
             .FirstOrDefaultAsync(c => c.Id == id && c.AppUserId == userId);
     }
@@ -34,7 +34,7 @@ public class SocialEventRepository: ISocialEventRepository
     public async Task<SocialEvent> SaveUserSocialEvent(string userId, SocialEvent socialEvent)
     {
         socialEvent.AppUserId = userId;
-        
+
         await _applicationDbContext.SocialEvents.AddAsync(socialEvent);
         await _applicationDbContext.SaveChangesAsync();
 
@@ -43,8 +43,9 @@ public class SocialEventRepository: ISocialEventRepository
 
     public async Task<SocialEvent?> UpdateUserSocialEvent(string userId, SocialEvent socialEvent)
     {
-        var existingSocialEvent = await _applicationDbContext.SocialEvents
-            .FirstOrDefaultAsync(s => s.Id == socialEvent.Id && s.AppUserId == userId);
+        var existingSocialEvent = await _applicationDbContext.SocialEvents.FirstOrDefaultAsync(s =>
+            s.Id == socialEvent.Id && s.AppUserId == userId
+        );
 
         // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingSocialEvent == null)
@@ -52,7 +53,7 @@ public class SocialEventRepository: ISocialEventRepository
 
         _applicationDbContext.Entry(existingSocialEvent).CurrentValues.SetValues(socialEvent);
         existingSocialEvent.AppUserId = userId;
-        
+
         await _applicationDbContext.SaveChangesAsync();
 
         return existingSocialEvent;
@@ -60,8 +61,9 @@ public class SocialEventRepository: ISocialEventRepository
 
     public async Task<SocialEvent?> DeleteUserSocialEvent(string userId, long id)
     {
-        var existingSocialEvent = await _applicationDbContext.SocialEvents
-            .FirstOrDefaultAsync(x => x.Id == id && x.AppUserId == userId);
+        var existingSocialEvent = await _applicationDbContext.SocialEvents.FirstOrDefaultAsync(x =>
+            x.Id == id && x.AppUserId == userId
+        );
 
         // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingSocialEvent == null)
@@ -75,7 +77,8 @@ public class SocialEventRepository: ISocialEventRepository
 
     public async Task<bool> ExitsUserSocialEvent(string userId, long id)
     {
-        return await _applicationDbContext.SocialEvents
-            .AnyAsync(s => s.Id == id && s.AppUserId == userId);
+        return await _applicationDbContext.SocialEvents.AnyAsync(s =>
+            s.Id == id && s.AppUserId == userId
+        );
     }
 }

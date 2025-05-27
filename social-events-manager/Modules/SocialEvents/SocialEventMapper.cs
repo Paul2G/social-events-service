@@ -18,13 +18,11 @@ public static class SocialEventMapper
             EndTime = socialEventModel.EndTime,
             CreatedAt = socialEventModel.CreatedAt,
             AttendeesCount = socialEventModel.Attendees.Count,
-            Attendees = socialEventModel.Attendees.Select(c => c.ToAttendeeDto()).ToList()
+            Attendees = socialEventModel.Attendees.Select(c => c.ToAttendeeDto()).ToList(),
         };
     }
 
-    public static SocialEvent ToSocialEvent(
-        this CreateSocialEventDto createSocialEventDto
-    )
+    public static SocialEvent ToSocialEvent(this CreateSocialEventDto createSocialEventDto)
     {
         return new SocialEvent
         {
@@ -36,10 +34,8 @@ public static class SocialEventMapper
             CreatedAt = DateTime.Now,
         };
     }
-    
-    public static SocialEvent ToSocialEvent(
-        this UpdateSocialEventDto updateSocialEventDto
-    )
+
+    public static SocialEvent ToSocialEvent(this UpdateSocialEventDto updateSocialEventDto)
     {
         return new SocialEvent
         {
@@ -51,8 +47,10 @@ public static class SocialEventMapper
         };
     }
 
-    public static void ParseFromUpdateSocialEventDto(this SocialEvent socialEvent,
-        UpdateSocialEventDto updateSocialEventDto)
+    public static void ParseFromUpdateSocialEventDto(
+        this SocialEvent socialEvent,
+        UpdateSocialEventDto updateSocialEventDto
+    )
     {
         socialEvent.Name = updateSocialEventDto.Name;
         socialEvent.Description = updateSocialEventDto.Description;

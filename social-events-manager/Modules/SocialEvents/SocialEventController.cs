@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using social_events_manager.Modules.Auth.Extensions;
 using social_events_manager.Modules.Auth.Models;
 using social_events_manager.Modules.SocialEvents.DTOs;
 using social_events_manager.Modules.SocialEvents.Interfaces;
@@ -43,10 +42,7 @@ public class SocialEventController(
 
         var socialEvent = await socialEventService.CreateAsync(socialEventDto);
 
-        return CreatedAtAction(
-            nameof(GetById),
-            new { id = socialEvent.Id }
-        );
+        return CreatedAtAction(nameof(GetById), new { id = socialEvent.Id });
     }
 
     [HttpPut]
