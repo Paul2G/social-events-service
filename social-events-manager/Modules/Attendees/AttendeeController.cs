@@ -1,89 +1,73 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
-using social_events_manager.Modules.Auth.Extensions;
-using social_events_manager.Modules.Auth.Models;
-using social_events_manager.Modules.Shared.DTOs;
-using social_events_manager.Modules.SocialEvents.Interfaces;
 
 namespace social_events_manager.Modules.Attendees;
 
 [ApiController]
 [Route("api/attendees")]
 [Authorize]
-public class AttendeeController(
-    IAttendeeRepository attendeeRepository,
-    ISocialEventService socialEventService,
-    UserManager<AppUser> userManager)
-    : ControllerBase
+public class AttendeeController : ControllerBase
 {
-    [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] PaginationDto paginationDto)
-    {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
+    private readonly IAttendeeService _attendeeService;
 
-        var attendees = await attendeeRepository.GetAllAsync(appUser, paginationDto);
-        var attendeesDto = attendees.Select(s => s.ToAttendeeDto());
-        return Ok(attendeesDto);
+    public AttendeeController(IAttendeeService attendeeService)
+    {
+        _attendeeService = attendeeService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var attendees = await _attendeeService.GetAllAsync();
+
+        return Ok(attendees);
     }
 
     [HttpGet]
     [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
+        var attendee = await _attendeeService.GetByIdAsync(id);
 
-        var attendee = await attendeeRepository.GetByIdAsync(appUser, id);
+        if (attendee == null)
+            return NotFound("Attendee not found");
 
-        if (attendee == null) return NotFound();
-
-        return Ok(attendee.ToAttendeeDto());
+        return Ok(attendee);
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateAttendeeDto attendeeDto)
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
+        var attendee = await _attendeeService.CreateAsync(attendeeDto);
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        if (!await socialEventService.ExitsAsync(attendeeDto.SocialEventId))
-            return BadRequest("Social event doesn't exists");
-
-        var attendeeModel = await attendeeRepository.CreateAsync(appUser, attendeeDto);
-
-        return CreatedAtAction(nameof(GetById), new { id = attendeeModel.Id }, attendeeModel.ToAttendeeDto());
+        return CreatedAtAction(nameof(GetById), new { id = attendee.Id }, attendee);
     }
 
     [HttpPut]
     [Route("{id:int}")]
-    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UpdateAttendeeDto attendeeDto)
+    public async Task<IActionResult> Update(
+        [FromRoute] long id,
+        [FromBody] UpdateAttendeeDto attendeeDto
+    )
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
+        var attendee = await _attendeeService.UpdateAsync(id, attendeeDto);
 
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        if (attendee == null)
+            return NotFound("Attendee not found");
 
-        var attendeeModel = await attendeeRepository.UpdateAsync(appUser, id, attendeeDto);
-        if (attendeeModel == null) return NotFound("Attendee not found");
-
-        return Ok(attendeeModel.ToAttendeeDto());
+        return Ok(attendee);
     }
 
     [HttpDelete]
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var username = User.GetUsername();
-        var appUser = await userManager.FindByNameAsync(username);
+        var attendee = await _attendeeService.DeleteAsync(id);
 
-        var attendeeModel = await attendeeRepository.DeleteAsync(appUser, id);
-        if (attendeeModel == null) return NotFound("Attendee not found");
+        if (attendee == null)
+            return NotFound("Attendee not found");
 
         return NoContent();
     }

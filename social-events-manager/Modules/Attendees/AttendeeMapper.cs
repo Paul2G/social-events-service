@@ -12,20 +12,24 @@ public static class AttendeeMapper
             Id = attendee.Id,
             Name = attendee.Name,
             RegisteredAt = attendee.RegisteredAt,
-            Status = attendee.Status
+            Status = attendee.Status,
         };
     }
 
-    public static Attendee ToAttendee(this CreateAttendeeDto attendeeDto, string appUserId)
+    public static Attendee ToAttendee(this CreateAttendeeDto attendeeDto)
     {
-        return new Attendee
-        {
-            Name = attendeeDto.Name,
-            AppUserId = appUserId
-        };
+        return new Attendee { Name = attendeeDto.Name };
     }
 
-    public static void ParseFromUpdateAttendeeDto(this Attendee attendee, UpdateAttendeeDto updateAttendeeDto)
+    public static Attendee ToAttendee(this UpdateAttendeeDto attendeeDto)
+    {
+        return new Attendee { Name = attendeeDto.Name, Status = attendeeDto.Status };
+    }
+
+    public static void ParseFromUpdateAttendeeDto(
+        this Attendee attendee,
+        UpdateAttendeeDto updateAttendeeDto
+    )
     {
         attendee.Name = updateAttendeeDto.Name;
         attendee.Status = updateAttendeeDto.Status;

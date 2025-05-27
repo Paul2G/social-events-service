@@ -1,74 +1,77 @@
 using Microsoft.EntityFrameworkCore;
 using social_events_manager.Data;
-using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
 using social_events_manager.Modules.Attendees.Models;
-using social_events_manager.Modules.Auth.Models;
-using social_events_manager.Modules.Shared.DTOs;
 
 namespace social_events_manager.Modules.Attendees;
 
-public class AttendeeRepository(ApplicationDbContext context) : IAttendeeRepository
+public class AttendeeRepository : IAttendeeRepository
 {
-    public async Task<List<Attendee>> GetAllAsync(AppUser appUser, PaginationDto paginationDto)
-    {
-        var offset = paginationDto.Limit * (paginationDto.Page - 1);
+    private readonly ApplicationDbContext _applicationDbContext;
 
-        return await context.Attendees
-            .Where(a => a.AppUserId == appUser.Id)
-            .Skip(offset)
-            .Take(paginationDto.Limit)
+    public AttendeeRepository(ApplicationDbContext applicationDbContext)
+    {
+        _applicationDbContext = applicationDbContext;
+    }
+
+    public async Task<List<Attendee>> FindUserAttendees(string userId)
+    {
+        return await _applicationDbContext
+            .Attendees.Where(a => a.AppUserId == userId)
             .ToListAsync();
     }
 
-    public async Task<Attendee?> GetByIdAsync(AppUser appUser, long id)
+    public async Task<Attendee?> FindUserAttendeeById(string userId, long id)
     {
-        return await context.Attendees
-            .Where(a => a.AppUserId == appUser.Id)
-            .FirstOrDefaultAsync(s => s.Id == id);
+        return await _applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
+            s.Id == id && s.AppUserId == userId
+        );
     }
 
-    public async Task<Attendee> CreateAsync(AppUser appUser, CreateAttendeeDto attendeeDto)
+    public async Task<Attendee> SaveUserAttendee(string userId, Attendee attendee)
     {
-        var attendeeModel = attendeeDto.ToAttendee(appUser.Id);
+        attendee.AppUserId = userId;
 
-        await context.Attendees.AddAsync(attendeeModel);
-        await context.SaveChangesAsync();
-        return attendeeModel;
+        var createdAttendee = await _applicationDbContext.Attendees.AddAsync(attendee);
+        await _applicationDbContext.SaveChangesAsync();
+
+        return createdAttendee.Entity;
     }
 
-    public async Task<Attendee?> UpdateAsync(AppUser appUser, long id, UpdateAttendeeDto attendeeDto)
+    public async Task<Attendee?> UpdateUserAttendee(string userId, Attendee attendee)
     {
-        var attendeeModel = await context.Attendees
-            .Where(a => a.AppUserId == appUser.Id)
-            .FirstOrDefaultAsync(a => a.Id == id);
+        var existingAttendee = await _applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
+            s.Id == attendee.Id && s.AppUserId == userId
+        );
 
-        if (attendeeModel == null)
+        // TODO: Make this more robust, maybe throw an exception or return a specific error
+        if (existingAttendee == null)
             return null;
 
-        attendeeModel.ParseFromUpdateAttendeeDto(attendeeDto);
-        await context.SaveChangesAsync();
+        _applicationDbContext.Entry(existingAttendee).CurrentValues.SetValues(attendee);
+        await _applicationDbContext.SaveChangesAsync();
 
-        return attendeeModel;
+        return existingAttendee;
     }
 
-    public async Task<Attendee?> DeleteAsync(AppUser appUser, long id)
+    public async Task<Attendee?> DeleteUserAttendee(string userId, long id)
     {
-        var attendeeModel = await context.Attendees
-            .Where(a => a.AppUserId == appUser.Id)
-            .FirstOrDefaultAsync(a => a.Id == id);
+        var existingAttendee = await _applicationDbContext.Attendees.FirstOrDefaultAsync(a =>
+            a.Id == id && a.AppUserId == userId
+        );
 
-        if (attendeeModel == null)
+        // TODO: Make this more robust, maybe throw an exception or return a specific error
+        if (existingAttendee == null)
             return null;
 
-        context.Attendees.Remove(attendeeModel);
-        await context.SaveChangesAsync();
+        _applicationDbContext.Attendees.Remove(existingAttendee);
+        await _applicationDbContext.SaveChangesAsync();
 
-        return attendeeModel;
+        return existingAttendee;
     }
 
-    public async Task<bool> ExistsAsync(AppUser appUser, long id)
+    public Task<bool> ExistsUserAttendee(string userId, long id)
     {
-        return await context.Attendees.Where(a => a.AppUserId == appUser.Id).AnyAsync(a => id == a.Id);
+        return _applicationDbContext.Attendees.AnyAsync(a => id == a.Id && a.AppUserId == userId);
     }
 }
