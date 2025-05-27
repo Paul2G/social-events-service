@@ -14,11 +14,11 @@ public static class LocationMapper
             Phone = location.Phone,
             Country = location.Country,
             PostalCode = location.PostalCode,
-            Address = location.Address
+            Address = location.Address,
         };
     }
 
-    public static Location ToLocation(this CreateLocationDto createLocationDto, string appUserId)
+    public static Location ToLocation(this CreateLocationDto createLocationDto)
     {
         return new Location
         {
@@ -27,11 +27,25 @@ public static class LocationMapper
             Country = createLocationDto.Country,
             PostalCode = createLocationDto.PostalCode,
             Address = createLocationDto.Address,
-            AppUserId = appUserId
         };
     }
 
-    public static void ParseFromUpdateLocationDto(this Location location, UpdateLocationDto updateLocationDto)
+    public static Location ToLocation(this UpdateLocationDto updateLocationDto)
+    {
+        return new Location
+        {
+            Name = updateLocationDto.Name,
+            Phone = updateLocationDto.Phone,
+            Country = updateLocationDto.Country,
+            PostalCode = updateLocationDto.PostalCode,
+            Address = updateLocationDto.Address,
+        };
+    }
+
+    public static void ParseFromUpdateLocationDto(
+        this Location location,
+        UpdateLocationDto updateLocationDto
+    )
     {
         location.Name = updateLocationDto.Name;
         location.Phone = updateLocationDto.Phone;
