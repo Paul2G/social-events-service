@@ -51,6 +51,7 @@ public class SocialEventService : ISocialEventService
     public async Task<ReadSocialEventDto?> UpdateAsync(long id, UpdateSocialEventDto socialEventDto)
     {
         var incomingSocialEvent = socialEventDto.ToSocialEvent();
+        incomingSocialEvent.Id = id;
 
         var socialEventModel = await _socialEventRepository.UpdateUserSocialEvent(
             _userService.GetUserId(),
