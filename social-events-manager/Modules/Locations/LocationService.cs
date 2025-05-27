@@ -4,21 +4,19 @@ using social_events_manager.Modules.Locations.Interfaces;
 
 namespace social_events_manager.Modules.Locations;
 
-public class LocationService : ILocationService
+public class LocationService(ILocationRepository locationRepository, IUserService userService)
+    : ILocationService
 {
-    private readonly ILocationRepository _locationRepository;
-    private readonly IUserService _userService;
-
     public async Task<List<ReadLocationDto>> GetAllAsync()
     {
-        var locations = await _locationRepository.FindUserLocations(_userService.GetUserId());
+        var locations = await locationRepository.FindUserLocations(userService.GetUserId());
 
         return (List<ReadLocationDto>)locations.Select(l => l.ToLocationDto());
     }
 
     public async Task<ReadLocationDto?> GetByIdAsync(long id)
     {
-        var location = await _locationRepository.FindUserLocationById(_userService.GetUserId(), id);
+        var location = await locationRepository.FindUserLocationById(userService.GetUserId(), id);
 
         return location.ToLocationDto();
     }
@@ -27,8 +25,8 @@ public class LocationService : ILocationService
     {
         var incomingLocation = locationDto.ToLocation();
 
-        var location = await _locationRepository.SaveUserLocation(
-            _userService.GetUserId(),
+        var location = await locationRepository.SaveUserLocation(
+            userService.GetUserId(),
             incomingLocation
         );
 
@@ -40,8 +38,8 @@ public class LocationService : ILocationService
         var incomingLocation = locationDto.ToLocation();
         incomingLocation.Id = id;
 
-        var location = await _locationRepository.UpdateUserLocation(
-            _userService.GetUserId(),
+        var location = await locationRepository.UpdateUserLocation(
+            userService.GetUserId(),
             incomingLocation
         );
 
@@ -50,7 +48,7 @@ public class LocationService : ILocationService
 
     public async Task<ReadLocationDto?> DeleteAsync(long id)
     {
-        var location = await _locationRepository.DeleteUserLocation(_userService.GetUserId(), id);
+        var location = await locationRepository.DeleteUserLocation(userService.GetUserId(), id);
 
         return location.ToLocationDto();
     }

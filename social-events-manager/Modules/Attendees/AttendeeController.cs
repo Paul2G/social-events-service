@@ -8,19 +8,12 @@ namespace social_events_manager.Modules.Attendees;
 [ApiController]
 [Route("api/attendees")]
 [Authorize]
-public class AttendeeController : ControllerBase
+public class AttendeeController(IAttendeeService attendeeService) : ControllerBase
 {
-    private readonly IAttendeeService _attendeeService;
-
-    public AttendeeController(IAttendeeService attendeeService)
-    {
-        _attendeeService = attendeeService;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var attendees = await _attendeeService.GetAllAsync();
+        var attendees = await attendeeService.GetAllAsync();
 
         return Ok(attendees);
     }
@@ -29,7 +22,7 @@ public class AttendeeController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
-        var attendee = await _attendeeService.GetByIdAsync(id);
+        var attendee = await attendeeService.GetByIdAsync(id);
 
         if (attendee == null)
             return NotFound("Attendee not found");
@@ -40,7 +33,7 @@ public class AttendeeController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateAttendeeDto attendeeDto)
     {
-        var attendee = await _attendeeService.CreateAsync(attendeeDto);
+        var attendee = await attendeeService.CreateAsync(attendeeDto);
 
         return CreatedAtAction(nameof(GetById), new { id = attendee.Id }, attendee);
     }
@@ -52,7 +45,7 @@ public class AttendeeController : ControllerBase
         [FromBody] UpdateAttendeeDto attendeeDto
     )
     {
-        var attendee = await _attendeeService.UpdateAsync(id, attendeeDto);
+        var attendee = await attendeeService.UpdateAsync(id, attendeeDto);
 
         if (attendee == null)
             return NotFound("Attendee not found");
@@ -64,7 +57,7 @@ public class AttendeeController : ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var attendee = await _attendeeService.DeleteAsync(id);
+        var attendee = await attendeeService.DeleteAsync(id);
 
         if (attendee == null)
             return NotFound("Attendee not found");

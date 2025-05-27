@@ -10,10 +10,7 @@ namespace social_events_manager.Modules.SocialEvents;
 [ApiController]
 [Route("api/social-events")]
 [Authorize]
-public class SocialEventController(
-    ISocialEventService socialEventService,
-    UserManager<AppUser> userManager
-) : ControllerBase
+public class SocialEventController(ISocialEventService socialEventService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()

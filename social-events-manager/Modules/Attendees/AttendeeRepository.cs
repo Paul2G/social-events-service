@@ -5,25 +5,16 @@ using social_events_manager.Modules.Attendees.Models;
 
 namespace social_events_manager.Modules.Attendees;
 
-public class AttendeeRepository : IAttendeeRepository
+public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAttendeeRepository
 {
-    private readonly ApplicationDbContext _applicationDbContext;
-
-    public AttendeeRepository(ApplicationDbContext applicationDbContext)
-    {
-        _applicationDbContext = applicationDbContext;
-    }
-
     public async Task<List<Attendee>> FindUserAttendees(string userId)
     {
-        return await _applicationDbContext
-            .Attendees.Where(a => a.AppUserId == userId)
-            .ToListAsync();
+        return await applicationDbContext.Attendees.Where(a => a.AppUserId == userId).ToListAsync();
     }
 
     public async Task<Attendee?> FindUserAttendeeById(string userId, long id)
     {
-        return await _applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
+        return await applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
             s.Id == id && s.AppUserId == userId
         );
     }
@@ -32,15 +23,15 @@ public class AttendeeRepository : IAttendeeRepository
     {
         attendee.AppUserId = userId;
 
-        var createdAttendee = await _applicationDbContext.Attendees.AddAsync(attendee);
-        await _applicationDbContext.SaveChangesAsync();
+        var createdAttendee = await applicationDbContext.Attendees.AddAsync(attendee);
+        await applicationDbContext.SaveChangesAsync();
 
         return createdAttendee.Entity;
     }
 
     public async Task<Attendee?> UpdateUserAttendee(string userId, Attendee attendee)
     {
-        var existingAttendee = await _applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
+        var existingAttendee = await applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
             s.Id == attendee.Id && s.AppUserId == userId
         );
 
@@ -48,15 +39,15 @@ public class AttendeeRepository : IAttendeeRepository
         if (existingAttendee == null)
             return null;
 
-        _applicationDbContext.Entry(existingAttendee).CurrentValues.SetValues(attendee);
-        await _applicationDbContext.SaveChangesAsync();
+        applicationDbContext.Entry(existingAttendee).CurrentValues.SetValues(attendee);
+        await applicationDbContext.SaveChangesAsync();
 
         return existingAttendee;
     }
 
     public async Task<Attendee?> DeleteUserAttendee(string userId, long id)
     {
-        var existingAttendee = await _applicationDbContext.Attendees.FirstOrDefaultAsync(a =>
+        var existingAttendee = await applicationDbContext.Attendees.FirstOrDefaultAsync(a =>
             a.Id == id && a.AppUserId == userId
         );
 
@@ -64,14 +55,14 @@ public class AttendeeRepository : IAttendeeRepository
         if (existingAttendee == null)
             return null;
 
-        _applicationDbContext.Attendees.Remove(existingAttendee);
-        await _applicationDbContext.SaveChangesAsync();
+        applicationDbContext.Attendees.Remove(existingAttendee);
+        await applicationDbContext.SaveChangesAsync();
 
         return existingAttendee;
     }
 
     public Task<bool> ExistsUserAttendee(string userId, long id)
     {
-        return _applicationDbContext.Attendees.AnyAsync(a => id == a.Id && a.AppUserId == userId);
+        return applicationDbContext.Attendees.AnyAsync(a => id == a.Id && a.AppUserId == userId);
     }
 }

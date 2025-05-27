@@ -8,19 +8,12 @@ namespace social_events_manager.Modules.Locations;
 [ApiController]
 [Route("api/locations")]
 [Authorize]
-public class LocationController : ControllerBase
+public class LocationController(ILocationService locationService) : ControllerBase
 {
-    private readonly ILocationService _locationService;
-
-    public LocationController(ILocationService locationService)
-    {
-        _locationService = locationService;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var locations = await _locationService.GetAllAsync();
+        var locations = await locationService.GetAllAsync();
 
         return Ok(locations);
     }
@@ -29,7 +22,7 @@ public class LocationController : ControllerBase
     [Route("{id:long}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
-        var location = await _locationService.GetByIdAsync(id);
+        var location = await locationService.GetByIdAsync(id);
 
         if (location == null)
             return NotFound("Location not found");
@@ -43,7 +36,7 @@ public class LocationController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var location = await _locationService.CreateAsync(locationDto);
+        var location = await locationService.CreateAsync(locationDto);
 
         return CreatedAtAction(nameof(GetById), new { id = location.Id }, location);
     }
@@ -58,7 +51,7 @@ public class LocationController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var location = await _locationService.UpdateAsync(id, locationDto);
+        var location = await locationService.UpdateAsync(id, locationDto);
 
         if (location == null)
             return NotFound("Location was not found");
@@ -70,7 +63,7 @@ public class LocationController : ControllerBase
     [Route("{id:long}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var location = await _locationService.DeleteAsync(id);
+        var location = await locationService.DeleteAsync(id);
 
         if (location == null)
             return NotFound("Location not found");
