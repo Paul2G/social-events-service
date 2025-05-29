@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using social_events_manager.Data;
+using social_events_manager.Middlewares;
 using social_events_manager.Modules.Attendees;
 using social_events_manager.Modules.Attendees.Interfaces;
 using social_events_manager.Modules.Auth.Interfaces;
@@ -29,6 +30,8 @@ connectionString = string.Format(connectionString, dbHost, dbPort, dbName, dbPas
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddExceptionHandler<ApiExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -143,6 +146,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
