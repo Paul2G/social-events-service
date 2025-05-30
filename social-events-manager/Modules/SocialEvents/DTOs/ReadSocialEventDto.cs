@@ -5,14 +5,12 @@ namespace social_events_manager.Modules.SocialEvents.DTOs;
 
 public class ReadSocialEventDto
 {
-    public long Id { get; set; }
+    public long Id { get; init; }
     public string Name { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-    public Location Location { get; set; } = new();
+    public string? Description { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public int AttendeesCount { get; set; }
-
+    public Location? Location { get; set; }
     public List<ReadAttendeeDto> Attendees { get; set; } = [];
 }

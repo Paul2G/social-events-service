@@ -41,7 +41,6 @@ public class SocialEventRepository(ApplicationDbContext applicationDbContext)
             s.Id == socialEvent.Id && s.AppUserId == userId
         );
 
-        // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingSocialEvent == null)
             return null;
 
@@ -59,7 +58,6 @@ public class SocialEventRepository(ApplicationDbContext applicationDbContext)
             x.Id == id && x.AppUserId == userId
         );
 
-        // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingSocialEvent == null)
             return null;
 

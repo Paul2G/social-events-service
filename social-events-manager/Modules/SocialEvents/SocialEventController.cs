@@ -25,9 +25,6 @@ public class SocialEventController(ISocialEventService socialEventService) : Con
     {
         var socialEvent = await socialEventService.GetByIdAsync(id);
 
-        if (socialEvent == null)
-            return NotFound();
-
         return Ok(socialEvent);
     }
 
@@ -53,8 +50,6 @@ public class SocialEventController(ISocialEventService socialEventService) : Con
             return BadRequest(ModelState);
 
         var socialEvent = await socialEventService.UpdateAsync(id, socialEventDto);
-        if (socialEvent == null)
-            return NotFound();
 
         return Ok(socialEvent);
     }
@@ -63,9 +58,7 @@ public class SocialEventController(ISocialEventService socialEventService) : Con
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var socialEventModel = await socialEventService.DeleteAsync(id);
-        if (socialEventModel == null)
-            return NotFound();
+        await socialEventService.DeleteAsync(id);
 
         return NoContent();
     }
