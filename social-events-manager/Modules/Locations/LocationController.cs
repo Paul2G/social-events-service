@@ -24,9 +24,6 @@ public class LocationController(ILocationService locationService) : ControllerBa
     {
         var location = await locationService.GetByIdAsync(id);
 
-        if (location == null)
-            return NotFound("Location not found");
-
         return Ok(location);
     }
 
@@ -53,9 +50,6 @@ public class LocationController(ILocationService locationService) : ControllerBa
 
         var location = await locationService.UpdateAsync(id, locationDto);
 
-        if (location == null)
-            return NotFound("Location was not found");
-
         return Ok(location);
     }
 
@@ -63,10 +57,7 @@ public class LocationController(ILocationService locationService) : ControllerBa
     [Route("{id:long}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var location = await locationService.DeleteAsync(id);
-
-        if (location == null)
-            return NotFound("Location not found");
+        await locationService.DeleteAsync(id);
 
         return NoContent();
     }

@@ -41,16 +41,4 @@ public static class LocationMapper
             Address = updateLocationDto.Address,
         };
     }
-
-    public static void ParseFromUpdateLocationDto(
-        this Location location,
-        UpdateLocationDto updateLocationDto
-    )
-    {
-        location.Name = updateLocationDto.Name;
-        location.Phone = updateLocationDto.Phone;
-        location.Country = updateLocationDto.Country;
-        location.PostalCode = updateLocationDto.PostalCode;
-        location.Address = updateLocationDto.Address;
-    }
 }

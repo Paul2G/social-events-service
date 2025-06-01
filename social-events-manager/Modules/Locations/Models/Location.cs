@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using social_events_manager.Modules.SocialEvents.Models;
 
@@ -6,15 +7,31 @@ namespace social_events_manager.Modules.Locations.Models;
 [Table("Locations")]
 public class Location
 {
+    [Required]
     public long Id { get; set; }
+
+    [Required]
+    [MaxLength(255)]
     public string Name { get; set; } = string.Empty;
+
+    [MaxLength(15)]
     public string? Phone { get; set; } = string.Empty;
+
+    [Required]
+    [MaxLength(50)]
     public string Country { get; set; } = string.Empty;
+
+    [Required]
     public int PostalCode { get; set; }
+
+    [Required]
+    [MaxLength(255)]
     public string Address { get; set; } = string.Empty;
+
+    [Required]
+    [MaxLength(255)]
     public string AppUserId { get; set; } = string.Empty;
 
     // Navigation
-
-    public List<SocialEvent> SocialEvents { get; set; } = new();
+    public List<SocialEvent> SocialEvents { get; } = [];
 }

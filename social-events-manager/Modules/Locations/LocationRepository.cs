@@ -35,7 +35,6 @@ public class LocationRepository(ApplicationDbContext applicationDbContext) : ILo
             l.Id == location.Id && l.AppUserId == userId
         );
 
-        // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingLocation == null)
             return null;
 
@@ -53,7 +52,6 @@ public class LocationRepository(ApplicationDbContext applicationDbContext) : ILo
             l.Id == id && l.AppUserId == userId
         );
 
-        // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingLocation == null)
             return null;
 

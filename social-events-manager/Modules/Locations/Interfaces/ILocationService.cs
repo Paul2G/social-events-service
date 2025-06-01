@@ -6,8 +6,8 @@ public interface ILocationService
 {
     Task<List<ReadLocationDto>> GetAllAsync();
 
-    Task<ReadLocationDto?> GetByIdAsync(long id);
+    Task<ReadLocationDto> GetByIdAsync(long id);
     Task<ReadLocationDto> CreateAsync(CreateLocationDto locationDto);
-    Task<ReadLocationDto?> UpdateAsync(long id, UpdateLocationDto locationDto);
-    Task<ReadLocationDto?> DeleteAsync(long id);
+    Task<ReadLocationDto> UpdateAsync(long id, UpdateLocationDto locationDto);
+    Task<ReadLocationDto> DeleteAsync(long id);
 }

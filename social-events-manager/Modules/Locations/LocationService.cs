@@ -1,3 +1,4 @@
+using social_events_manager.Exceptions;
 using social_events_manager.Modules.Auth.Interfaces;
 using social_events_manager.Modules.Locations.DTOs;
 using social_events_manager.Modules.Locations.Interfaces;
@@ -14,9 +15,12 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
         return locations.Select(l => l.ToLocationDto()).ToList();
     }
 
-    public async Task<ReadLocationDto?> GetByIdAsync(long id)
+    public async Task<ReadLocationDto> GetByIdAsync(long id)
     {
         var location = await locationRepository.FindUserLocationById(userService.GetUserId(), id);
+
+        if (location == null)
+            throw new ItemNotFoundException($"Location with ID {id} not found");
 
         return location.ToLocationDto();
     }
@@ -33,7 +37,7 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
         return location.ToLocationDto();
     }
 
-    public async Task<ReadLocationDto?> UpdateAsync(long id, UpdateLocationDto locationDto)
+    public async Task<ReadLocationDto> UpdateAsync(long id, UpdateLocationDto locationDto)
     {
         var incomingLocation = locationDto.ToLocation();
         incomingLocation.Id = id;
@@ -43,12 +47,18 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
             incomingLocation
         );
 
+        if (location == null)
+            throw new ItemNotFoundException($"Location with ID {id} not found");
+
         return location.ToLocationDto();
     }
 
-    public async Task<ReadLocationDto?> DeleteAsync(long id)
+    public async Task<ReadLocationDto> DeleteAsync(long id)
     {
         var location = await locationRepository.DeleteUserLocation(userService.GetUserId(), id);
+
+        if (location == null)
+            throw new ItemNotFoundException($"Location with ID {id} not found");
 
         return location.ToLocationDto();
     }
