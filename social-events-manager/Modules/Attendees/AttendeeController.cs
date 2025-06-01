@@ -24,9 +24,6 @@ public class AttendeeController(IAttendeeService attendeeService) : ControllerBa
     {
         var attendee = await attendeeService.GetByIdAsync(id);
 
-        if (attendee == null)
-            return NotFound("Attendee not found");
-
         return Ok(attendee);
     }
 
@@ -47,9 +44,6 @@ public class AttendeeController(IAttendeeService attendeeService) : ControllerBa
     {
         var attendee = await attendeeService.UpdateAsync(id, attendeeDto);
 
-        if (attendee == null)
-            return NotFound("Attendee not found");
-
         return Ok(attendee);
     }
 
@@ -57,10 +51,7 @@ public class AttendeeController(IAttendeeService attendeeService) : ControllerBa
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
-        var attendee = await attendeeService.DeleteAsync(id);
-
-        if (attendee == null)
-            return NotFound("Attendee not found");
+        await attendeeService.DeleteAsync(id);
 
         return NoContent();
     }

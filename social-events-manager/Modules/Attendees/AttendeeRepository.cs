@@ -35,7 +35,6 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
             s.Id == attendee.Id && s.AppUserId == userId
         );
 
-        // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingAttendee == null)
             return null;
 
@@ -51,7 +50,6 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
             a.Id == id && a.AppUserId == userId
         );
 
-        // TODO: Make this more robust, maybe throw an exception or return a specific error
         if (existingAttendee == null)
             return null;
 

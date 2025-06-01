@@ -1,3 +1,4 @@
+using social_events_manager.Exceptions;
 using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
 using social_events_manager.Modules.Auth.Interfaces;
@@ -14,9 +15,12 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
         return attendees.Select(a => a.ToAttendeeDto()).ToList();
     }
 
-    public async Task<ReadAttendeeDto?> GetByIdAsync(long id)
+    public async Task<ReadAttendeeDto> GetByIdAsync(long id)
     {
         var attendee = await attendeeRepository.FindUserAttendeeById(userService.GetUserId(), id);
+
+        if (attendee == null)
+            throw new ItemNotFoundException($"Attendee with ID {id} not found.");
 
         return attendee.ToAttendeeDto();
     }
@@ -33,7 +37,7 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
         return attendee.ToAttendeeDto();
     }
 
-    public async Task<ReadAttendeeDto?> UpdateAsync(long id, UpdateAttendeeDto attendeeDto)
+    public async Task<ReadAttendeeDto> UpdateAsync(long id, UpdateAttendeeDto attendeeDto)
     {
         var incomingAttendee = attendeeDto.ToAttendee();
         incomingAttendee.Id = id;
@@ -43,13 +47,19 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
             incomingAttendee
         );
 
-        return attendee?.ToAttendeeDto();
+        if (attendee == null)
+            throw new ItemNotFoundException($"Attendee with ID {id} not found.");
+
+        return attendee.ToAttendeeDto();
     }
 
-    public async Task<ReadAttendeeDto?> DeleteAsync(long id)
+    public async Task<ReadAttendeeDto> DeleteAsync(long id)
     {
         var attendee = await attendeeRepository.DeleteUserAttendee(userService.GetUserId(), id);
 
-        return attendee?.ToAttendeeDto();
+        if (attendee == null)
+            throw new ItemNotFoundException($"Attendee with ID {id} not found.");
+
+        return attendee.ToAttendeeDto();
     }
 }

@@ -25,13 +25,4 @@ public static class AttendeeMapper
     {
         return new Attendee { Name = attendeeDto.Name, Status = attendeeDto.Status };
     }
-
-    public static void ParseFromUpdateAttendeeDto(
-        this Attendee attendee,
-        UpdateAttendeeDto updateAttendeeDto
-    )
-    {
-        attendee.Name = updateAttendeeDto.Name;
-        attendee.Status = updateAttendeeDto.Status;
-    }
 }
