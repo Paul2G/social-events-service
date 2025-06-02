@@ -1,6 +1,6 @@
 namespace social_events_manager.Exceptions;
 
-public class ItemNotFoundException : KeyNotFoundException
+public class ItemNotFoundException : Exception
 {
     public ItemNotFoundException() { }
 

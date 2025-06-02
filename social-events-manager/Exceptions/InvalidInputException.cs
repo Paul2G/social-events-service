@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace social_events_manager.Exceptions;
 
-public class InvalidInputException : ArgumentException
+public class InvalidInputException : Exception
 {
     public InvalidInputException() { }
 
