@@ -35,6 +35,12 @@ public class ApiExceptionHandler(ILogger<ApiExceptionHandler> logger) : IExcepti
                 problemDetails.Status = (int)HttpStatusCode.BadRequest;
                 httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 break;
+            case UnauthorizedException:
+                problemDetails.Type = "https://tools.ietf.org/html/rfc9110#section-15.5.2";
+                problemDetails.Title = "Unauthorized access";
+                problemDetails.Status = (int)HttpStatusCode.Unauthorized;
+                httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                break;
             default:
                 problemDetails.Type = "https://tools.ietf.org/html/rfc9110#section-15.6.1";
                 problemDetails.Title = "Unexpected error";

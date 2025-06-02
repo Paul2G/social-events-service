@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using social_events_manager.Exceptions;
 using social_events_manager.Middlewares;
 using social_events_manager.Modules.Auth.DTOs;
 using social_events_manager.Modules.Auth.Interfaces;
@@ -27,7 +28,7 @@ public class AuthController(
         );
 
         if (user == null)
-            return Unauthorized("Invalid credentials");
+            throw new UnauthorizedException("Invalid credentials");
 
         var result = await signInManager.CheckPasswordSignInAsync(
             user,
@@ -36,7 +37,7 @@ public class AuthController(
         );
 
         if (!result.Succeeded)
-            return Unauthorized("Invalid credentials");
+            throw new UnauthorizedException("Invalid credentials");
 
         return Ok(user.ToReadUserDto(tokenService.CreateToken(user)));
     }
@@ -50,7 +51,7 @@ public class AuthController(
         var appUSer = await userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
         if (appUSer == null)
-            return NotFound();
+            throw new UnauthorizedException("User not found");
 
         return Ok(appUSer.ToReadUserDto(tokenService.CreateToken(appUSer)));
     }
