@@ -30,7 +30,7 @@ public class SocialEvent
     [Required]
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
 
-    [MaxLength(255)]
+    [Required]
     public string AppUserId { get; set; } = string.Empty;
 
     // Navigation properties

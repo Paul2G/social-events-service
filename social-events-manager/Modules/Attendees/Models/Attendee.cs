@@ -29,7 +29,6 @@ public class Attendee
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
     [Required]
-    [MaxLength(255, ErrorMessage = "Name cannot be over 255 characters")]
     public string AppUserId { get; set; } = string.Empty;
 
     // Navigation
