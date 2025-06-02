@@ -39,6 +39,8 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
             return null;
 
         applicationDbContext.Entry(existingAttendee).CurrentValues.SetValues(attendee);
+        existingAttendee.AppUserId = userId;
+
         await applicationDbContext.SaveChangesAsync();
 
         return existingAttendee;
