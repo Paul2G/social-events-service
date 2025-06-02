@@ -24,19 +24,19 @@ public class ApiExceptionHandler(ILogger<ApiExceptionHandler> logger) : IExcepti
         switch (exception)
         {
             case ItemNotFoundException:
-                problemDetails.Type = "https://http.cat/404";
+                problemDetails.Type = "https://tools.ietf.org/html/rfc9110#section-15.5.5";
                 problemDetails.Title = "Item not found";
                 problemDetails.Status = (int)HttpStatusCode.NotFound;
                 httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                 break;
             case InvalidInputException:
-                problemDetails.Type = "https://http.cat/400";
+                problemDetails.Type = "https://tools.ietf.org/html/rfc9110#section-15.5.1";
                 problemDetails.Title = "Invalid input";
                 problemDetails.Status = (int)HttpStatusCode.BadRequest;
                 httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 break;
             default:
-                problemDetails.Type = "https://http.cat/500";
+                problemDetails.Type = "https://tools.ietf.org/html/rfc9110#section-15.6.1";
                 problemDetails.Title = "Unexpected error";
                 problemDetails.Detail = "An error occurred while processing your request";
                 problemDetails.Status = (int)HttpStatusCode.InternalServerError;
