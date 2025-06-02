@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using social_events_manager.Middlewares;
 using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
 
@@ -8,6 +9,7 @@ namespace social_events_manager.Modules.Attendees;
 [ApiController]
 [Route("api/attendees")]
 [Authorize]
+[ModelStateValidationFilter]
 public class AttendeeController(IAttendeeService attendeeService) : ControllerBase
 {
     [HttpGet]

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using social_events_manager.Middlewares;
 using social_events_manager.Modules.Locations.DTOs;
 using social_events_manager.Modules.Locations.Interfaces;
 
@@ -8,6 +9,7 @@ namespace social_events_manager.Modules.Locations;
 [ApiController]
 [Route("api/locations")]
 [Authorize]
+[ModelStateValidationFilter]
 public class LocationController(ILocationService locationService) : ControllerBase
 {
     [HttpGet]
@@ -30,9 +32,6 @@ public class LocationController(ILocationService locationService) : ControllerBa
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateLocationDto locationDto)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
         var location = await locationService.CreateAsync(locationDto);
 
         return CreatedAtAction(nameof(GetById), new { id = location.Id }, location);
@@ -45,9 +44,6 @@ public class LocationController(ILocationService locationService) : ControllerBa
         [FromBody] UpdateLocationDto locationDto
     )
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
         var location = await locationService.UpdateAsync(id, locationDto);
 
         return Ok(location);

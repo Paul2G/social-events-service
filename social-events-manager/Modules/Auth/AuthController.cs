@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using social_events_manager.Middlewares;
 using social_events_manager.Modules.Auth.DTOs;
 using social_events_manager.Modules.Auth.Interfaces;
 using social_events_manager.Modules.Auth.Models;
@@ -9,6 +10,7 @@ namespace social_events_manager.Modules.Auth;
 
 [Route("auth")]
 [ApiController]
+[ModelStateValidationFilter]
 public class AuthController(
     UserManager<AppUser> userManager,
     ITokenService tokenService,
@@ -19,9 +21,6 @@ public class AuthController(
     [Route("login")]
     public async Task<IActionResult> Login(LoginUserDto loginUserDto)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
         var user = await userManager.Users.FirstOrDefaultAsync(u =>
             u.NormalizedUserName == loginUserDto.Username.ToUpper()
         );
@@ -29,7 +28,11 @@ public class AuthController(
         if (user == null)
             return Unauthorized("Invalid credentials");
 
-        var result = await signInManager.CheckPasswordSignInAsync(user, loginUserDto.Password, false);
+        var result = await signInManager.CheckPasswordSignInAsync(
+            user,
+            loginUserDto.Password,
+            false
+        );
 
         if (!result.Succeeded)
             return Unauthorized("Invalid credentials");
@@ -43,9 +46,6 @@ public class AuthController(
     {
         try
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var appUser = registerUserDto.ToAppUser();
 
             var createdUser = await userManager.CreateAsync(appUser, registerUserDto.Password);
