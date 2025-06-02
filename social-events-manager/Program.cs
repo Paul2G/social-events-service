@@ -32,6 +32,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddProblemDetails();
+builder.Services.AddHealthChecks();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowAllOrigins",
+        policyBuilder =>
+            policyBuilder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                // .AllowCredentials()
+                .SetIsOriginAllowed(_ => true)
+    );
+});
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -66,7 +81,6 @@ builder.Services.AddSwaggerGen(options =>
     );
 });
 
-builder.Services.AddHealthChecks();
 builder
     .Services.AddControllers()
     .AddNewtonsoftJson(options =>
@@ -147,6 +161,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseExceptionHandler();
+app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
