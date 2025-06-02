@@ -5,11 +5,10 @@ namespace social_events_manager.Modules.SocialEvents.DTOs;
 public class CreateSocialEventDto
 {
     [Required]
-    [MinLength(6, ErrorMessage = "Name have to be at least 6 characters long")]
-    [MaxLength(255, ErrorMessage = "Name cannot be over 255 characters")]
+    [StringLength(255, MinimumLength = 6)]
     public string Name { get; set; } = string.Empty;
 
-    [MaxLength(255, ErrorMessage = "Description cannot be over 255 characters")]
+    [StringLength(255)]
     public string? Description { get; set; }
 
     [Required]
@@ -21,6 +20,4 @@ public class CreateSocialEventDto
     public DateTime EndTime { get; set; }
 
     public long? LocationId { get; set; }
-
-    public int[] AttendeesIds { get; set; } = [];
 }

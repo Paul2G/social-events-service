@@ -5,21 +5,21 @@ namespace social_events_manager.Modules.Locations.DTOs;
 public class CreateLocationDto
 {
     [Required]
-    [MaxLength(255, ErrorMessage = "Name cannot be over 255 characters")]
+    [StringLength(255)]
     public string Name { get; set; } = string.Empty;
 
     [Phone]
-    [MaxLength(15, ErrorMessage = "Phone number cannot be over 15 characters")]
+    [StringLength(15)]
     public string? Phone { get; set; }
 
     [Required]
-    [MaxLength(50, ErrorMessage = "Country cannot be over 50 characters")]
+    [StringLength(50)]
     public string Country { get; set; } = string.Empty;
 
     [Required]
     public int PostalCode { get; set; }
 
     [Required]
-    [MaxLength(255, ErrorMessage = "Address cannot be over 255 characters")]
+    [StringLength(255)]
     public string Address { get; set; } = string.Empty;
 }
