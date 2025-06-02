@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using social_events_manager.Modules.Auth.Models;
 
 namespace social_events_manager.Modules.Auth;
 
-[Route("auth")]
+[Route("api/auth")]
 [ApiController]
 [ModelStateValidationFilter]
 public class AuthController(
@@ -22,7 +23,7 @@ public class AuthController(
     public async Task<IActionResult> Login(LoginUserDto loginUserDto)
     {
         var user = await userManager.Users.FirstOrDefaultAsync(u =>
-            u.NormalizedUserName == loginUserDto.Username.ToUpper()
+            u.NormalizedEmail == loginUserDto.Email.ToUpper()
         );
 
         if (user == null)
@@ -40,30 +41,37 @@ public class AuthController(
         return Ok(user.ToReadUserDto(tokenService.CreateToken(user)));
     }
 
+    [HttpGet]
+    [Route("me")]
+    public async Task<IActionResult> Me()
+    {
+        var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        var appUSer = await userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (appUSer == null)
+            return NotFound();
+
+        return Ok(appUSer.ToReadUserDto(tokenService.CreateToken(appUSer)));
+    }
+
     [HttpPost]
     [Route("register")]
     public async Task<IActionResult> Register([FromBody] RegisterUserDto registerUserDto)
     {
-        try
+        var appUser = registerUserDto.ToAppUser();
+
+        var createdUser = await userManager.CreateAsync(appUser, registerUserDto.Password);
+
+        if (createdUser.Succeeded)
         {
-            var appUser = registerUserDto.ToAppUser();
+            var roleResult = await userManager.AddToRoleAsync(appUser, "User");
 
-            var createdUser = await userManager.CreateAsync(appUser, registerUserDto.Password);
-
-            if (createdUser.Succeeded)
-            {
-                var roleResult = await userManager.AddToRoleAsync(appUser, "User");
-
-                return roleResult.Succeeded
-                    ? Ok(appUser.ToReadUserDto(tokenService.CreateToken(appUser)))
-                    : StatusCode(500, roleResult.Errors);
-            }
-
-            return StatusCode(500, createdUser.Errors);
+            return roleResult.Succeeded
+                ? Ok(appUser.ToReadUserDto(tokenService.CreateToken(appUser)))
+                : StatusCode(500, roleResult.Errors);
         }
-        catch (Exception e)
-        {
-            return StatusCode(500, e);
-        }
+
+        return StatusCode(500, createdUser.Errors);
     }
 }
