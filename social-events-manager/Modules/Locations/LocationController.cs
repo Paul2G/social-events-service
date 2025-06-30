@@ -18,14 +18,12 @@ public class LocationController(ILocationService locationService) : ControllerBa
     {
         if (paginationQuery.Page.HasValue)
         {
-            var locations = await locationService.GetAllPaginatedAsync(paginationQuery);
-            return Ok(locations);
+            var paginatedLocations = await locationService.GetAllPaginatedAsync(paginationQuery);
+            return Ok(paginatedLocations);
         }
-        else
-        {
-            var locations = await locationService.GetAllAsync();
-            return Ok(locations);
-        }
+
+        var locations = await locationService.GetAllAsync();
+        return Ok(locations);
     }
 
     [HttpGet]
