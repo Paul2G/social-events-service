@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using social_events_manager.Middlewares;
+using social_events_manager.Modules.Shared.DTOs;
 using social_events_manager.Modules.SocialEvents.DTOs;
 using social_events_manager.Modules.SocialEvents.Interfaces;
 
@@ -14,8 +15,16 @@ namespace social_events_manager.Modules.SocialEvents;
 public class SocialEventController(ISocialEventService socialEventService) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] PaginationQueryDto paginationQueryDto)
     {
+        if (paginationQueryDto.Page.HasValue)
+        {
+            var paginatedSocialEvents = await socialEventService.GetAllPaginatedAsync(
+                paginationQueryDto
+            );
+            return Ok(paginatedSocialEvents);
+        }
+
         var socialEvents = await socialEventService.GetAllAsync();
         return Ok(socialEvents);
     }

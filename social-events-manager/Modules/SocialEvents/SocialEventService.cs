@@ -1,6 +1,8 @@
 ﻿using social_events_manager.Exceptions;
 using social_events_manager.Modules.Auth.Interfaces;
 using social_events_manager.Modules.Locations.Interfaces;
+using social_events_manager.Modules.Shared;
+using social_events_manager.Modules.Shared.DTOs;
 using social_events_manager.Modules.SocialEvents.DTOs;
 using social_events_manager.Modules.SocialEvents.Interfaces;
 
@@ -19,6 +21,28 @@ public class SocialEventService(
         );
 
         return socialEvents.Select(s => s.ToSocialEventDto()).ToList();
+    }
+
+    public async Task<PaginatedListDto<ReadSocialEventDto>> GetAllPaginatedAsync(
+        PaginationQueryDto paginationQueryDto
+    )
+    {
+        var paginationQuery = paginationQueryDto.ToPaginationQuery();
+
+        var socialEvents = await socialEventRepository.FindUserSocialEventsPaginated(
+            userService.GetUserId(),
+            paginationQuery.Limit,
+            paginationQuery.Offset
+        );
+
+        var totalCount = await socialEventRepository.CountUserSocialEvents(userService.GetUserId());
+
+        return new PaginatedListDto<ReadSocialEventDto>(
+            socialEvents.Select(s => s.ToSocialEventDto()).ToList(),
+            paginationQuery.Page,
+            paginationQuery.PageSize,
+            totalCount
+        );
     }
 
     public async Task<ReadSocialEventDto> GetByIdAsync(long id)

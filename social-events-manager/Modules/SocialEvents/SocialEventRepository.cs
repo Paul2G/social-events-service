@@ -17,6 +17,21 @@ public class SocialEventRepository(ApplicationDbContext applicationDbContext)
             .ToListAsync();
     }
 
+    public async Task<List<SocialEvent>> FindUserSocialEventsPaginated(
+        string userId,
+        int limit,
+        int offset
+    )
+    {
+        return await applicationDbContext
+            .SocialEvents.Where(s => s.AppUserId == userId)
+            .Include(c => c.Attendees)
+            .Include(c => c.Location)
+            .Skip(offset)
+            .Take(limit)
+            .ToListAsync();
+    }
+
     public async Task<SocialEvent?> FindUserSocialEventById(string userId, long id)
     {
         return await applicationDbContext
@@ -67,10 +82,13 @@ public class SocialEventRepository(ApplicationDbContext applicationDbContext)
         return existingSocialEvent;
     }
 
-    public async Task<bool> ExitsUserSocialEvent(string userId, long id)
+    public Task<bool> ExitsUserSocialEvent(string userId, long id)
     {
-        return await applicationDbContext.SocialEvents.AnyAsync(s =>
-            s.Id == id && s.AppUserId == userId
-        );
+        return applicationDbContext.SocialEvents.AnyAsync(s => s.Id == id && s.AppUserId == userId);
+    }
+
+    public Task<int> CountUserSocialEvents(string userId)
+    {
+        return applicationDbContext.SocialEvents.CountAsync(s => s.AppUserId == userId);
     }
 }
