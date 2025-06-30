@@ -2,6 +2,8 @@ using social_events_manager.Exceptions;
 using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
 using social_events_manager.Modules.Auth.Interfaces;
+using social_events_manager.Modules.Shared;
+using social_events_manager.Modules.Shared.DTOs;
 
 namespace social_events_manager.Modules.Attendees;
 
@@ -13,6 +15,28 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
         var attendees = await attendeeRepository.FindUserAttendees(userService.GetUserId());
 
         return attendees.Select(a => a.ToAttendeeDto()).ToList();
+    }
+
+    public async Task<PaginatedListDto<ReadAttendeeDto>> GetAllPaginatedAsync(
+        PaginationQueryDto paginationQueryDto
+    )
+    {
+        var paginationQuery = paginationQueryDto.ToPaginationQuery();
+
+        var attendees = await attendeeRepository.FindUserAttendeesPaginated(
+            userService.GetUserId(),
+            paginationQuery.Limit,
+            paginationQuery.Offset
+        );
+
+        var totalCount = await attendeeRepository.CountUserAttendees(userService.GetUserId());
+
+        return new PaginatedListDto<ReadAttendeeDto>(
+            attendees.Select(a => a.ToAttendeeDto()).ToList(),
+            paginationQuery.Page,
+            paginationQuery.PageSize,
+            totalCount
+        );
     }
 
     public async Task<ReadAttendeeDto> GetByIdAsync(long id)

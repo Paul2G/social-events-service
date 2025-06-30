@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using social_events_manager.Middlewares;
 using social_events_manager.Modules.Attendees.DTOs;
 using social_events_manager.Modules.Attendees.Interfaces;
+using social_events_manager.Modules.Shared.DTOs;
 
 namespace social_events_manager.Modules.Attendees;
 
@@ -13,10 +14,15 @@ namespace social_events_manager.Modules.Attendees;
 public class AttendeeController(IAttendeeService attendeeService) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] PaginationQueryDto paginationQueryDto)
     {
-        var attendees = await attendeeService.GetAllAsync();
+        if (paginationQueryDto.Page.HasValue)
+        {
+            var paginatedAttendees = await attendeeService.GetAllPaginatedAsync(paginationQueryDto);
+            return Ok(paginatedAttendees);
+        }
 
+        var attendees = await attendeeService.GetAllAsync();
         return Ok(attendees);
     }
 

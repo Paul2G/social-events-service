@@ -12,6 +12,19 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
         return await applicationDbContext.Attendees.Where(a => a.AppUserId == userId).ToListAsync();
     }
 
+    public async Task<List<Attendee>> FindUserAttendeesPaginated(
+        string userId,
+        int limit,
+        int offset
+    )
+    {
+        return await applicationDbContext
+            .Attendees.Where(a => a.AppUserId == userId)
+            .Skip(offset)
+            .Take(limit)
+            .ToListAsync();
+    }
+
     public async Task<Attendee?> FindUserAttendeeById(string userId, long id)
     {
         return await applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
@@ -64,5 +77,10 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
     public Task<bool> ExistsUserAttendee(string userId, long id)
     {
         return applicationDbContext.Attendees.AnyAsync(a => id == a.Id && a.AppUserId == userId);
+    }
+
+    public Task<int> CountUserAttendees(string userId)
+    {
+        return applicationDbContext.Attendees.CountAsync(a => a.AppUserId == userId);
     }
 }
