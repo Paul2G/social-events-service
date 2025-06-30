@@ -12,6 +12,19 @@ public class LocationRepository(ApplicationDbContext applicationDbContext) : ILo
         return await applicationDbContext.Locations.Where(a => a.AppUserId == userId).ToListAsync();
     }
 
+    public async Task<List<Location>> FindUserLocationsPaginated(
+        string userId,
+        int limit,
+        int offset
+    )
+    {
+        return await applicationDbContext
+            .Locations.Where(a => a.AppUserId == userId)
+            .Skip(offset)
+            .Take(limit)
+            .ToListAsync();
+    }
+
     public async Task<Location?> FindUserLocationById(string userId, long id)
     {
         return await applicationDbContext.Locations.FirstOrDefaultAsync(l =>
@@ -61,10 +74,13 @@ public class LocationRepository(ApplicationDbContext applicationDbContext) : ILo
         return existingLocation;
     }
 
-    public async Task<bool> ExistsUserLocation(string userId, long id)
+    public Task<bool> ExistsUserLocation(string userId, long id)
     {
-        return await applicationDbContext.Locations.AnyAsync(l =>
-            l.Id == id && l.AppUserId == userId
-        );
+        return applicationDbContext.Locations.AnyAsync(l => l.Id == id && l.AppUserId == userId);
+    }
+
+    public Task<int> CountUserLocations(string userId)
+    {
+        return applicationDbContext.Locations.CountAsync(l => l.AppUserId == userId);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using social_events_manager.Middlewares;
 using social_events_manager.Modules.Locations.DTOs;
 using social_events_manager.Modules.Locations.Interfaces;
+using social_events_manager.Modules.Shared.DTOs;
 
 namespace social_events_manager.Modules.Locations;
 
@@ -13,11 +14,18 @@ namespace social_events_manager.Modules.Locations;
 public class LocationController(ILocationService locationService) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] PaginationQueryDto paginationQuery)
     {
-        var locations = await locationService.GetAllAsync();
-
-        return Ok(locations);
+        if (paginationQuery.Page.HasValue)
+        {
+            var locations = await locationService.GetAllPaginatedAsync(paginationQuery);
+            return Ok(locations);
+        }
+        else
+        {
+            var locations = await locationService.GetAllAsync();
+            return Ok(locations);
+        }
     }
 
     [HttpGet]
