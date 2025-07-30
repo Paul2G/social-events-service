@@ -19,13 +19,19 @@ using social_events_manager.Modules.SocialEvents.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// override JWT signing key
+builder.Configuration["JWT:SigningKey"] = Environment.GetEnvironmentVariable("JWT_SIGNING_KEY");
+
 // --- Configuración de la cadena de conexión ---
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
 var dbPort = Environment.GetEnvironmentVariable("DB_PORT");
 var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbUser = Environment.GetEnvironmentVariable("DB_USER");
 var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
-connectionString = string.Format(connectionString, dbHost, dbPort, dbName, dbPassword);
+connectionString = string.Format(
+    $"Server={dbHost},{dbPort};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True;"
+);
 
 // --- Servicios base ---
 builder
