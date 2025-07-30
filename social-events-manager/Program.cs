@@ -19,35 +19,22 @@ using social_events_manager.Modules.SocialEvents.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// --- Configuración de la cadena de conexión ---
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
 var dbPort = Environment.GetEnvironmentVariable("DB_PORT");
 var dbName = Environment.GetEnvironmentVariable("DB_NAME");
 var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
-
 connectionString = string.Format(connectionString, dbHost, dbPort, dbName, dbPassword);
 
-builder.Services.AddControllers();
+// --- Servicios base ---
+builder
+    .Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    });
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddExceptionHandler<ApiExceptionHandler>();
-builder.Services.AddProblemDetails();
-builder.Services.AddHealthChecks();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        "AllowAllOrigins",
-        policyBuilder =>
-            policyBuilder
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyOrigin()
-                // .AllowCredentials()
-                .SetIsOriginAllowed(_ => true)
-    );
-});
-
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Social Event Manager", Version = "v1" });
@@ -80,14 +67,25 @@ builder.Services.AddSwaggerGen(options =>
         }
     );
 });
+builder.Services.AddExceptionHandler<ApiExceptionHandler>();
+builder.Services.AddProblemDetails();
+builder.Services.AddHealthChecks();
 
-builder
-    .Services.AddControllers()
-    .AddNewtonsoftJson(options =>
-    {
-        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-    });
+// --- CORS ---
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowAllOrigins",
+        policyBuilder =>
+            policyBuilder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .SetIsOriginAllowed(_ => true)
+    );
+});
 
+// --- Base de datos y autenticación ---
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
@@ -129,6 +127,7 @@ builder
         };
     });
 
+// --- Inyección de dependencias ---
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ISocialEventRepository, SocialEventRepository>();
 builder.Services.AddScoped<ISocialEventService, SocialEventService>();
@@ -141,12 +140,14 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 var app = builder.Build();
 
+// --- Migraciones automáticas ---
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     context.Database.Migrate();
 }
 
+// --- Middlewares ---
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger(option =>
@@ -167,7 +168,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapHealthChecks("/");
-
 app.MapControllers();
 
 app.Run();
