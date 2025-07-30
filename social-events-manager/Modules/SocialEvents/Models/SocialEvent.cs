@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using social_events_manager.Modules.Attendees.Models;
+using social_events_manager.Modules.Auth.Models;
 using social_events_manager.Modules.Locations.Models;
 
 namespace social_events_manager.Modules.SocialEvents.Models;
@@ -24,16 +25,16 @@ public class SocialEvent
     [Required]
     public DateTime EndTime { get; set; }
 
-    public long? LocationId { get; set; }
-
     // Auto generated properties
     [Required]
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
 
     [Required]
     public string AppUserId { get; set; } = string.Empty;
+    public AppUser AppUser { get; set; }
 
-    // Navigation properties
+    public long? LocationId { get; set; }
     public Location? Location { get; init; }
+
     public List<Attendee> Attendees { get; } = [];
 }

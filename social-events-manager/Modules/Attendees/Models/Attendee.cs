@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using social_events_manager.Modules.Auth.Models;
 using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.Attendees.Models;
@@ -30,7 +31,7 @@ public class Attendee
 
     [Required]
     public string AppUserId { get; set; } = string.Empty;
+    public AppUser AppUser { get; set; }
 
-    // Navigation
     public List<SocialEvent> SocialEvents { get; } = [];
 }

@@ -17,7 +17,8 @@ public class CreateLocationDto
     public string Country { get; set; } = string.Empty;
 
     [Required]
-    public int PostalCode { get; set; }
+    [RegularExpression(@"^\d{5}$", ErrorMessage = "Postal code must be exactly 5 digits.")]
+    public string PostalCode { get; set; } = string.Empty;
 
     [Required]
     [StringLength(255)]

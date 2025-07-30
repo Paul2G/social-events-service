@@ -19,6 +19,7 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions)
     {
         base.OnModelCreating(modelBuilder);
 
+        // Many-to-many: Attendees <-> SocialEvents
         modelBuilder
             .Entity<Attendee>()
             .HasMany(a => a.SocialEvents)
@@ -29,12 +30,44 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions)
                     j.HasOne<SocialEvent>()
                         .WithMany()
                         .HasForeignKey("SocialEventsId")
-                        .OnDelete(DeleteBehavior.Cascade), // or NoAction
+                        .OnDelete(DeleteBehavior.Restrict),
                 j =>
                     j.HasOne<Attendee>()
                         .WithMany()
                         .HasForeignKey("AttendeesId")
-                        .OnDelete(DeleteBehavior.Cascade) // choose only one to cascade
+                        .OnDelete(DeleteBehavior.Restrict)
             );
+
+        // SocialEvent → AppUser
+        modelBuilder
+            .Entity<SocialEvent>()
+            .HasOne(se => se.AppUser)
+            .WithMany(u => u.SocialEvents)
+            .HasForeignKey(se => se.AppUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // SocialEvent → Location
+        modelBuilder
+            .Entity<SocialEvent>()
+            .HasOne(se => se.Location)
+            .WithMany(l => l.SocialEvents)
+            .HasForeignKey(se => se.LocationId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // Attendee → AppUser
+        modelBuilder
+            .Entity<Attendee>()
+            .HasOne(a => a.AppUser)
+            .WithMany(u => u.Attendees)
+            .HasForeignKey(a => a.AppUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // Location → AppUser
+        modelBuilder
+            .Entity<Location>()
+            .HasOne(l => l.AppUser)
+            .WithMany(u => u.Locations)
+            .HasForeignKey(l => l.AppUserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

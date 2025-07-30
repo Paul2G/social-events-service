@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using social_events_manager.Modules.Auth.Models;
 using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.Locations.Models;
@@ -22,7 +23,8 @@ public class Location
     public string Country { get; set; } = string.Empty;
 
     [Required]
-    public int PostalCode { get; set; }
+    [Length(5, 5)]
+    public string PostalCode { get; set; } = string.Empty;
 
     [Required]
     [MaxLength(255)]
@@ -30,6 +32,7 @@ public class Location
 
     [Required]
     public string AppUserId { get; set; } = string.Empty;
+    public AppUser AppUser { get; set; }
 
     // Navigation
     public List<SocialEvent> SocialEvents { get; } = [];
