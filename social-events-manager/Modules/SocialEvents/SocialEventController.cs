@@ -43,7 +43,7 @@ public class SocialEventController(ISocialEventService socialEventService) : Con
     {
         var socialEvent = await socialEventService.CreateAsync(socialEventDto);
 
-        return CreatedAtAction(nameof(GetById), new { id = socialEvent.Id });
+        return CreatedAtAction(nameof(GetById), new { id = socialEvent.Id }, socialEvent);
     }
 
     [HttpPut]
