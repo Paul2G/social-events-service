@@ -7,7 +7,7 @@ public class ReadAttendeeDto
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    public Attendee.AttendanceStatus Status { get; set; } = Attendee.AttendanceStatus.Pending;
+    public string Status { get; set; } = string.Empty;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
     public List<SocialEvent> SocialEvents { get; set; } = [];
