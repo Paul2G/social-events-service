@@ -11,7 +11,7 @@ public static class AttendeeMapper
         {
             Id = attendee.Id,
             Name = attendee.Name,
-            RegisteredAt = attendee.RegisteredAt,
+            RegisteredAt = attendee.RegisteredAt.ToUniversalTime(),
             Status = attendee.Status.ToString(),
         };
     }
