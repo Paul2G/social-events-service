@@ -20,6 +20,7 @@ public class LocationRepository(ApplicationDbContext applicationDbContext) : ILo
     {
         return await applicationDbContext
             .Locations.Where(a => a.AppUserId == userId)
+            .Include((l) => l.SocialEvents)
             .Skip(offset)
             .Take(limit)
             .ToListAsync();
@@ -27,9 +28,9 @@ public class LocationRepository(ApplicationDbContext applicationDbContext) : ILo
 
     public async Task<Location?> FindUserLocationById(string userId, long id)
     {
-        return await applicationDbContext.Locations.FirstOrDefaultAsync(l =>
-            l.Id == id && l.AppUserId == userId
-        );
+        return await applicationDbContext
+            .Locations.Include((l) => l.SocialEvents)
+            .FirstOrDefaultAsync(l => l.Id == id && l.AppUserId == userId);
     }
 
     public async Task<Location> SaveUserLocation(string userId, Location location)

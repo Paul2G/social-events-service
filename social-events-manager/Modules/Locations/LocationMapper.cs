@@ -1,21 +1,28 @@
 using social_events_manager.Modules.Locations.DTOs;
 using social_events_manager.Modules.Locations.Models;
+using social_events_manager.Modules.SocialEvents;
 
 namespace social_events_manager.Modules.Locations;
 
 public static class LocationMapper
 {
-    public static ReadLocationDto ToLocationDto(this Location location)
+    public static ReadLocationDto ToLocationDto(this Location locationModel)
     {
         return new ReadLocationDto
         {
-            Id = location.Id,
-            Name = location.Name,
-            Phone = location.Phone,
-            Country = location.Country,
-            PostalCode = location.PostalCode,
-            Address = location.Address,
+            Id = locationModel.Id,
+            Name = locationModel.Name,
+            Phone = locationModel.Phone,
+            Country = locationModel.Country,
+            PostalCode = locationModel.PostalCode,
+            Address = locationModel.Address,
+            SocialEvents = locationModel.SocialEvents,
         };
+    }
+
+    public static ReadLocationSummaryDto ToLocationSummaryDto(this Location locationModel)
+    {
+        return new ReadLocationSummaryDto { Id = locationModel.Id, Name = locationModel.Name };
     }
 
     public static Location ToLocation(this CreateLocationDto createLocationDto)

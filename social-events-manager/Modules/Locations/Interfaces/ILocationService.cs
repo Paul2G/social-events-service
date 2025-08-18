@@ -5,7 +5,7 @@ namespace social_events_manager.Modules.Locations.Interfaces;
 
 public interface ILocationService
 {
-    Task<List<ReadLocationDto>> GetAllAsync();
+    Task<List<ReadLocationSummaryDto>> GetAllAsync();
     Task<PaginatedListDto<ReadLocationDto>> GetAllPaginatedAsync(
         PaginationQueryDto paginationQueryDto
     );
