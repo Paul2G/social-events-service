@@ -14,13 +14,13 @@ public class SocialEventService(
     IUserService userService
 ) : ISocialEventService
 {
-    public async Task<List<ReadSocialEventDto>> GetAllAsync()
+    public async Task<List<ReadSocialEventSummaryDto>> GetAllAsync()
     {
         var socialEvents = await socialEventRepository.FindUserSocialEvents(
             userService.GetUserId()
         );
 
-        return socialEvents.Select(s => s.ToSocialEventDto()).ToList();
+        return socialEvents.Select(s => s.ToSocialEventSummaryDto()).ToList();
     }
 
     public async Task<PaginatedListDto<ReadSocialEventDto>> GetAllPaginatedAsync(

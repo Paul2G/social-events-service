@@ -12,8 +12,6 @@ public class SocialEventRepository(ApplicationDbContext applicationDbContext)
     {
         return await applicationDbContext
             .SocialEvents.Where(s => s.AppUserId == userId)
-            .Include(c => c.Attendees)
-            .Include(c => c.Location)
             .ToListAsync();
     }
 

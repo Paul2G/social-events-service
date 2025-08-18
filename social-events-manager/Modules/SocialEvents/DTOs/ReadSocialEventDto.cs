@@ -1,4 +1,5 @@
 ﻿using social_events_manager.Modules.Attendees.DTOs;
+using social_events_manager.Modules.Locations.DTOs;
 using social_events_manager.Modules.Locations.Models;
 
 namespace social_events_manager.Modules.SocialEvents.DTOs;
@@ -11,6 +12,6 @@ public class ReadSocialEventDto
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public Location? Location { get; set; }
+    public ReadLocationSummaryDto? Location { get; set; }
     public List<ReadAttendeeDto> Attendees { get; set; } = [];
 }

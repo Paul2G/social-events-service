@@ -5,7 +5,7 @@ namespace social_events_manager.Modules.SocialEvents.Interfaces;
 
 public interface ISocialEventService
 {
-    Task<List<ReadSocialEventDto>> GetAllAsync();
+    Task<List<ReadSocialEventSummaryDto>> GetAllAsync();
     Task<PaginatedListDto<ReadSocialEventDto>> GetAllPaginatedAsync(
         PaginationQueryDto paginationQueryDto
     );
