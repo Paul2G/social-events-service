@@ -7,8 +7,11 @@ public class UpdateAttendeeDto
 {
     [Required]
     [StringLength(255)]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Required]
-    public Attendee.AttendanceStatus Status { get; set; }
+    public string Status { get; set; }
+
+    [Required]
+    public long SocialEventId { get; set; }
 }

@@ -5,7 +5,7 @@ namespace social_events_manager.Modules.Attendees.Interfaces;
 
 public interface IAttendeeService
 {
-    Task<List<ReadAttendeeDto>> GetAllAsync();
+    Task<List<ReadAttendeeSummaryDto>> GetAllAsync();
     Task<PaginatedListDto<ReadAttendeeDto>> GetAllPaginatedAsync(
         PaginationQueryDto paginationQueryDto
     );

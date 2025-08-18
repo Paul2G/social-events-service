@@ -20,6 +20,7 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
     {
         return await applicationDbContext
             .Attendees.Where(a => a.AppUserId == userId)
+            .Include(a => a.SocialEvent)
             .Skip(offset)
             .Take(limit)
             .ToListAsync();
@@ -27,9 +28,9 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
 
     public async Task<Attendee?> FindUserAttendeeById(string userId, long id)
     {
-        return await applicationDbContext.Attendees.FirstOrDefaultAsync(s =>
-            s.Id == id && s.AppUserId == userId
-        );
+        return await applicationDbContext
+            .Attendees.Include(a => a.SocialEvent)
+            .FirstOrDefaultAsync(s => s.Id == id && s.AppUserId == userId);
     }
 
     public async Task<Attendee> SaveUserAttendee(string userId, Attendee attendee)

@@ -10,11 +10,11 @@ namespace social_events_manager.Modules.Attendees;
 public class AttendeeService(IAttendeeRepository attendeeRepository, IUserService userService)
     : IAttendeeService
 {
-    public async Task<List<ReadAttendeeDto>> GetAllAsync()
+    public async Task<List<ReadAttendeeSummaryDto>> GetAllAsync()
     {
         var attendees = await attendeeRepository.FindUserAttendees(userService.GetUserId());
 
-        return attendees.Select(a => a.ToAttendeeDto()).ToList();
+        return attendees.Select(a => a.ToAttendeeSummaryDto()).ToList();
     }
 
     public async Task<PaginatedListDto<ReadAttendeeDto>> GetAllPaginatedAsync(

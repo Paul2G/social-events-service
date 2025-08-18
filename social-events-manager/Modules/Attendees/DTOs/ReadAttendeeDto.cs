@@ -1,4 +1,5 @@
 using social_events_manager.Modules.Attendees.Models;
+using social_events_manager.Modules.SocialEvents.DTOs;
 using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.Attendees.DTOs;
@@ -10,5 +11,5 @@ public class ReadAttendeeDto
     public string Status { get; set; } = string.Empty;
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
-    public List<SocialEvent> SocialEvents { get; set; } = [];
+    public ReadSocialEventSummaryDto SocialEvent { get; set; }
 }
