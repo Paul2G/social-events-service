@@ -32,8 +32,8 @@ public class Location
 
     [Required]
     public string AppUserId { get; set; } = string.Empty;
-    public AppUser AppUser { get; set; }
 
     // Navigation
     public List<SocialEvent> SocialEvents { get; } = [];
+    public AppUser AppUser { get; set; }
 }

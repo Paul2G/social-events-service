@@ -19,24 +19,13 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions)
     {
         base.OnModelCreating(modelBuilder);
 
-        // Many-to-many: Attendees <-> SocialEvents
+        // SocialEvent → Location
         modelBuilder
-            .Entity<Attendee>()
-            .HasMany(a => a.SocialEvents)
-            .WithMany(se => se.Attendees)
-            .UsingEntity<Dictionary<string, object>>(
-                "AttendeeSocialEvent",
-                j =>
-                    j.HasOne<SocialEvent>()
-                        .WithMany()
-                        .HasForeignKey("SocialEventsId")
-                        .OnDelete(DeleteBehavior.Restrict),
-                j =>
-                    j.HasOne<Attendee>()
-                        .WithMany()
-                        .HasForeignKey("AttendeesId")
-                        .OnDelete(DeleteBehavior.Restrict)
-            );
+            .Entity<SocialEvent>()
+            .HasOne(se => se.Location)
+            .WithMany(l => l.SocialEvents)
+            .HasForeignKey(se => se.LocationId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         // SocialEvent → AppUser
         modelBuilder
@@ -46,12 +35,12 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions)
             .HasForeignKey(se => se.AppUserId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // SocialEvent → Location
+        // Attendee → SocialEvent
         modelBuilder
-            .Entity<SocialEvent>()
-            .HasOne(se => se.Location)
-            .WithMany(l => l.SocialEvents)
-            .HasForeignKey(se => se.LocationId)
+            .Entity<Attendee>()
+            .HasOne(a => a.SocialEvent)
+            .WithMany(se => se.Attendees)
+            .HasForeignKey(a => a.SocialEventId)
             .OnDelete(DeleteBehavior.Restrict);
 
         // Attendee → AppUser

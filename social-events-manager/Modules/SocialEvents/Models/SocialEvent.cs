@@ -31,10 +31,11 @@ public class SocialEvent
 
     [Required]
     public string AppUserId { get; set; } = string.Empty;
-    public AppUser AppUser { get; set; }
 
     public long? LocationId { get; set; }
-    public Location? Location { get; init; }
 
+    // Navigation properties
     public List<Attendee> Attendees { get; } = [];
+    public Location? Location { get; init; }
+    public AppUser AppUser { get; set; }
 }

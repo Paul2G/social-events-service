@@ -12,8 +12,8 @@ using social_events_manager.Data;
 namespace social_events_manager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250730043756_FixCascadeDeleteRules")]
-    partial class FixCascadeDeleteRules
+    [Migration("20250818005152_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace social_events_manager.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AttendeeSocialEvent", b =>
-                {
-                    b.Property<long>("AttendeesId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("SocialEventsId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("AttendeesId", "SocialEventsId");
-
-                    b.HasIndex("SocialEventsId");
-
-                    b.ToTable("AttendeeSocialEvent");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -193,12 +178,17 @@ namespace social_events_manager.Migrations
                     b.Property<DateTime>("RegisteredAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("SocialEventId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("SocialEventId");
 
                     b.ToTable("Attendees");
                 });
@@ -352,21 +342,6 @@ namespace social_events_manager.Migrations
                     b.ToTable("SocialEvents");
                 });
 
-            modelBuilder.Entity("AttendeeSocialEvent", b =>
-                {
-                    b.HasOne("social_events_manager.Modules.Attendees.Models.Attendee", null)
-                        .WithMany()
-                        .HasForeignKey("AttendeesId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("social_events_manager.Modules.SocialEvents.Models.SocialEvent", null)
-                        .WithMany()
-                        .HasForeignKey("SocialEventsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -426,7 +401,15 @@ namespace social_events_manager.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("social_events_manager.Modules.SocialEvents.Models.SocialEvent", "SocialEvent")
+                        .WithMany("Attendees")
+                        .HasForeignKey("SocialEventId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("AppUser");
+
+                    b.Navigation("SocialEvent");
                 });
 
             modelBuilder.Entity("social_events_manager.Modules.Locations.Models.Location", b =>
@@ -470,6 +453,11 @@ namespace social_events_manager.Migrations
             modelBuilder.Entity("social_events_manager.Modules.Locations.Models.Location", b =>
                 {
                     b.Navigation("SocialEvents");
+                });
+
+            modelBuilder.Entity("social_events_manager.Modules.SocialEvents.Models.SocialEvent", b =>
+                {
+                    b.Navigation("Attendees");
                 });
 #pragma warning restore 612, 618
         }

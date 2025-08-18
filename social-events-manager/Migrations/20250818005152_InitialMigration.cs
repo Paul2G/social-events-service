@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace social_events_manager.Migrations
 {
     /// <inheritdoc />
-    public partial class UserContent : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -159,38 +157,17 @@ namespace social_events_manager.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attendees",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    RegisteredAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Attendees", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Attendees_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,7 +176,8 @@ namespace social_events_manager.Migrations
                         name: "FK_Locations_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,13 +186,13 @@ namespace social_events_manager.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LocationId = table.Column<long>(type: "bigint", nullable: true),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LocationId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,45 +201,43 @@ namespace social_events_manager.Migrations
                         name: "FK_SocialEvents_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SocialEvents_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AttendeeSocialEvent",
+                name: "Attendees",
                 columns: table => new
                 {
-                    AttendeesId = table.Column<long>(type: "bigint", nullable: false),
-                    SocialEventsId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    RegisteredAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SocialEventId = table.Column<long>(type: "bigint", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AttendeeSocialEvent", x => new { x.AttendeesId, x.SocialEventsId });
+                    table.PrimaryKey("PK_Attendees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AttendeeSocialEvent_Attendees_AttendeesId",
-                        column: x => x.AttendeesId,
-                        principalTable: "Attendees",
+                        name: "FK_Attendees_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AttendeeSocialEvent_SocialEvents_SocialEventsId",
-                        column: x => x.SocialEventsId,
+                        name: "FK_Attendees_SocialEvents_SocialEventId",
+                        column: x => x.SocialEventId,
                         principalTable: "SocialEvents",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "c117954b-aaea-4115-9b89-c1ccd76b3e1f", null, "User", "USER" },
-                    { "ef782bc2-cb9a-4396-ba81-6c904c6ce1eb", null, "Admin", "ADMIN" }
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -309,9 +285,9 @@ namespace social_events_manager.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttendeeSocialEvent_SocialEventsId",
-                table: "AttendeeSocialEvent",
-                column: "SocialEventsId");
+                name: "IX_Attendees_SocialEventId",
+                table: "Attendees",
+                column: "SocialEventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_AppUserId",
@@ -348,13 +324,10 @@ namespace social_events_manager.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AttendeeSocialEvent");
+                name: "Attendees");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Attendees");
 
             migrationBuilder.DropTable(
                 name: "SocialEvents");

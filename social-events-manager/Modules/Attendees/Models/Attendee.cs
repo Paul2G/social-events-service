@@ -30,8 +30,12 @@ public class Attendee
     public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 
     [Required]
-    public string AppUserId { get; set; } = string.Empty;
-    public AppUser AppUser { get; set; }
+    public long SocialEventId { get; set; }
 
-    public List<SocialEvent> SocialEvents { get; } = [];
+    [Required]
+    public string AppUserId { get; set; } = string.Empty;
+
+    // Navigation properties
+    public SocialEvent SocialEvent { get; set; }
+    public AppUser AppUser { get; set; }
 }
