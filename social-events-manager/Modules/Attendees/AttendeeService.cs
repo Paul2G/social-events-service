@@ -51,6 +51,16 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
 
     public async Task<ReadAttendeeDto> CreateAsync(CreateAttendeeDto attendeeDto)
     {
+        bool existsSocialEvent = await attendeeRepository.ExistsUserAttendee(
+            userService.GetUserId(),
+            attendeeDto.SocialEventId
+        );
+
+        if (!existsSocialEvent)
+            throw new ItemNotFoundException(
+                $"Social event with ID {attendeeDto.SocialEventId} not found."
+            );
+
         var incomingAttendee = attendeeDto.ToAttendee();
 
         var attendee = await attendeeRepository.SaveUserAttendee(
@@ -63,6 +73,16 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
 
     public async Task<ReadAttendeeDto> UpdateAsync(long id, UpdateAttendeeDto attendeeDto)
     {
+        bool existsSocialEvent = await attendeeRepository.ExistsUserAttendee(
+            userService.GetUserId(),
+            attendeeDto.SocialEventId
+        );
+
+        if (!existsSocialEvent)
+            throw new ItemNotFoundException(
+                $"Social event with ID {attendeeDto.SocialEventId} not found."
+            );
+
         var incomingAttendee = attendeeDto.ToAttendee();
         incomingAttendee.Id = id;
 
