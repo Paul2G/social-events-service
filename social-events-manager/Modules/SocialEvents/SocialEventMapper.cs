@@ -19,7 +19,7 @@ public static class SocialEventMapper
             EndTime = socialEventModel.EndTime.ToUniversalTime(),
             CreatedAt = socialEventModel.CreatedAt.ToUniversalTime(),
             Location = socialEventModel.Location?.ToLocationSummaryDto(),
-            Attendees = socialEventModel.Attendees.Select(c => c.ToAttendeeDto()).ToList(),
+            Attendees = socialEventModel.Attendees.Select(c => c.ToAttendeeSummaryDto()).ToList(),
         };
     }
 
@@ -32,6 +32,7 @@ public static class SocialEventMapper
             Id = socialEventModel.Id,
             Name = socialEventModel.Name,
             Description = socialEventModel.Description,
+            LocationId = socialEventModel.LocationId,
         };
     }
 

@@ -13,5 +13,5 @@ public class ReadSocialEventDto
     public DateTime EndTime { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public ReadLocationSummaryDto? Location { get; set; }
-    public List<ReadAttendeeDto> Attendees { get; set; } = [];
+    public List<ReadAttendeeSummaryDto> Attendees { get; set; } = [];
 }

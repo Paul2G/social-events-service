@@ -22,7 +22,15 @@ public static class LocationMapper
 
     public static ReadLocationSummaryDto ToLocationSummaryDto(this Location locationModel)
     {
-        return new ReadLocationSummaryDto { Id = locationModel.Id, Name = locationModel.Name };
+        return new ReadLocationSummaryDto
+        {
+            Id = locationModel.Id,
+            Name = locationModel.Name,
+            Phone = locationModel.Phone,
+            Country = locationModel.Country,
+            PostalCode = locationModel.PostalCode,
+            Address = locationModel.Address,
+        };
     }
 
     public static Location ToLocation(this CreateLocationDto createLocationDto)
