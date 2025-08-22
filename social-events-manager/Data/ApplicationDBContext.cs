@@ -58,5 +58,14 @@ public class ApplicationDbContext(DbContextOptions dbContextOptions)
             .WithMany(u => u.Locations)
             .HasForeignKey(l => l.AppUserId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // Seeding roles
+        var roles = new List<IdentityRole>
+        {
+            new() { Name = "Admin", NormalizedName = "ADMIN" },
+            new() { Name = "User", NormalizedName = "USER" },
+        };
+
+        modelBuilder.Entity<IdentityRole>().HasData(roles);
     }
 }
