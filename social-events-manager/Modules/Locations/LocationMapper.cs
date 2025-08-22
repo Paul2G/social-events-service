@@ -16,7 +16,9 @@ public static class LocationMapper
             Country = locationModel.Country,
             PostalCode = locationModel.PostalCode,
             Address = locationModel.Address,
-            SocialEvents = locationModel.SocialEvents,
+            SocialEvents = locationModel
+                .SocialEvents.Select((se) => se.ToSocialEventSummaryDto())
+                .ToList(),
         };
     }
 

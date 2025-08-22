@@ -1,5 +1,4 @@
 using social_events_manager.Modules.SocialEvents.DTOs;
-using social_events_manager.Modules.SocialEvents.Models;
 
 namespace social_events_manager.Modules.Locations.DTOs;
 
@@ -11,5 +10,5 @@ public class ReadLocationDto
     public string Country { get; set; }
     public string PostalCode { get; set; }
     public string Address { get; set; }
-    public List<SocialEvent> SocialEvents { get; set; } = [];
+    public List<ReadSocialEventSummaryDto> SocialEvents { get; set; } = [];
 }
