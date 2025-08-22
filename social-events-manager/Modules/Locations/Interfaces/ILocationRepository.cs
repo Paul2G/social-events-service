@@ -4,12 +4,12 @@ namespace social_events_manager.Modules.Locations.Interfaces;
 
 public interface ILocationRepository
 {
-    Task<List<Location>> FindUserLocations(string userId);
-    Task<List<Location>> FindUserLocationsPaginated(string userId, int limit, int offset);
-    Task<Location?> FindUserLocationById(string userId, long id);
-    Task<Location> SaveUserLocation(string userId, Location location);
-    Task<Location?> UpdateUserLocation(string userId, Location location);
-    Task<Location?> DeleteUserLocation(string userId, long id);
-    Task<bool> ExistsUserLocation(string userId, long id);
-    Task<int> CountUserLocations(string userId);
+    Task<List<Location>> FindLocations();
+    Task<List<Location>> FindLocationsPaginated(int limit, int offset);
+    Task<Location?> FindLocationById(long id);
+    Task<Location> SaveLocation(Location location);
+    Task<Location?> UpdateLocation(Location location);
+    Task<Location?> DeleteLocation(long id);
+    Task<bool> ExistsLocation(long id);
+    Task<int> CountLocations();
 }

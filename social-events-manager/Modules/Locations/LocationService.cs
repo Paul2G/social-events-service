@@ -12,7 +12,7 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
 {
     public async Task<List<ReadLocationSummaryDto>> GetAllAsync()
     {
-        var locations = await locationRepository.FindUserLocations(userService.GetUserId());
+        var locations = await locationRepository.FindLocations();
 
         return locations.Select(l => l.ToLocationSummaryDto()).ToList();
     }
@@ -23,9 +23,8 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
     {
         var paginationQuery = paginationQueryDto.ToPaginationQuery();
 
-        var locationsCount = await locationRepository.CountUserLocations(userService.GetUserId());
-        var locations = await locationRepository.FindUserLocationsPaginated(
-            userService.GetUserId(),
+        var locationsCount = await locationRepository.CountLocations();
+        var locations = await locationRepository.FindLocationsPaginated(
             paginationQuery.Limit,
             paginationQuery.Offset
         );
@@ -40,7 +39,7 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
 
     public async Task<ReadLocationDto> GetByIdAsync(long id)
     {
-        var location = await locationRepository.FindUserLocationById(userService.GetUserId(), id);
+        var location = await locationRepository.FindLocationById(id);
 
         if (location == null)
             throw new ItemNotFoundException($"Location with ID {id} not found");
@@ -51,11 +50,9 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
     public async Task<ReadLocationDto> CreateAsync(CreateLocationDto locationDto)
     {
         var incomingLocation = locationDto.ToLocation();
+        incomingLocation.AppUserId = userService.GetUserId();
 
-        var location = await locationRepository.SaveUserLocation(
-            userService.GetUserId(),
-            incomingLocation
-        );
+        var location = await locationRepository.SaveLocation(incomingLocation);
 
         return location.ToLocationDto();
     }
@@ -65,10 +62,7 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
         var incomingLocation = locationDto.ToLocation();
         incomingLocation.Id = id;
 
-        var location = await locationRepository.UpdateUserLocation(
-            userService.GetUserId(),
-            incomingLocation
-        );
+        var location = await locationRepository.UpdateLocation(incomingLocation);
 
         if (location == null)
             throw new ItemNotFoundException($"Location with ID {id} not found");
@@ -78,7 +72,7 @@ public class LocationService(ILocationRepository locationRepository, IUserServic
 
     public async Task<ReadLocationDto> DeleteAsync(long id)
     {
-        var location = await locationRepository.DeleteUserLocation(userService.GetUserId(), id);
+        var location = await locationRepository.DeleteLocation(id);
 
         if (location == null)
             throw new ItemNotFoundException($"Location with ID {id} not found");

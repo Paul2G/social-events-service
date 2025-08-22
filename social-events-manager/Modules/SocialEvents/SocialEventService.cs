@@ -16,9 +16,7 @@ public class SocialEventService(
 {
     public async Task<List<ReadSocialEventSummaryDto>> GetAllAsync()
     {
-        var socialEvents = await socialEventRepository.FindUserSocialEvents(
-            userService.GetUserId()
-        );
+        var socialEvents = await socialEventRepository.FindSocialEvents();
 
         return socialEvents.Select(s => s.ToSocialEventSummaryDto()).ToList();
     }
@@ -29,13 +27,12 @@ public class SocialEventService(
     {
         var paginationQuery = paginationQueryDto.ToPaginationQuery();
 
-        var socialEvents = await socialEventRepository.FindUserSocialEventsPaginated(
-            userService.GetUserId(),
+        var socialEvents = await socialEventRepository.FindSocialEventsPaginated(
             paginationQuery.Limit,
             paginationQuery.Offset
         );
 
-        var totalCount = await socialEventRepository.CountUserSocialEvents(userService.GetUserId());
+        var totalCount = await socialEventRepository.CountSocialEvents();
 
         return new PaginatedListDto<ReadSocialEventDto>(
             socialEvents.Select(s => s.ToSocialEventDto()).ToList(),
@@ -47,10 +44,7 @@ public class SocialEventService(
 
     public async Task<ReadSocialEventDto> GetByIdAsync(long id)
     {
-        var socialEvent = await socialEventRepository.FindUserSocialEventById(
-            userService.GetUserId(),
-            id
-        );
+        var socialEvent = await socialEventRepository.FindSocialEventById(id);
 
         if (socialEvent == null)
             throw new ItemNotFoundException($"Social event with ID {id} not found.");
@@ -62,8 +56,7 @@ public class SocialEventService(
     {
         if (socialEventDto.LocationId != null)
         {
-            bool exitsLocation = await locationRepository.ExistsUserLocation(
-                userService.GetUserId(),
+            bool exitsLocation = await locationRepository.ExistsLocation(
                 socialEventDto.LocationId.Value
             );
             if (!exitsLocation)
@@ -73,11 +66,9 @@ public class SocialEventService(
         }
 
         var incomingSocialEvent = socialEventDto.ToSocialEvent();
+        incomingSocialEvent.AppUserId = userService.GetUserId();
 
-        var socialEvent = await socialEventRepository.SaveUserSocialEvent(
-            userService.GetUserId(),
-            incomingSocialEvent
-        );
+        var socialEvent = await socialEventRepository.SaveSocialEvent(incomingSocialEvent);
 
         return socialEvent.ToSocialEventDto();
     }
@@ -86,8 +77,7 @@ public class SocialEventService(
     {
         if (socialEventDto.LocationId != null)
         {
-            bool exitsLocation = await locationRepository.ExistsUserLocation(
-                userService.GetUserId(),
+            bool exitsLocation = await locationRepository.ExistsLocation(
                 socialEventDto.LocationId.Value
             );
             if (!exitsLocation)
@@ -99,10 +89,7 @@ public class SocialEventService(
         var incomingSocialEvent = socialEventDto.ToSocialEvent();
         incomingSocialEvent.Id = id;
 
-        var socialEvent = await socialEventRepository.UpdateUserSocialEvent(
-            userService.GetUserId(),
-            incomingSocialEvent
-        );
+        var socialEvent = await socialEventRepository.UpdateSocialEvent(incomingSocialEvent);
 
         if (socialEvent == null)
             throw new ItemNotFoundException($"Social event with ID {id} not found.");
@@ -112,10 +99,7 @@ public class SocialEventService(
 
     public async Task<ReadSocialEventDto> DeleteAsync(long id)
     {
-        var socialEvent = await socialEventRepository.DeleteUserSocialEvent(
-            userService.GetUserId(),
-            id
-        );
+        var socialEvent = await socialEventRepository.DeleteSocialEvent(id);
 
         if (socialEvent == null)
             throw new ItemNotFoundException($"Social event with ID {id} not found.");

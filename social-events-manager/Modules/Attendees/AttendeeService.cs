@@ -12,7 +12,7 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
 {
     public async Task<List<ReadAttendeeSummaryDto>> GetAllAsync()
     {
-        var attendees = await attendeeRepository.FindUserAttendees(userService.GetUserId());
+        var attendees = await attendeeRepository.FindAttendees();
 
         return attendees.Select(a => a.ToAttendeeSummaryDto()).ToList();
     }
@@ -23,13 +23,12 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
     {
         var paginationQuery = paginationQueryDto.ToPaginationQuery();
 
-        var attendees = await attendeeRepository.FindUserAttendeesPaginated(
-            userService.GetUserId(),
+        var attendees = await attendeeRepository.FindAttendeesPaginated(
             paginationQuery.Limit,
             paginationQuery.Offset
         );
 
-        var totalCount = await attendeeRepository.CountUserAttendees(userService.GetUserId());
+        var totalCount = await attendeeRepository.CountAttendees();
 
         return new PaginatedListDto<ReadAttendeeDto>(
             attendees.Select(a => a.ToAttendeeDto()).ToList(),
@@ -41,7 +40,7 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
 
     public async Task<ReadAttendeeDto> GetByIdAsync(long id)
     {
-        var attendee = await attendeeRepository.FindUserAttendeeById(userService.GetUserId(), id);
+        var attendee = await attendeeRepository.FindAttendeeById(id);
 
         if (attendee == null)
             throw new ItemNotFoundException($"Attendee with ID {id} not found.");
@@ -51,10 +50,7 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
 
     public async Task<ReadAttendeeDto> CreateAsync(CreateAttendeeDto attendeeDto)
     {
-        bool existsSocialEvent = await attendeeRepository.ExistsUserAttendee(
-            userService.GetUserId(),
-            attendeeDto.SocialEventId
-        );
+        bool existsSocialEvent = await attendeeRepository.ExistsAttendee(attendeeDto.SocialEventId);
 
         if (!existsSocialEvent)
             throw new ItemNotFoundException(
@@ -62,21 +58,16 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
             );
 
         var incomingAttendee = attendeeDto.ToAttendee();
+        incomingAttendee.AppUserId = userService.GetUserId();
 
-        var attendee = await attendeeRepository.SaveUserAttendee(
-            userService.GetUserId(),
-            incomingAttendee
-        );
+        var attendee = await attendeeRepository.SaveAttendee(incomingAttendee);
 
         return attendee.ToAttendeeDto();
     }
 
     public async Task<ReadAttendeeDto> UpdateAsync(long id, UpdateAttendeeDto attendeeDto)
     {
-        bool existsSocialEvent = await attendeeRepository.ExistsUserAttendee(
-            userService.GetUserId(),
-            attendeeDto.SocialEventId
-        );
+        bool existsSocialEvent = await attendeeRepository.ExistsAttendee(attendeeDto.SocialEventId);
 
         if (!existsSocialEvent)
             throw new ItemNotFoundException(
@@ -86,10 +77,7 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
         var incomingAttendee = attendeeDto.ToAttendee();
         incomingAttendee.Id = id;
 
-        var attendee = await attendeeRepository.UpdateUserAttendee(
-            userService.GetUserId(),
-            incomingAttendee
-        );
+        var attendee = await attendeeRepository.UpdateAttendee(incomingAttendee);
 
         if (attendee == null)
             throw new ItemNotFoundException($"Attendee with ID {id} not found.");
@@ -99,7 +87,7 @@ public class AttendeeService(IAttendeeRepository attendeeRepository, IUserServic
 
     public async Task<ReadAttendeeDto> DeleteAsync(long id)
     {
-        var attendee = await attendeeRepository.DeleteUserAttendee(userService.GetUserId(), id);
+        var attendee = await attendeeRepository.DeleteAttendee(id);
 
         if (attendee == null)
             throw new ItemNotFoundException($"Attendee with ID {id} not found.");

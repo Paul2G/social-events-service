@@ -4,15 +4,15 @@ namespace social_events_manager.Modules.SocialEvents.Interfaces;
 
 public interface ISocialEventRepository
 {
-    Task<List<SocialEvent>> FindUserSocialEvents(string userId);
-    Task<List<SocialEvent>> FindUserSocialEventsPaginated(string userId, int limit, int offset);
-    Task<SocialEvent?> FindUserSocialEventById(string userId, long id);
+    Task<List<SocialEvent>> FindSocialEvents();
+    Task<List<SocialEvent>> FindSocialEventsPaginated(int limit, int offset);
+    Task<SocialEvent?> FindSocialEventById(long id);
 
-    Task<SocialEvent> SaveUserSocialEvent(string userId, SocialEvent socialEvent);
+    Task<SocialEvent> SaveSocialEvent(SocialEvent socialEvent);
 
-    Task<SocialEvent?> UpdateUserSocialEvent(string userId, SocialEvent socialEvent);
+    Task<SocialEvent?> UpdateSocialEvent(SocialEvent socialEvent);
 
-    Task<SocialEvent?> DeleteUserSocialEvent(string userId, long id);
-    Task<bool> ExitsUserSocialEvent(string userId, long id);
-    Task<int> CountUserSocialEvents(string userId);
+    Task<SocialEvent?> DeleteSocialEvent(long id);
+    Task<bool> ExitsSocialEvent(long id);
+    Task<int> CountSocialEvents();
 }
