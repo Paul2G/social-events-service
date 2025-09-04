@@ -48,6 +48,7 @@ public class SocialEventRepository(ApplicationDbContext applicationDbContext)
         if (existingSocialEvent == null)
             return null;
 
+        socialEvent.AppUserId = existingSocialEvent.AppUserId;
         applicationDbContext.Entry(existingSocialEvent).CurrentValues.SetValues(socialEvent);
 
         await applicationDbContext.SaveChangesAsync();

@@ -45,6 +45,7 @@ public class AttendeeRepository(ApplicationDbContext applicationDbContext) : IAt
         if (existingAttendee == null)
             return null;
 
+        attendee.AppUserId = existingAttendee.AppUserId;
         applicationDbContext.Entry(existingAttendee).CurrentValues.SetValues(attendee);
 
         await applicationDbContext.SaveChangesAsync();

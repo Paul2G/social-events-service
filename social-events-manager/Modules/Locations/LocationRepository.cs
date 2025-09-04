@@ -45,6 +45,7 @@ public class LocationRepository(ApplicationDbContext applicationDbContext) : ILo
         if (existingLocation == null)
             return null;
 
+        location.AppUserId = existingLocation.AppUserId;
         applicationDbContext.Entry(existingLocation).CurrentValues.SetValues(location);
 
         await applicationDbContext.SaveChangesAsync();
